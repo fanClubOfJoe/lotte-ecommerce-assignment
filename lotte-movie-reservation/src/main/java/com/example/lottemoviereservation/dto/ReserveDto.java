@@ -8,6 +8,7 @@ public class ReserveDto {
     private int reserveEnterCount;
 
     public ReserveDto(int userNo, int movieNo, String reserveTime, int reserveEnterCount) {
+        this.reserveNo = reserveNo;
         this.userNo = userNo;
         this.movieNo = movieNo;
         this.reserveTime = reserveTime;

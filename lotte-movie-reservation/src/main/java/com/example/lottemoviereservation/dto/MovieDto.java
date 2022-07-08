@@ -13,6 +13,9 @@ public class MovieDto {
     private double reserveRate;
     private String ageGrade;
 
+    public MovieDto(){
+
+    }
     public MovieDto(int movieNo, String movieTitle, double movieRate, String movieContent, String movieSummary, String movieImg, String movieScreenDate, String movieTime, String movieCategory, double reserveRate, String ageGrade) {
         this.movieNo = movieNo;
         this.movieTitle = movieTitle;

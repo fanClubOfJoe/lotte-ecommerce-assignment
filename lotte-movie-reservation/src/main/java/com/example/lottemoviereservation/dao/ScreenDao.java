@@ -2,7 +2,6 @@ package com.example.lottemoviereservation.dao;
 
 import com.example.lottemoviereservation.db.DBClose;
 import com.example.lottemoviereservation.db.DBConnection;
-import com.example.lottemoviereservation.dto.MovieDto;
 import com.example.lottemoviereservation.dto.TheaterDetailDto;
 import com.example.lottemoviereservation.dto.TheaterDto;
 
