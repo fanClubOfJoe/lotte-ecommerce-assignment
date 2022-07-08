@@ -22,6 +22,19 @@ public class UserDto {
         this.userPassword = userPassword;
     }
 
+    public UserDto(int userNo, String userId, String userName) {
+        this.userNo = userNo;
+        this.userId = userId;
+        this.userName = userName;
+    }
+
+    public UserDto(int userNo, String userId, String userName, String userPassword) {
+        this.userNo = userNo;
+        this.userId = userId;
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
+
     public int getUserNo() {
         return userNo;
     }
