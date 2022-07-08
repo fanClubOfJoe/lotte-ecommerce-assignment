@@ -1,14 +1,18 @@
 package com.example.lottemoviereservation.dto;
 
 public class ReserveDto {
-    public int reserveNo;
-    public int userNo;
-    public int movieNo;
+    private int reserveNo;
+    private int userNo;
+    private int movieNo;
+    private String reserveTime;
+    private String reserveEnterCount;
 
-
-    public ReserveDto(int userNo, int movieNo) {
+    public ReserveDto(int reserveNo, int userNo, int movieNo, String reserveTime, String reserveEnterCount) {
+        this.reserveNo = reserveNo;
         this.userNo = userNo;
         this.movieNo = movieNo;
+        this.reserveTime = reserveTime;
+        this.reserveEnterCount = reserveEnterCount;
     }
 
     public int getReserveNo() {
@@ -35,12 +39,30 @@ public class ReserveDto {
         this.movieNo = movieNo;
     }
 
+    public String getReserveTime() {
+        return reserveTime;
+    }
+
+    public void setReserveTime(String reserveTime) {
+        this.reserveTime = reserveTime;
+    }
+
+    public String getReserveEnterCount() {
+        return reserveEnterCount;
+    }
+
+    public void setReserveEnterCount(String reserveEnterCount) {
+        this.reserveEnterCount = reserveEnterCount;
+    }
+
     @Override
     public String toString() {
         return "ReserveDto{" +
                 "reserveNo=" + reserveNo +
                 ", userNo=" + userNo +
                 ", movieNo=" + movieNo +
+                ", reserveTime='" + reserveTime + '\'' +
+                ", reserveEnterCount='" + reserveEnterCount + '\'' +
                 '}';
     }
 }

@@ -1,10 +1,10 @@
 package com.example.lottemoviereservation.dto;
 
 public class UserDto {
-    public int userNo;
-    public String userId;
-    public String userName;
-    public String userPassword;
+    private int userNo;
+    private String userId;
+    private String userName;
+    private String userPassword;
 
     @Override
     public String toString() {

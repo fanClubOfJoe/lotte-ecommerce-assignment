@@ -1,21 +1,28 @@
 package com.example.lottemoviereservation.dto;
 
 public class MovieDto {
-    public int movieNo;
-    public String movieTitle;
-    public double movieRate;
-    public String movieContent;
-    public String movieSummary;
-    public String movieImg;
-    public double reserveRate;
-    public String ageGrade;
+    private int movieNo;
+    private String movieTitle;
+    private double movieRate;
+    private String movieContent;
+    private String movieSummary;
+    private String movieImg;
+    private String movieScreenDate;
+    private String movieTime;
+    private String movieCategory;
+    private double reserveRate;
+    private String ageGrade;
 
-    public MovieDto(String movieTitle, double movieRate, String movieContent, String movieSummary, String movieImg, double reserveRate, String ageGrade) {
+    public MovieDto(int movieNo, String movieTitle, double movieRate, String movieContent, String movieSummary, String movieImg, String movieScreenDate, String movieTime, String movieCategory, double reserveRate, String ageGrade) {
+        this.movieNo = movieNo;
         this.movieTitle = movieTitle;
         this.movieRate = movieRate;
         this.movieContent = movieContent;
         this.movieSummary = movieSummary;
         this.movieImg = movieImg;
+        this.movieScreenDate = movieScreenDate;
+        this.movieTime = movieTime;
+        this.movieCategory = movieCategory;
         this.reserveRate = reserveRate;
         this.ageGrade = ageGrade;
     }
@@ -29,6 +36,9 @@ public class MovieDto {
                 ", movieContent='" + movieContent + '\'' +
                 ", movieSummary='" + movieSummary + '\'' +
                 ", movieImg='" + movieImg + '\'' +
+                ", movieScreenDate='" + movieScreenDate + '\'' +
+                ", movieTime='" + movieTime + '\'' +
+                ", movieCategory='" + movieCategory + '\'' +
                 ", reserveRate=" + reserveRate +
                 ", ageGrade='" + ageGrade + '\'' +
                 '}';
@@ -96,5 +106,29 @@ public class MovieDto {
 
     public void setAgeGrade(String ageGrade) {
         this.ageGrade = ageGrade;
+    }
+
+    public String getMovieScreenDate() {
+        return movieScreenDate;
+    }
+
+    public void setMovieScreenDate(String movieScreenDate) {
+        this.movieScreenDate = movieScreenDate;
+    }
+
+    public String getMovieTime() {
+        return movieTime;
+    }
+
+    public void setMovieTime(String movieTime) {
+        this.movieTime = movieTime;
+    }
+
+    public String getMovieCategory() {
+        return movieCategory;
+    }
+
+    public void setMovieCategory(String movieCategory) {
+        this.movieCategory = movieCategory;
     }
 }
