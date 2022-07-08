@@ -23,11 +23,11 @@ public class ScreenDao {
         return dao;
     }
 
-    public List<TheaterDetailDto> getTheaterDetailList() {
+    public List<TheaterDetailDto> getTheaterDetailList(String date) {
         String sql = "SELECT movie_no, theater_detail_standard_date , " +
                 "theater_detail_time, theater_detail_remain_seats , theater_detail_seats " +
                 "FROM theater_details " +
-                "WHERE DATEDIFF(now(), theater_detail_standard_date) > 0 ";
+                "WHERE DATEDIFF(STR_TO_DATE('"+date+"', '%Y%m%d'), theater_detail_standard_date) > 0 ";
         Connection conn = null;
         PreparedStatement psmt = null;
         ResultSet rs = null;

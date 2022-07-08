@@ -10,6 +10,6 @@ class ScreenDaoTest {
     void getTheaterDetailList() {
 
         ScreenDao dao = ScreenDao.getInstance();
-        dao.getTheaterDetailList();
+        dao.getTheaterDetailList("20100529");
     }
 }
