@@ -1,12 +1,11 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="lotte-movie-reservation:war exploded">
-    <output-path>$PROJECT_DIR$/target/lotte-movie-reservation-1.0-SNAPSHOT</output-path>
+    <output-path>$PROJECT_DIR$/lotte-movie-reservation/target/lotte-movie-reservation-1.0-SNAPSHOT</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
         <module>lotte-movie-reservation</module>
         <packaging>war</packaging>
-        <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
     <root id="root">
@@ -15,15 +14,11 @@
           <element id="module-output" name="lotte-movie-reservation" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.27" />
-          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
-          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.mortbay.jetty:jetty-util:6.1.25" />
-          <element id="library" level="project" name="Maven: org.json:json:20160810" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/lotte-movie-reservation-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/lotte-movie-reservation/target/lotte-movie-reservation-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="lotte-movie-reservation/web/Web" />
     </root>
