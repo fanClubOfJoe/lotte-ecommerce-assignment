@@ -23,6 +23,7 @@ public class ScreenDao {
         return dao;
     }
 
+    // 예매할 수 있는 영화의 정보를 날짜 기반으로 가져옴 getTheaterDetailList(20220708) 방식으로 호출
     public List<TheaterDetailDto> getTheaterDetailList(String date) {
         String sql = "SELECT movie_no, theater_detail_standard_date , " +
                 "theater_detail_time, theater_detail_remain_seats , theater_detail_seats " +
