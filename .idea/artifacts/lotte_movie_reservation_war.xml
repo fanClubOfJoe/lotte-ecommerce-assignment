@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lotte-movie-reservation:war">
+    <output-path>$PROJECT_DIR$/lotte-movie-reservation/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>lotte-movie-reservation</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="lotte-movie-reservation-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="lotte-movie-reservation:war exploded" />
+    </root>
+  </artifact>
+</component>
