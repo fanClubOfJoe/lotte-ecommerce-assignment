@@ -1,28 +1,38 @@
 package com.example.lottemoviereservation.dto;
 
 public class TheaterDetailDto {
-    public int theaterDetailNo;
-    public int movieNo;
-    public String theaterDetailTime;
-    public int theaterDetailRemainSeats;
-    public int theaterDetailSeats;
+    private int theaterDetailNo;
+    private int theaterNo;
+    private int movieNo;
+    private String theaterDetailStandardDate;
+    private String theaterDetailTime;
+    private int theaterDetailRemainSeats;
+    private int theaterDetailSeats;
 
-    public TheaterDetailDto(int movieNo, String theaterDetailTime, int theaterDetailRemainSeats, int theaterDetailSeats) {
+    public TheaterDetailDto(int theaterDetailNo, int theaterNo, int movieNo, String theaterDetailStandardDate, String theaterDetailTime, int theaterDetailRemainSeats, int theaterDetailSeats) {
+        this.theaterDetailNo = theaterDetailNo;
+        this.theaterNo = theaterNo;
         this.movieNo = movieNo;
+        this.theaterDetailStandardDate = theaterDetailStandardDate;
         this.theaterDetailTime = theaterDetailTime;
         this.theaterDetailRemainSeats = theaterDetailRemainSeats;
         this.theaterDetailSeats = theaterDetailSeats;
     }
 
-    @Override
-    public String toString() {
-        return "TheaterDetailDto{" +
-                "theaterDetailNo=" + theaterDetailNo +
-                ", movieNo=" + movieNo +
-                ", theaterDetailTime='" + theaterDetailTime + '\'' +
-                ", theaterDetailRemainSeats=" + theaterDetailRemainSeats +
-                ", theaterDetailSeats=" + theaterDetailSeats +
-                '}';
+    public int getTheaterNo() {
+        return theaterNo;
+    }
+
+    public void setTheaterNo(int theaterNo) {
+        this.theaterNo = theaterNo;
+    }
+
+    public String getTheaterDetailStandardDate() {
+        return theaterDetailStandardDate;
+    }
+
+    public void setTheaterDetailStandardDate(String theaterDetailStandardDate) {
+        this.theaterDetailStandardDate = theaterDetailStandardDate;
     }
 
     public int getTheaterDetailNo() {
@@ -63,5 +73,18 @@ public class TheaterDetailDto {
 
     public void setTheaterDetailSeats(int theaterDetailSeats) {
         this.theaterDetailSeats = theaterDetailSeats;
+    }
+
+    @Override
+    public String toString() {
+        return "TheaterDetailDto{" +
+                "theaterDetailNo=" + theaterDetailNo +
+                ", theaterNo=" + theaterNo +
+                ", movieNo=" + movieNo +
+                ", theaterDetailStandardDate='" + theaterDetailStandardDate + '\'' +
+                ", theaterDetailTime='" + theaterDetailTime + '\'' +
+                ", theaterDetailRemainSeats=" + theaterDetailRemainSeats +
+                ", theaterDetailSeats=" + theaterDetailSeats +
+                '}';
     }
 }

@@ -1,12 +1,12 @@
 package com.example.lottemoviereservation.dto;
 
 public class ReviewDto {
-    public int reviewNo;
-    public int movieNo;
-    public int userNo;
-    public String reviewTitle;
-    public String reviewContent;
-    public double reviewRate;
+    private int reviewNo;
+    private int movieNo;
+    private int userNo;
+    private String reviewTitle;
+    private String reviewContent;
+    private double reviewRate;
 
     public int getReviewNo() {
         return reviewNo;
