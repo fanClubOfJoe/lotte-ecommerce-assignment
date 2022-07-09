@@ -10,6 +10,8 @@ import java.util.List;
 import com.example.lottemoviereservation.db.DBClose;
 import com.example.lottemoviereservation.db.DBConnection;
 import com.example.lottemoviereservation.dto.ReviewDto;
+//reviews rate int ....
+
 
 public class ReviewDao {
 	private static ReviewDao dao = new ReviewDao();
@@ -44,7 +46,7 @@ public class ReviewDao {
 						rs.getInt(2),
 						rs.getString(3),
 						rs.getString(4),
-						rs.getDouble(5)
+						rs.getInt(5)
 				);
 				list.add(dto);
 			}
@@ -57,6 +59,48 @@ public class ReviewDao {
 		}
 		return list;
 	}
+
+	public static List<ReviewDto> getReviewListByUserNo(int user_no) {
+		//(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
+		String sql = " select movie_no, user_no, review_title, review_content, review_rate "
+				+ " from reviews "
+				+ " where user_no=? "
+				+ " order by review_no ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		List<ReviewDto> list = new ArrayList<>();
+
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, user_no);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				ReviewDto dto = new ReviewDto(
+						rs.getInt(1),
+						rs.getInt(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getInt(5)
+				);
+				list.add(dto);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Get reviewList fail");
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, psmt, rs);
+		}
+		return list;
+	}
+
+	//getReviewListByMovieNo
+
+	//
 
 	public boolean writeReview(ReviewDto dto) {
 		//(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
@@ -75,7 +119,7 @@ public class ReviewDao {
 			psmt.setInt(2, dto.getUserNo());
 			psmt.setString(3, dto.getReviewTitle());
 			psmt.setString(4, dto.getReviewContent());
-			psmt.setDouble(5, dto.getReviewRate());
+			psmt.setInt(5, dto.getReviewRate());
 
 			count = psmt.executeUpdate();
 		} catch (SQLException e) {
