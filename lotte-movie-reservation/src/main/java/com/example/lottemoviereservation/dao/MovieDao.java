@@ -120,7 +120,6 @@ public class MovieDao {
             psmt = conn.prepareStatement(sql);
 
             rs = psmt.executeQuery();
-
             while (rs.next()) {
 
                 int i = 1;
