@@ -107,10 +107,10 @@
                                 <c:out value="${dto.movieScreenDate}"/> 개봉
                             </div>
                             <div>
-                                <c:out value="${dto.reserveRate}"/>
+                                <strong> 예매율 | </strong><c:out value="${dto.reserveRate}"/>
                             </div>
                             <div>
-                                <c:out value="${dto.movieRate}"/>
+                                <strong> 평점 | </strong><c:out value="${dto.movieRate}"/>
                             </div>
                         </td>
                         <c:if test="${i%j == j-1 }">

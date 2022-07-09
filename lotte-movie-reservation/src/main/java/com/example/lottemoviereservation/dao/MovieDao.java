@@ -106,7 +106,7 @@ public class MovieDao {
         }
         sql = sql + sWord;
 
-        sql = sql + " order by movie_title asc ";
+        sql = sql + " order by reserve_rate desc, movie_title asc ";
 
         Connection conn = null;
         PreparedStatement psmt = null;
