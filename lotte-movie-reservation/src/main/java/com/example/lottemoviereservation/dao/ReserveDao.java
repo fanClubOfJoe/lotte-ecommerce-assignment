@@ -78,12 +78,12 @@ public class ReserveDao {
         return count > 0;
     }
 
-    // 예매할 수 있는 영화의 정보를 날짜 기반으로 가져옴 getTheaterDetailList(20220708) 방식으로 호출
+    // 예매할 수 있는 영화의 정보를 날짜 기반(20220708)으로 7일 안에 개봉한 영화 반환
     public List<TheaterDetailDto> getTheaterDetailList(String date) {
-        String sql = "SELECT movie_no, theater_detail_standard_date , " +
+        String sql ="SELECT movie_no, theater_detail_standard_date, " +
                 "theater_detail_time, theater_detail_remain_seats , theater_detail_seats " +
                 "FROM theater_details " +
-                "WHERE DATEDIFF(STR_TO_DATE('"+date+"', '%Y%m%d'), theater_detail_standard_date) > 0 ";
+                "WHERE timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) >= 0";
         Connection conn = null;
         PreparedStatement psmt = null;
         ResultSet rs = null;
