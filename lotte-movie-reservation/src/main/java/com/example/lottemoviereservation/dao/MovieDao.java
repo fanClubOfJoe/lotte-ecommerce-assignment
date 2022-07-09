@@ -89,4 +89,46 @@ public class MovieDao {
 
         return list;
     }
+
+    public boolean insertMovieDate(MovieDto dto){
+
+        boolean result = false;
+
+        String sql = "insert into movies(movie_title, movie_rate, movie_content, movie_summary, movie_img, "
+                + "	movie_time, movie_category, reserve_rate, age_grade)"
+                + " values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        Connection conn = null;
+        PreparedStatement psmt = null;
+        int count = 0;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, dto.getMovieTitle());
+            psmt.setString(2, dto.getMovieRate()+"");
+            psmt.setString(3, dto.getMovieContent());
+            psmt.setString(4, dto.getMovieSummary());
+            psmt.setString(5, dto.getMovieImg());
+            psmt.setString(6, dto.getMovieTime());
+            psmt.setString(7, dto.getMovieCategory());
+            psmt.setString(8, dto.getReserveRate()+"");
+            psmt.setString(9, dto.getAgeGrade());
+
+            count = psmt.executeUpdate();
+
+            if(count > 0){
+                result = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, null);
+        }
+
+        return result;
+    }
 }
+

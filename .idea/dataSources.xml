@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="lotte" uuid="324ca49f-ba84-473b-a793-56c7f6e51ab9">
+    <data-source source="LOCAL" name="lotte-local" uuid="874c3f24-ecc5-4d6a-98cc-22ffce2f2b24">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://lotte@74e480ad-a90d-423c-bd19-744df28e3775.external.kr1.mysql.rds.nhncloudservice.com:10000</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
