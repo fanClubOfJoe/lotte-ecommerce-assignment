@@ -2,13 +2,10 @@ package com.example.lottemoviereservation.dao;
 
 import com.example.lottemoviereservation.db.DBClose;
 import com.example.lottemoviereservation.db.DBConnection;
+import com.example.lottemoviereservation.dto.MovieTheaterDetailDto;
 import com.example.lottemoviereservation.dto.ReserveDto;
-import com.example.lottemoviereservation.dto.TheaterDetailDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +47,39 @@ public class ReserveDao {
         return canReserve > 0;
     }
 
+    public MovieTheaterDetailDto getMovieReserveDtoByMovieNo(int movieNo) {
+        String sql = " select movie_title, theater_detail_no, theater_no, movies.movie_no, theater_detail_standard_date, " +
+                "theater_deatil_time, theater_detail_remain_seats, theater_detail_seats"+
+                " from movies, theater_details WHERE movie_no=? AND movies.movie_no = theater_detail.movie_no";
+        Connection conn = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+
+        MovieTheaterDetailDto dto = null;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, movieNo);
+
+            rs = psmt.executeQuery();
+
+
+            while (rs.next()) {
+                int i = 1;
+                dto = new MovieTheaterDetailDto(rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return dto;
+    }
     // 예매하기
     public boolean setReserve(ReserveDto reserve) {
         String sql = "INSERT INTO reserves(user_no, movie_no, reserve_time, reserve_enter_count)" +
@@ -80,16 +110,17 @@ public class ReserveDao {
     }
 
     // 예매할 수 있는 영화의 정보를 날짜 기반(20220708)으로 7일 안에 개봉한 영화 반환
-    public List<TheaterDetailDto> getTheaterDetailList(String date) {
-        String sql ="SELECT movie_no, theater_detail_standard_date, " +
+    public List<MovieTheaterDetailDto> getTheaterDetailList(String date) {
+        String sql ="SELECT movies.movie_title, theater_detail_no, theater_no, theater_details.movie_no, theater_detail_standard_date, " +
                 "theater_detail_time, theater_detail_remain_seats , theater_detail_seats " +
-                "FROM theater_details " +
-                "WHERE timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) >= 0";
+                "FROM theater_details, movies " +
+                "WHERE timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) >= 0 " +
+                "AND movies.movie_no = theater_details.movie_no";
         Connection conn = null;
         PreparedStatement psmt = null;
         ResultSet rs = null;
 
-        List<TheaterDetailDto> list = new ArrayList<>();
+        List<MovieTheaterDetailDto> list = new ArrayList<>();
 
         try {
             DBConnection.initConnection();
@@ -99,7 +130,8 @@ public class ReserveDao {
 
             while(rs.next()) {
                 int i = 1;
-                TheaterDetailDto dto = new TheaterDetailDto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++));
+                MovieTheaterDetailDto dto = new MovieTheaterDetailDto(rs.getString(i++), rs.getInt(i++), rs.getInt(i++),
+                        rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++));
                 System.out.println(dto);
                 list.add(dto);
             }

@@ -2,8 +2,8 @@
 
 <%
 
-    response.sendRedirect("user?param=login");
-//    response.sendRedirect("reserve?param=reserve");
+//    response.sendRedirect("user?param=login");
+    response.sendRedirect("reserve?param=reserve");
 
 %>
 

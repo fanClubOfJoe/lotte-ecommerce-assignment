@@ -1,6 +1,7 @@
 package com.example.lottemoviereservation.controller;
 
 import com.example.lottemoviereservation.dao.ReserveDao;
+import com.example.lottemoviereservation.dto.MovieTheaterDetailDto;
 import com.example.lottemoviereservation.dto.ReserveDto;
 import com.example.lottemoviereservation.dto.TheaterDetailDto;
 import com.example.lottemoviereservation.util.CalendarUtil;
@@ -44,10 +45,10 @@ public class ReserveController extends HttpServlet {
             String date = year+CalendarUtil.two(month)+CalendarUtil.two(day);
 
             ReserveDao dao = ReserveDao.getInstance();
-            List<TheaterDetailDto> list = dao.getTheaterDetailList(date);
-            Collections.sort(list, new Comparator<TheaterDetailDto>() {
+            List<MovieTheaterDetailDto> list = dao.getTheaterDetailList(date);
+            Collections.sort(list, new Comparator<MovieTheaterDetailDto>() {
                 @Override
-                public int compare(TheaterDetailDto o1, TheaterDetailDto o2) {
+                public int compare(MovieTheaterDetailDto o1, MovieTheaterDetailDto o2) {
                     if(o1.getMovieNo() == o2.getMovieNo()) {
                         try {
                             SimpleDateFormat format = new SimpleDateFormat("HH:mm");
@@ -64,7 +65,8 @@ public class ReserveController extends HttpServlet {
             });
 
             JSONObject obj = new JSONObject();
-            obj.put("theaterDetailList", list);
+            obj.put("list", list);
+            System.out.println(obj);
             response.setContentType("application/x-json; charset=utf-8;");
             response.getWriter().println(obj);
         }

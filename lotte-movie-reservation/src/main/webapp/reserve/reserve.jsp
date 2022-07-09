@@ -32,18 +32,39 @@ $(document).ready(function() {
     let year = 2022;
     let month = 7;
     let day = 9;
+    let title;
     $.ajax({
-        url: "<%=request.getContextPath()%>/reserve?param=reservedetail&year="+year+"&month="+month+"&day="+day,
-        data: {},
+        url: "<%=request.getContextPath()%>/reserve?param=reservedetail",
+        data: { 'year': year, 'month': month, 'day': day},
         method: "GET",
         success:function(data) {
-            var html = "<table>";
-            html += "<tr><td>TEST</td></tr>";
-            html += "</table>";
-            $('#container').append(html);
-            console.dir(data);
-            JSONParser parser
-            console.dir(data.parse());
+            console.dir(data.list[0]);
+            let html = "<table>";
+            for(let i = 0; i < data.list.length; i++) {
+                let date = data.list[i].theaterDetailStandardDate;
+                date = date.split(" ")[0];
+                date = date.split("-");
+                html += "<tr>" +
+                    "<td>" +
+                    data.list[i].movieTitle +
+                    "</td>" +
+                    "<td>" +
+                    data.list[i].theaterDetailNo +
+                    "</td>" +
+                    "<td>" +
+                    data.list[i].theaterDetailRemainSeats + " / " +
+                    data.list[i].theaterDetailSeats +
+                    "</td>" +
+                    "<td>" +
+                    date[0] + "년 " + date[1] + "월 " + date[2] + "일 " +
+                    "</td>" +
+                    "<td>" +
+                    data.list[0].theaterDetailTime +
+                    "</td>" +
+                    "</tr>";
+                html += "</table>";
+                $('#container').append(html);
+            }
         },
         error:function() {
             console.log("ERR");
