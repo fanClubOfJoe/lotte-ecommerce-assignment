@@ -4,16 +4,23 @@ public class UserDto {
     private int userNo;
     private String userId;
     private String userName;
+    private String userEmail;
     private String userPassword;
+    private boolean isActivated;
+    public String getUserEmail() {
+        return userEmail;
+    }
 
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "userNo=" + userNo +
-                ", userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                '}';
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public boolean isActivated() {
+        return isActivated;
+    }
+
+    public void setActivated(boolean activated) {
+        isActivated = activated;
     }
 
     public UserDto(String userId, String userName, String userPassword) {
@@ -66,4 +73,5 @@ public class UserDto {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+
 }
