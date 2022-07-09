@@ -8,6 +8,7 @@ import com.example.lottemoviereservation.dto.TheaterDetailDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,6 +100,62 @@ public class ReserveDao {
             while(rs.next()) {
                 int i = 1;
                 TheaterDetailDto dto = new TheaterDetailDto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++));
+                System.out.println(dto);
+                list.add(dto);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+        return list;
+    }
+    // 예매 취소
+    public boolean deleteReserveDtoByReserveNo(int reserveNo) {
+        String sql = "DELETE FROM reserves WHERE reserve_no = ?";
+        Connection conn = null;
+        PreparedStatement psmt = null;
+
+        int count = 0;
+
+        try {
+            DBConnection.initConnection();
+            conn = DBConnection.getConnection();
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, reserveNo);
+
+            count = psmt.executeUpdate();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, null);
+        }
+        return count > 0;
+    }
+
+    // 예매 조회
+    public List<ReserveDto> getReserveDtoByUserNo(int userNo) {
+        String sql = "SELECT reserve_no, movie_no, reserve_time, reserve_enter_count FROM reserves WHERE user_no = ?";
+        Connection conn = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+
+        List<ReserveDto> list = new ArrayList<>();
+
+        try {
+            DBConnection.initConnection();
+            conn = DBConnection.getConnection();
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, userNo);
+
+            rs = psmt.executeQuery();
+
+            while(rs.next()) {
+                int i = 1;
+                ReserveDto dto = new ReserveDto(rs.getInt(i++), userNo, rs.getInt(i++), rs.getString(i++), rs.getInt(i++));
                 System.out.println(dto);
                 list.add(dto);
             }
