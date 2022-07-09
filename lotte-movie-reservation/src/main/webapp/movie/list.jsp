@@ -13,12 +13,13 @@
         search = "";
     }
 
-    MovieDao dao = MovieDao.getInstance();
-    List<MovieDto> list = dao.getMovieSearchList(choice, search);
+    MovieDao movieDao = MovieDao.getInstance();
+
+    List<MovieDto> movieList = movieDao.getMovieSearchList(choice, search);
 
     pageContext.setAttribute("choice", choice);
     pageContext.setAttribute("search", search);
-    pageContext.setAttribute("list", list);
+    pageContext.setAttribute("movieList", movieList);
 %>
 <html>
 <head>
@@ -78,39 +79,39 @@
 <div class="container">
     <div class="center-block list-block">
         <c:choose>
-            <c:when test="${not empty list}">
+            <c:when test="${not empty movieList}">
                 <div class="result">
-                    영화검색 결과 <strong> ${list.size()} 건 </strong>
+                    영화검색 결과 <strong> ${movieList.size()} 건 </strong>
                 </div>
 
                 <c:set var="i" value="0"/>
                 <c:set var="j" value="3"/>
                 <table>
-                    <c:forEach var="dto" items="${list}">
+                    <c:forEach var="movieDto" items="${movieList}">
                         <c:if test="${i%j == 0 }">
                             <tr>
                         </c:if>
                         <td class="dto-block">
                             <div>
-                                <img class="moviePoster" src="${dto.movieImg}" alt="No image"/>
+                                <img class="moviePoster" src="${movieDto.movieImg}" alt="No image"/>
                             </div>
                             <div>
-                                <a href="<%=request.getContextPath() %>/movie?param=detail&movieno=${dto.movieNo}">${dto.movieTitle}</a>
+                                <a href="<%=request.getContextPath() %>/movie?param=detail&movieno=${movieDto.movieNo}">${movieDto.movieTitle}</a>
                             </div>
                             <div>
-                                <c:out value="${dto.ageGrade}"/>
+                                <c:out value="${movieDto.ageGrade}"/>
                             </div>
                             <div>
-                                <c:out value="${dto.movieCategory}"/>
+                                <c:out value="${movieDto.movieCategory}"/>
                             </div>
                             <div>
-                                <c:out value="${dto.movieScreenDate}"/> 개봉
+                                <c:out value="${movieDto.movieScreenDate}"/> 개봉
                             </div>
                             <div>
-                                <strong> 예매율 | </strong><c:out value="${dto.reserveRate}"/>
+                                <strong> 예매율 | </strong><c:out value="${movieDto.reserveRate}"/>
                             </div>
                             <div>
-                                <strong> 평점 | </strong><c:out value="${dto.movieRate}"/>
+                                <strong> 평점 | </strong><c:out value="${movieDto.movieRate}"/>
                             </div>
                         </td>
                         <c:if test="${i%j == j-1 }">
