@@ -114,7 +114,7 @@ public class MovieDao {
             psmt.setString(6, dto.getMovieTime());
             psmt.setString(7, dto.getMovieCategory());
             psmt.setString(8, dto.getReserveRate()+"");
-            psmt.setString(9, dto.getMovieTitle());
+            psmt.setString(9, dto.getAgeGrade());
 
             count = psmt.executeUpdate();
 
