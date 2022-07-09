@@ -44,13 +44,20 @@
         .dto-block {
             width: 300px;
         }
+        .select {
+            width: auto;
+            height: 38px;
+        }
+        .result {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
 <div>
     <div class="row px-5 mx-5 mb-4 mt-5 pt-5">
         <div class="col-sm-3">
-            <select class="form-select" id="choice">
+            <select id="choice" class="select">
                 <option>검색</option>
                 <option value="movieTitle">영화 제목</option>
                 <option value="movieCategory">영화 장르</option>
@@ -72,6 +79,10 @@
     <div class="center-block list-block">
         <c:choose>
             <c:when test="${not empty list}">
+                <div class="result">
+                    영화검색 결과 <strong> ${list.size()} 건 </strong>
+                </div>
+
                 <c:set var="i" value="0"/>
                 <c:set var="j" value="3"/>
                 <table>
@@ -84,10 +95,13 @@
                                 <img class="moviePoster" src="${dto.movieImg}" alt="No image"/>
                             </div>
                             <div>
-                                <c:out value="${dto.movieTitle}"/>
+                                <a href="<%=request.getContextPath() %>/movie?param=detail&movieno=${dto.movieNo}">${dto.movieTitle}</a>
                             </div>
                             <div>
                                 <c:out value="${dto.ageGrade}"/>
+                            </div>
+                            <div>
+                                <c:out value="${dto.movieCategory}"/>
                             </div>
                             <div>
                                 <c:out value="${dto.movieScreenDate}"/> 개봉
@@ -98,7 +112,6 @@
                             <div>
                                 <c:out value="${dto.movieRate}"/>
                             </div>
-
                         </td>
                         <c:if test="${i%j == j-1 }">
                             </tr>
