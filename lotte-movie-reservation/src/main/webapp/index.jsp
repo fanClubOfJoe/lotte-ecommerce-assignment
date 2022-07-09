@@ -3,6 +3,7 @@
 <%
 
     response.sendRedirect("user?param=login");
+//    response.sendRedirect("reserve?param=reserve");
 
 %>
 

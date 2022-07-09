@@ -25,7 +25,7 @@
 
 <div class="center">
 
-  <form action="loginAf.jsp" method="post">
+  <form action="<%=request.getContextPath() %>/user?param=loginAf" method="post">
 
     <table border="1">
       <tr>
@@ -44,9 +44,9 @@
       <tr>
         <td colspan="3">
           <input type="submit" value="로그인">
-          <a href="regi.jsp">회원가입</a>
-          <a href="regi.jsp">아이디찾기</a>
-          <a href="regi.jsp">비밀번호찾기</a>
+          <a href="<%=request.getContextPath() %>/user?param=regi">회원가입</a>
+          <a href="<%=request.getContextPath() %>/user?param=findId">아이디찾기</a>
+          <a href="<%=request.getContextPath() %>/user?param=findPwd">비밀번호찾기</a>
         </td>
       </tr>
 

@@ -33,12 +33,12 @@ public class UserController extends HttpServlet {
             resp.sendRedirect("user/login.jsp");
         }
         else if(param.equals("loginAf")) {
-            int no = Integer.parseInt(req.getParameter("user_no"));
-            String id = req.getParameter("user_id");
-            String pwd = req.getParameter("user_password");
+            int no = Integer.parseInt(req.getParameter("no"));
+            String id = req.getParameter("id");
+            String pwd = req.getParameter("pwd");
 
             UserDao dao = UserDao.getInstance();
-            UserDto user = dao.login(new UserDto(no, id, null, pwd));
+            UserDto user = dao.login(new UserDto(no, id, null, null, pwd));
 
             String msg = "loginFail";
             String send = "";
@@ -50,7 +50,7 @@ public class UserController extends HttpServlet {
             resp.sendRedirect("loginAf.jsp?"+ send +"&loginmsg=" + msg);
         }
         else if(param.equals("regi")) {
-            resp.sendRedirect("member/regi.jsp");
+            resp.sendRedirect("user/regi.jsp");
         }
         else if(param.equals("idcheck")) {
             String id = req.getParameter("id");
@@ -74,10 +74,11 @@ public class UserController extends HttpServlet {
 
             String id = req.getParameter("id");
             String name = req.getParameter("name");
+            String email = req.getParameter("email");
             String pwd = req.getParameter("pwd");
 
             UserDao dao = UserDao.getInstance();
-            boolean b = dao.addUser(new UserDto(id, name, pwd));
+            boolean b = dao.addUser(new UserDto(id, name, email, pwd));
             String msg = "OK";
 
             if(b == false) {
@@ -86,6 +87,15 @@ public class UserController extends HttpServlet {
 
             resp.sendRedirect("message.jsp?msg=" + msg);
 
+        }
+        else if(param.equals("findId")) {
+            resp.sendRedirect("user/findId.jsp");
+        }
+        else if(param.equals("findPwd")) {
+            resp.sendRedirect("user/findPwd" +
+                    "" +
+                    "" +
+                    ".jsp");
         }
     }
 }
