@@ -1,4 +1,4 @@
-use mydb;
+use lotteMovie;
 
 DROP TABLE theater_details;
 DROP TABLE reserves;
@@ -45,7 +45,8 @@ CREATE TABLE users(
                       user_id varchar(50) not null unique,
                       user_email varchar(100) not null unique,
                       user_name varchar(50) not null,
-                      user_password varchar(50) not null
+                      user_password varchar(50) not null,
+                      is_activated boolean not null default true
 );
 
 CREATE TABLE reserves(
@@ -64,31 +65,18 @@ CREATE TABLE reviews(
                         user_no int not null,
                         review_title varchar(50) not null,
                         review_content varchar(1000) not null,
-                        review_rate decimal(4, 2) not null default 0.0, -- 사용자평점
+                        review_rate int not null default 0.0, -- 사용자평점
                         foreign key(user_no) references users(user_no),
                         foreign key(movie_no) references movies(movie_no)
 );
-    
 
 -- INSERT
 INSERT INTO movies(movie_title, movie_rate, movie_content, movie_summary, movie_img, movie_screen_date, movie_time, movie_category, reserve_rate, age_grade)
 VALUES("콘스탄틴", 4.72, "존 콘스탄틴, 인간세계와 지하세계의 경계에 선 절대 구원의 힘!", "", "https://movie.daum.net/moviedb/main?movieId=40906#photoId=136755", STR_TO_DATE('20050208', '%Y%m%d'),120, '액션/판타지', 8.3, "15세이상관람가");
 INSERT INTO theaters VALUES (1, "비트컴퓨터 영화관", "강남");
-INSERT INTO theater_details(theater_no, movie_no, theater_detail_standard_date, theater_detail_time, theater_detail_remain_seats, theater_detail_seats) VALUES (1, 1, STR_TO_DATE('20050208', '%Y%m%d') , "09:00", 65, 65);
+INSERT INTO theater_details(theater_no, movie_no, theater_detail_standard_date, theater_detail_time, theater_detail_remain_seats, theater_detail_seats) VALUES (1, 1, STR_TO_DATE('20050208', '%Y%m%d') , "21:00", 65, 65);
 INSERT INTO users(user_id, user_email, user_name, user_password) VALUES('test', 'test@test.com', '테스트', 'test');
-INSERT INTO reserves(user_no, movie_no, reserve_time, reserve_enter_count) VALUES(1, 1, STR_TO_DATE("1200", '%H%i%s'), 5);
+INSERT INTO reserves(movie_no, reserve_time, reserve_enter_count) VALUES(1, STR_TO_DATE("1200", '%H%i%s'), 5);
 
 -- UPDATE
 UPDATE theater_details SET theater_detail_remain_seats = 5 WHERE movie_no = 1;
-SELECT movie_no, theater_detail_standard_date , 
-                theater_detail_time, theater_detail_remain_seats , theater_detail_seats 
-                FROM theater_details 
-                WHERE DATEDIFF(now(), theater_detail_standard_date) > 0;
-                
-SELECT movie_no, movie_title, movie_rate, movie_content, movie_summary,movie_img, movie_screen_date, movie_time, movie_category, reserve_rate, age_grade
-FROM movies WHERE movie_no = 1;
-
-SELECT movie_no, theater_detail_remain_seats, theater_detail_seats
-FROM theater_details;
-
-SELECT IF(theater_detail_remain_seats >= 5 , 1 , 0) FROM theater_details WHERE movie_no = 1; 
