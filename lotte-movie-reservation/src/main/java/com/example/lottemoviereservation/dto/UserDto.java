@@ -15,18 +15,12 @@ public class UserDto {
         this.userPassword = userPassword;
     }
 
-    public UserDto(int userNo, String userId, String userEmail, String userName) {
-        this.userNo = userNo;
-        this.userId = userId;
-        this.userName = userName;
-        this.userEmail = userEmail;
-    }
 
-    public UserDto(int userNo, String userId, String userName, String userEmail, String userPassword) {
+    public UserDto(int userNo, String userId, String userEmail, String userName, String userPassword) {
         this.userNo = userNo;
         this.userId = userId;
-        this.userName = userName;
         this.userEmail = userEmail;
+        this.userName = userName;
         this.userPassword = userPassword;
     }
 
