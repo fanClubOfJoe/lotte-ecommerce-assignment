@@ -49,7 +49,6 @@
     <div>
         <strong>${dto.movieSummary}</strong></div>
     <div>
-    <div>
         ${dto.movieContent}</div>
     <div>
         <strong> 상영 시간 | </strong>${dto.movieTime}</div>
