@@ -22,10 +22,4 @@ class ReserveDaoTest {
         result = dao.setReserve(new ReserveDto(1, 1, "0900", 5));
         assertEquals(result, true);
     }
-
-    @Test
-    void getTheaterDetailList() {
-        ScreenDao dao = ScreenDao.getInstance();
-        dao.getTheaterDetailList("20100529");
-    }
 }
