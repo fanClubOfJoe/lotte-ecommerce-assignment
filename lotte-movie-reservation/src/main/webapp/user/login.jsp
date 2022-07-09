@@ -32,7 +32,9 @@
         <th>아이디</th>
         <td>
           <input type="text" id="id" name="id" size="20"><br>
-          <input type="checkbox" id="chk_save_id">save id
+          <div class="form-group form-check">
+            <label class="form-check-label" for="rememberID"><input class="form-check-input" type="checkbox" name="rememberID" id="rememberID">id 저장</label>
+          </div>
         </td>
       </tr>
       <tr>
@@ -55,32 +57,7 @@
   </form>
 </div>
 
-<script type="text/javascript">
-
-  let user_id = $.cookie("user_id");
-  if(user_id != null){
-    $("#id").val(user_id);
-    $("#chk_save_id").prop("checked", true);
-  }
-
-  $("#chk_save_id").click(function() {
-
-    if($("#chk_save_id").is(":checked")){
-
-      if($("#id").val().trim() == ""){
-        alert("id를 입력해 주십시오");
-        $("#chk_save_id").prop("checked", false);
-      }else{
-        // cookie를 저장
-        $.cookie("user_id", $("#id").val().trim(), {expires:7, path:'./'});
-      }
-
-    }else{
-      $.removeCookie("user_id", { path:'./' });
-    }
-  });
-
-</script>
+<script type="text/javascript" src="js/login.js"></script>
 
 </body>
 </html>

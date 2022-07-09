@@ -33,21 +33,19 @@ public class UserController extends HttpServlet {
             resp.sendRedirect("user/login.jsp");
         }
         else if(param.equals("loginAf")) {
-            int no = Integer.parseInt(req.getParameter("no"));
+
             String id = req.getParameter("id");
             String pwd = req.getParameter("pwd");
-
             UserDao dao = UserDao.getInstance();
-            UserDto user = dao.login(new UserDto(no, id, null, null, pwd));
-
+            UserDto user = dao.login(new UserDto(-1, id, null, null, pwd));
             String msg = "loginFail";
-            String send = "";
             if(user != null && !user.getUserId().equals("")) {
                 resp.setContentType("application/x-json; charset=utf-8");
-                send = "id=" + user.getUserId() + "&name=" + user.getUserName();
                 msg = "loginSuccess";
+                req.getSession().setAttribute("login", user);
+                System.out.println(req);
             }
-            resp.sendRedirect("loginAf.jsp?"+ send +"&loginmsg=" + msg);
+            resp.sendRedirect("user/hi.jsp");
         }
         else if(param.equals("regi")) {
             resp.sendRedirect("user/regi.jsp");
@@ -68,6 +66,7 @@ public class UserController extends HttpServlet {
 
             resp.setContentType("application/x-json; charset=utf-8");
             resp.getWriter().print(obj);
+
 
         }
         else if(param.equals("regiAf")) {
