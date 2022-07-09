@@ -90,6 +90,53 @@ public class MovieDao {
         return list;
     }
 
+    public List<MovieDto> getMovieSearchList(String choice, String search) {
+
+        String sql = " select movie_no, movie_title, movie_rate, movie_content, movie_summary, movie_img, movie_screen_date, "
+                + "			movie_time, movie_category, reserve_rate, age_grade "
+                + " from movies ";
+
+        String sWord = "";
+        if (choice.equals("movieTitle")) {
+            sWord = " where movie_title like '%" + search + "%' ";
+        } else if (choice.equals("movieCategory")) {
+            sWord = " where movie_category like '%" + search + "%' ";
+        } else if (choice.equals("movieContent")) {
+            sWord = " where movie_content like '%" + search + "%' ";
+        }
+        sql = sql + sWord;
+
+        sql = sql + " order by movie_title asc ";
+
+        Connection conn = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+
+        List<MovieDto> list = new ArrayList<MovieDto>();
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+
+            rs = psmt.executeQuery();
+
+            while (rs.next()) {
+
+                int i = 1;
+                MovieDto dto = new MovieDto(rs.getInt(i++), rs.getString(i++), rs.getDouble(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDouble(i++), rs.getString(i++));
+
+                list.add(dto);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return list;
+    }
 
     public boolean insertMovieDate(MovieDto dto) {
 
@@ -115,7 +162,7 @@ public class MovieDao {
             psmt.setString(6, dto.getMovieTime());
             psmt.setString(7, dto.getMovieCategory());
             psmt.setString(8, dto.getReserveRate() + "");
-            psmt.setString(9, dto.getMovieTitle());
+            psmt.setString(9, dto.getAgeGrade());
 
             count = psmt.executeUpdate();
 
@@ -131,5 +178,7 @@ public class MovieDao {
 
         return result;
     }
+
+
 }
 
