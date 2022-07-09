@@ -51,9 +51,8 @@ public class ReserveDao {
 
     // 예매하기
     public boolean setReserve(ReserveDto reserve) {
-        if(!getRemainSeats(reserve))
-            return false;
-        String sql = "INSERT INTO reserves(user_no, movie_no, reserve_time, reserve_enter_count) VALUES(?, ?, STR_TO_DATE(?, '%H%i%s'), ?)";
+        String sql = "INSERT INTO reserves(user_no, movie_no, reserve_time, reserve_enter_count)" +
+                " VALUES(?, ?, STR_TO_DATE(?, '%H%i%s'), ?)";
         Connection conn = null;
         PreparedStatement psmt = null;
 

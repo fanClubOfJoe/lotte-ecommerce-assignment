@@ -1,6 +1,7 @@
 package com.example.lottemoviereservation.controller;
 
 import com.example.lottemoviereservation.dao.ReserveDao;
+import com.example.lottemoviereservation.dto.ReserveDto;
 import com.example.lottemoviereservation.dto.TheaterDetailDto;
 import com.example.lottemoviereservation.util.CalendarUtil;
 import org.json.JSONObject;
@@ -64,6 +65,30 @@ public class ReserveController extends HttpServlet {
 
             JSONObject obj = new JSONObject();
             obj.put("theaterDetailList", list);
+            response.setContentType("application/x-json; charset=utf-8;");
+            response.getWriter().println(obj);
+        }
+        else if(param.equals("reserveticket")) {
+            // !user정보 가져오기!
+            int userNo = 1;
+            int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+            String reserveTime = request.getParameter("reserveTime");
+            int reserveEnterCount = Integer.parseInt(request.getParameter("reserveEnterCount"));
+
+            ReserveDao dao = ReserveDao.getInstance();
+
+            ReserveDto dto = new ReserveDto(userNo, movieNo, reserveTime, reserveEnterCount);
+
+            JSONObject obj = new JSONObject();
+
+            // 예약이 불가능한 인원 수 일 때 false JSONObject로 전달
+            if(!dao.getRemainSeats(dto)) {
+                obj.put("result", false);
+            }
+            else {
+                dao.setReserve(dto);
+                obj.put("result", true);
+            }
             response.setContentType("application/x-json; charset=utf-8;");
             response.getWriter().println(obj);
         }
