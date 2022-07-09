@@ -34,7 +34,9 @@ public class MovieController extends HttpServlet {
 
         if (param.equals("detail")) {
 
-            resp.sendRedirect("movie/detail.jsp");
+            int movieno = Integer.parseInt(req.getParameter("movieno"));
+
+            resp.sendRedirect("movie/detail.jsp?movieno="+movieno);
 
         }else if (param.equals("list")) {
             resp.sendRedirect("movie/list.jsp");

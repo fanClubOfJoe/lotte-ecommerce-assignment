@@ -5,24 +5,8 @@ public class UserDto {
     private String userId;
     private String userEmail;
     private String userName;
-    private String userEmail;
     private String userPassword;
     private boolean isActivated;
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public boolean isActivated() {
-        return isActivated;
-    }
-
-    public void setActivated(boolean activated) {
-        isActivated = activated;
-    }
 
     public UserDto(String userId, String userName, String userEmail, String userPassword) {
         this.userId = userId;
@@ -81,4 +65,12 @@ public class UserDto {
     public void setUserEmail(String userEmail) {this.userEmail = userEmail;}
 
     public String getUserEmail() {return userEmail;}
+
+    public boolean isActivated() {
+        return isActivated;
+    }
+
+    public void setActivated(boolean activated) {
+        isActivated = activated;
+    }
 }
