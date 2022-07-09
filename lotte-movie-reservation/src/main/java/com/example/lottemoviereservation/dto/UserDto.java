@@ -3,6 +3,7 @@ package com.example.lottemoviereservation.dto;
 public class UserDto {
     private int userNo;
     private String userId;
+    private String userEmail;
     private String userName;
     private String userPassword;
 
@@ -11,27 +12,31 @@ public class UserDto {
         return "UserDto{" +
                 "userNo=" + userNo +
                 ", userId='" + userId + '\'' +
+                ", userId='" + userEmail + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 '}';
     }
 
-    public UserDto(String userId, String userName, String userPassword) {
+    public UserDto(String userId, String userName, String userEmail, String userPassword) {
         this.userId = userId;
         this.userName = userName;
+        this.userEmail = userEmail;
         this.userPassword = userPassword;
     }
 
-    public UserDto(int userNo, String userId, String userName) {
+    public UserDto(int userNo, String userId, String userEmail, String userName) {
         this.userNo = userNo;
         this.userId = userId;
         this.userName = userName;
+        this.userEmail = userEmail;
     }
 
-    public UserDto(int userNo, String userId, String userName, String userPassword) {
+    public UserDto(int userNo, String userId, String userName, String userEmail, String userPassword) {
         this.userNo = userNo;
         this.userId = userId;
         this.userName = userName;
+        this.userEmail = userEmail;
         this.userPassword = userPassword;
     }
 
@@ -66,4 +71,8 @@ public class UserDto {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+
+    public void setUserEmail(String userEmail) {this.userEmail = userEmail;}
+
+    public String getUserEmail() {return userEmail;}
 }

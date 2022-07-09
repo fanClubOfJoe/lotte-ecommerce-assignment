@@ -19,31 +19,28 @@ public class UserDao {
     }
 
     public boolean addUser(UserDto dto) {
-        String sql =    " insert into users(user_id, user_name, user_password) "
-                    +   "      values(?, ?, ?) ";
+        String sql =    " insert into users(user_id, user_name, user_email, user_password) "
+                    +   "      values(?, ?, ?, ?) ";
 
-        String address = "74e480ad-a90d-423c-bd19-744df28e3775.external.kr1.mysql.rds.nhncloudservice.com";
-        String id = "lotte";
-        String pwd = "lotte";
+
         Connection conn = null;
         PreparedStatement psmt = null;
         int count = 0;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(address, id, pwd);
+            conn = DBConnection.getConnection();
+            System.out.println(conn);
 
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, dto.getUserId());
             psmt.setString(2, dto.getUserName());
-            psmt.setString(3, dto.getUserPassword());
+            psmt.setString(3, dto.getUserEmail());
+            psmt.setString(4, dto.getUserPassword());
 
             count = psmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } finally {
             DBClose.close(conn, psmt, null);
         }
@@ -85,8 +82,82 @@ public class UserDao {
 
         return findId;
     }
+    public String findId(String user_name, String user_email) {
+
+        String sql = " SELECT user_id "
+                + " FROM users "
+                + " WHERE user_name=? and user_email=?";
+
+        Connection conn = null;         // DB 연결
+        PreparedStatement psmt = null;   // Query문을 실행
+        ResultSet rs = null;         // 결과 취득
+
+        String id;
+
+        try {
+            conn = DBConnection.getConnection();
+            System.out.println("1/3 findId success");
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, user_name);
+            psmt.setString(2, user_email);
+            System.out.println(psmt);
+            System.out.println("2/3 findId success");
+
+            rs = psmt.executeQuery();
+            if(rs.next()) {
+                id = rs.getString(1);
+                return id;
+            }
+            System.out.println("3/3 findId success");
+
+        } catch (SQLException e) {
+            System.out.println("findId fail");
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return null;
+    }
+    public String findPwd(String user_id, String user_email) {
+
+        String sql = " SELECT user_password "
+                + " FROM users "
+                + " WHERE user_id=? and user_email=?";
+
+        Connection conn = null;         // DB 연결
+        PreparedStatement psmt = null;   // Query문을 실행
+        ResultSet rs = null;         // 결과 취득
+
+        String pwd;
+
+        try {
+            conn = DBConnection.getConnection();
+            System.out.println("1/3 findPwd success");
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, user_id);
+            psmt.setString(2, user_email);
+            System.out.println(psmt);
+            System.out.println("2/3 findPwd success");
+
+            rs = psmt.executeQuery();
+            if(rs.next()) {
+                pwd = rs.getString(1);
+                return pwd;
+            }
+            System.out.println("3/3 findPwd success");
+
+        } catch (SQLException e) {
+            System.out.println("findPwd fail");
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return null;
+    }
     public UserDto login(UserDto dto) {
-        String sql = " select user_no, user_id, user_name, user_password "
+        String sql = " select user_no, user_id, user_name, user_email, user_password "
                 + " from users "
                 + " where user_id=? and user_password=? ";
         Connection conn = null;

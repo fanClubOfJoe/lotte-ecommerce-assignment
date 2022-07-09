@@ -5,16 +5,17 @@
 
 <%
     request.setCharacterEncoding("utf-8");
+    String id = request.getParameter("id");
+    String pwd = request.getParameter("pwd");
     String loginmsg = request.getParameter("loginmsg");
-    int no = Integer.parseInt(request.getParameter("user_no"));
-    String id = request.getParameter("user_id");
-    String name = request.getParameter("user_name");
 %>
 <body>
 
 <%
 
-    UserDto user = new UserDto(no, id, name);
+    UserDao dao = UserDao.getInstance();
+
+    UserDto user = dao.login(new UserDto(0, id, pwd, null, null));
 
 %>
 <%
@@ -26,7 +27,7 @@
 %>
 <script type="text/javascript">
     alert("안녕하세요. <%=user.getUserName() %>님");
-    location.href = "user?param=bbslist";
+    // location.href = "user?param=bbslist";
 </script>
 <%
 }
