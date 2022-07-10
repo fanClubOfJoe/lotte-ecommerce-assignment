@@ -36,7 +36,7 @@
                     a += '</div></div></div>';
                 });
 
-                //if() 총 count 수 넘으면 더보기 버튼 안보이게
+                //if() 총 count 수 넘으면 더보기 버튼 안보이게 처리 필요
                 a += '<a class="button" href="#" onclick="listReview(' + movieNo + ', ' + ++reviewListSize + '); return false;">더보기</a>';
 
                 $(".listReview").html(a);
@@ -101,7 +101,7 @@
         }
     }
 
-    //��� ����
+    //리뷰 삭제
     function deleteReview(reviewNo) {
         $.ajax({
             url: '/review/delete/',
