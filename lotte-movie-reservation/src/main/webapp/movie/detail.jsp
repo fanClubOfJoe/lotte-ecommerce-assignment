@@ -18,7 +18,7 @@
     ReviewDao reviewDao = ReviewDao.getInstance();
     UserDao userDao = UserDao.getInstance();
 
-    List<ReviewDto> reviewList = reviewDao.getReviewListByMovieNo(movieno);
+    List<ReviewDto> reviewList = reviewDao.getReviewPageListByMovieNo(movieno,2);
     List<UserNameDto> userNameList = userDao.getUserNameByReview(reviewList);
 
     pageContext.setAttribute("movieDto", movieDto);
@@ -40,6 +40,7 @@
             src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style type="text/css">
         .moviePoster {
             width: 200px;
@@ -95,7 +96,7 @@
             padding: 2em;
         }
 
-        .registerBtn {
+        .insertReviewBtn {
             background-color: #e60012;
         }
     </style>
@@ -124,6 +125,7 @@
         <strong> 예매율 | </strong>${movieDto.reserveRate}</div>
 
     <div>
+        <div>
         <div>리뷰/평점</div>
         <div>
             <form action="review" method="post" >
@@ -140,14 +142,24 @@
                     <label for="1-star" class="star">&#9733;</label>
                 </div>
                 <div class="review_contents">
+                    <form name="insertReviewForm">
                     <textarea rows="10" class="review_textarea"
                               placeholder="평점 및 영화 관람평을 작성해주세요. 주제와 무관한 리뷰 또는 스포일러는 표시제한 또는 삭제될 수 있습니다." id="reviewContent" name="reviewContent"></textarea>
                     <div class="cmd">
-                        <input type="button" class="registerBtn" name="save" id="save" value="등록">
+                        <input type="button" class="insertReviewBtn" name="insertReviewBtn" id="insertReviewBtn" value="등록">
                     </div>
+                    </form>
                 </div>
             </form>
         </div>
+        </div>
+
+
+            <div class="review-container">
+                <div class="listReview"></div>
+            </div>
+        <%@ include file="review.jsp" %>
+
 
     </div>
 </div>
