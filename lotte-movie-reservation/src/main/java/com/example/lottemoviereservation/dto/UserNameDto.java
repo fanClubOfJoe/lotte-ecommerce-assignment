@@ -1,6 +1,7 @@
 package com.example.lottemoviereservation.dto;
 
-public class UserNameDto {
+public class
+UserNameDto {
     private int userNo;
     private String userName;
 

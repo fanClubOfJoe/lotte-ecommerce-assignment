@@ -202,7 +202,7 @@ public class UserDao {
 
     }
 
-    public String getUserNameByUserNo(int userNo) {
+    private String getUserNameByUserNo(int userNo) {
 
         String sql = " SELECT user_name "
                 + " FROM users "

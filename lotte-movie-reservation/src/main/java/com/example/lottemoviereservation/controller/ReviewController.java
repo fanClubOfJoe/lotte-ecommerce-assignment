@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.lottemoviereservation.dao.MovieDao;
 import com.example.lottemoviereservation.dao.ReviewDao;
 import com.example.lottemoviereservation.dao.UserDao;
+import com.example.lottemoviereservation.dto.MovieDto;
+import com.example.lottemoviereservation.dto.MovieNameDto;
 import com.example.lottemoviereservation.dto.ReviewDto;
 import com.example.lottemoviereservation.dto.UserDto;
 import com.example.lottemoviereservation.dto.UserNameDto;
@@ -59,6 +62,7 @@ public class ReviewController extends HttpServlet {
 //        int rating = Integer.parseInt(request.getParameter("rating"));
 
         ReviewDao reviewDao = ReviewDao.getInstance();
+        MovieDao movieDao = MovieDao.getInstance();
         UserDao userDao = UserDao.getInstance();
 
         if (param.equals("movielist")) {
@@ -109,14 +113,14 @@ public class ReviewController extends HttpServlet {
             JSONObject obj = new JSONObject();
 
             List<ReviewDto> reviewList = reviewDao.getReviewPageListByUserNo(userNo, page);
-            List<UserNameDto> userNameList = userDao.getUserNameByReview(reviewList);
+            List<MovieNameDto> movieNameList = movieDao.getMovieNameByReview(reviewList);
 
             int reviewCount = reviewDao.getReviewCount();
 
             if (!reviewList.isEmpty()) {
                 obj.put("reviewList", reviewList);
                 obj.put("list", reviewList);
-                obj.put("userNameList", userNameList);
+                obj.put("movieNameList", movieNameList);
                 obj.put("reviewCount", reviewCount);
             }
             response.setContentType("application/x-json; charset=utf-8;");

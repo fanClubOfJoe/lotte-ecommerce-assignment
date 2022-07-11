@@ -3,6 +3,9 @@ package com.example.lottemoviereservation.dao;
 import com.example.lottemoviereservation.db.DBClose;
 import com.example.lottemoviereservation.db.DBConnection;
 import com.example.lottemoviereservation.dto.MovieDto;
+import com.example.lottemoviereservation.dto.MovieNameDto;
+import com.example.lottemoviereservation.dto.ReviewDto;
+import com.example.lottemoviereservation.dto.UserNameDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -213,6 +216,83 @@ public class MovieDao {
         }
 
         return result;
+    }
+
+    public String getUserNameByUserNo(int userNo) {
+
+        String sql = " SELECT user_name "
+                + " FROM users "
+                + " WHERE user_no=? ";
+
+        Connection conn = null;         // DB 연결
+        PreparedStatement psmt = null;   // Query문을 실행
+        ResultSet rs = null;         // 결과 취득
+
+        String findName = "";
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, userNo);
+
+            rs = psmt.executeQuery();
+            if (rs.next()) {
+                findName = rs.getString(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("getUserName fail");
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return findName;
+    }
+
+    public List<MovieNameDto> getMovieNameByReview(List<ReviewDto> reviewList) {
+        List<MovieNameDto> userNameList = new ArrayList<>();
+
+        for (ReviewDto reviewDto : reviewList) {
+            int movieNo = reviewDto.getMovieNo();
+            String userName = getMovieNameByMovieNo(movieNo);
+
+            userNameList.add(new MovieNameDto(movieNo, userName));
+
+        }
+        return userNameList;
+    }
+
+    private String getMovieNameByMovieNo(int movieNo) {
+
+        String sql = " SELECT movie_name "
+                + " FROM movies "
+                + " WHERE movie_no=? ";
+
+        Connection conn = null;         // DB 연결
+        PreparedStatement psmt = null;   // Query문을 실행
+        ResultSet rs = null;         // 결과 취득
+
+        String findName = "";
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, movieNo);
+
+            rs = psmt.executeQuery();
+            if (rs.next()) {
+                findName = rs.getString(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("getUserName fail");
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return findName;
     }
 }
 
