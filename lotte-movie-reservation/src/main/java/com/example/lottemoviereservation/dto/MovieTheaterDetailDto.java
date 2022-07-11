@@ -2,6 +2,9 @@ package com.example.lottemoviereservation.dto;
 
 public class MovieTheaterDetailDto {
     private String movieTitle;
+    private int movieTime;
+    private String movieCategory;
+    private String ageGrade;
     private int theaterDetailNo;
     private int theaterNo;
     private int movieNo;
@@ -10,11 +13,13 @@ public class MovieTheaterDetailDto {
     private int theaterDetailRemainSeats;
     private int theaterDetailSeats;
 
-
     @Override
     public String toString() {
         return "MovieTheaterDetailDto{" +
                 "movieTitle='" + movieTitle + '\'' +
+                ", movieTime=" + movieTime +
+                ", movieCategory='" + movieCategory + '\'' +
+                ", ageGrade='" + ageGrade + '\'' +
                 ", theaterDetailNo=" + theaterDetailNo +
                 ", theaterNo=" + theaterNo +
                 ", movieNo=" + movieNo +
@@ -25,8 +30,11 @@ public class MovieTheaterDetailDto {
                 '}';
     }
 
-    public MovieTheaterDetailDto(String movieTitle, int theaterDetailNo, int theaterNo, int movieNo, String theaterDetailStandardDate, String theaterDetailTime, int theaterDetailRemainSeats, int theaterDetailSeats) {
+    public MovieTheaterDetailDto(String movieTitle, int movieTime, String movieCategory, String ageGrade, int theaterDetailNo, int theaterNo, int movieNo, String theaterDetailStandardDate, String theaterDetailTime, int theaterDetailRemainSeats, int theaterDetailSeats) {
         this.movieTitle = movieTitle;
+        this.movieTime = movieTime;
+        this.movieCategory = movieCategory;
+        this.ageGrade = ageGrade;
         this.theaterDetailNo = theaterDetailNo;
         this.theaterNo = theaterNo;
         this.movieNo = movieNo;
@@ -42,6 +50,30 @@ public class MovieTheaterDetailDto {
 
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
+    }
+
+    public int getMovieTime() {
+        return movieTime;
+    }
+
+    public void setMovieTime(int movieTime) {
+        this.movieTime = movieTime;
+    }
+
+    public String getMovieCategory() {
+        return movieCategory;
+    }
+
+    public void setMovieCategory(String movieCategory) {
+        this.movieCategory = movieCategory;
+    }
+
+    public String getAgeGrade() {
+        return ageGrade;
+    }
+
+    public void setAgeGrade(String ageGrade) {
+        this.ageGrade = ageGrade;
     }
 
     public int getTheaterDetailNo() {

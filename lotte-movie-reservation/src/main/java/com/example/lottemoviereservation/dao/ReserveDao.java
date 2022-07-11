@@ -48,7 +48,7 @@ public class ReserveDao {
     }
 
     public MovieTheaterDetailDto getMovieReserveDtoByMovieNo(int movieNo) {
-        String sql = " select movie_title, theater_detail_no, theater_no, movies.movie_no, theater_detail_standard_date, " +
+        String sql = " select movie_title, movie_time, movie_category, age_grade, theater_detail_no, theater_no, movies.movie_no, theater_detail_standard_date, " +
                 "theater_deatil_time, theater_detail_remain_seats, theater_detail_seats"+
                 " from movies, theater_details WHERE movie_no=? AND movies.movie_no = theater_detail.movie_no";
         Connection conn = null;
@@ -69,7 +69,7 @@ public class ReserveDao {
 
             while (rs.next()) {
                 int i = 1;
-                dto = new MovieTheaterDetailDto(rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++));
+                dto = new MovieTheaterDetailDto(rs.getString(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++));
             }
 
         } catch (SQLException e) {
@@ -111,7 +111,7 @@ public class ReserveDao {
 
     // 예매할 수 있는 영화의 정보를 날짜 기반(20220708)으로 7일 안에 개봉한 영화 반환
     public List<MovieTheaterDetailDto> getTheaterDetailList(String date) {
-        String sql ="SELECT movies.movie_title, theater_detail_no, theater_no, theater_details.movie_no, theater_detail_standard_date, " +
+        String sql ="SELECT movies.movie_title, movie_time, movie_category, age_grade, theater_detail_no, theater_no, theater_details.movie_no, theater_detail_standard_date, " +
                 "theater_detail_time, theater_detail_remain_seats , theater_detail_seats " +
                 "FROM theater_details, movies " +
                 "WHERE timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) >= 0 " +
@@ -130,7 +130,7 @@ public class ReserveDao {
 
             while(rs.next()) {
                 int i = 1;
-                MovieTheaterDetailDto dto = new MovieTheaterDetailDto(rs.getString(i++), rs.getInt(i++), rs.getInt(i++),
+                MovieTheaterDetailDto dto = new MovieTheaterDetailDto(rs.getString(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++),
                         rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++));
                 System.out.println(dto);
                 list.add(dto);
