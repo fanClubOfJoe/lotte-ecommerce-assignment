@@ -71,17 +71,22 @@
 <script type="text/javascript">
     $(function () {
         $("#idBtn").click(function () {
-            	alert("btn click");
 
             $.ajax({
                 type:"post",
                 url:"./idcheck.jsp",
                 data:{ "id":$("#id").val() },
                 success:function( data ){
-                    if(data.trim() == "YES"){
+                    if(data.trim() === "YES"){
                        $("#idcheck").css("color", "#0000ff");
                         $("#idcheck").html('사용할 수 있는 id입니다');
-                    }else{
+                    }
+                    else if(data.trim() === ""){
+                        $("#idcheck").css("color", "#ff0000");
+                        $("#idcheck").html('아이디를 입력해주세요.);
+                        $("#id").val("");
+                    }
+                    else{
                         $("#idcheck").css("color", "#ff0000");
                         $("#idcheck").html('사용 중인 id입니다');
                         $("#id").val("");
@@ -96,7 +101,7 @@
 
     });
     function checkForm() {
-        if(document.getElementById("pwd").value != document.getElementById("confirmPwd").value) {
+        if(document.getElementById("pwd").value !== document.getElementById("confirmPwd").value) {
             alert("패스워드가 일치하지 않습니다!");
             return false;
         }
@@ -107,7 +112,7 @@
     }
    function checkId() {
        let memberId = document.getElementById("id");
-       if(memberId.value == "") {
+       if(memberId.value === "") {
            alert("아이디를 입력하세요!");
            memberId.focus();
        }else {
