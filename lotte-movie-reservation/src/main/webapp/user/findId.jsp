@@ -13,6 +13,7 @@
     </script>
 </head>
 <body>
+<jsp:include page="../front/header.jsp"/>
 <div class="container">
     <div class="card-body">
         <h3 class="card-title">아이디 찾기</h3>
@@ -32,5 +33,6 @@
         <a href="login.jsp" class="btn btn-danger">취소</a>
     </div>
 </div>
+<jsp:include page="../front/footer.jsp"/>
 </body>
 </html>
