@@ -8,6 +8,7 @@
   <title>아이디 찾기</title>
 </head>
 <body>
+<jsp:include page="../front/header.jsp"/>
 <% String id = (String) request.getAttribute("user_id"); %>
 <%-- 추후에 div태그 border 표시와 문자 굵기 표시하기. --%>
 <div class="container">
@@ -19,5 +20,6 @@
     </div>
   </div>
 </div>
+<jsp:include page="../front/footer.jsp"/>
 </body>
 </html>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<jsp:include page="../front/header.jsp"/>
 <div class="container">
     <div class="card-body">
         <div class="align-center">
@@ -17,5 +18,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="../front/footer.jsp"/>
 </body>
 </html>

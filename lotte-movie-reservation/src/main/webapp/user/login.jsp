@@ -20,7 +20,7 @@
 
 </head>
 <body>
-
+<jsp:include page="../front/header.jsp"/>
 <div class="everything">
     <div class="member_login_wrap">
         <div class="contents_inner">
@@ -59,7 +59,7 @@
         </div>
     </div>
 </div>
-
+<jsp:include page="../front/footer.jsp"/>
 <script type="text/javascript" src="js/login.js"></script>
 
 </body>
