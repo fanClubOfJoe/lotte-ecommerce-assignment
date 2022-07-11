@@ -251,7 +251,7 @@
                         </td>
                         <td><%=String.format("%s", theater_name)%>
                         </td>
-                        <td><%=String.format("%d", seatsCount)%>${reserveDto.reserveEnterCount}
+                        <td>${reserveDto.reserveEnterCount}
                         </td>
                     </tr>
                 </c:forEach>
