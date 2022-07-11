@@ -162,7 +162,23 @@
             margin-left: 5px;
         }
 
+        .redbox {
+            margin-top: 20px;
+            background-color: #e60012;
+            color: white;
+            text-align: center;
+        }
+
+        .reservebox {
+            margin-top: 10px;
+            margin-left: 20px;
+            margin-right:20px;
+            padding: 10px;
+        }
+
         .reserve {
+            margin-left: 400px;
+            margin-bottom: 10px;
             padding: 5px;
             border: none;
             border-radius: 5px;
@@ -176,7 +192,6 @@
             border: #E60012 1px solid;
         }
 
-        }
     </style>
 </head>
 <%-- 일주일 일정 --%>
@@ -357,23 +372,24 @@
                             "<font class='seatsfont' style='color: royalblue;'>" + data.list[i].theaterDetailRemainSeats + "석</font></button>&nbsp;&nbsp;&nbsp;"
                         html += "<div id='id" + modalId + "' class='w3-modal'>" +
                             "<div class='w3-modal-content w3-animate-zoom'>" +
-                            "<div class='w3-container''>" +
+                            "<div class='w3-container reservebox''>" +
+                            "<div class='redbox'>예약 정보</div>" +
                             "<input type=\"hidden\" name=\"movieNo\" value=\"movieNo\">" +
                             "<table id='" + data.list[i].movieNo + "'>" +
                             "<tr>" +
-                            "<th>영화제목</th>" +
-                            "<td>" + data.list[i].movieTitle + "</td>" +
+                            "<th align='left'>영화제목</th>" +
+                            "<td>| " + data.list[i].movieTitle + "</td>" +
                             "</tr>" +
                             "<tr>" +
-                            "<th>날짜</th>" +
-                            "<td>" + date[0] + "년 " + month + "월 " + day + "일 " + "</td>" +
+                            "<th align='left'>날짜</th>" +
+                            "<td>| " + date[0] + "년 " + month + "월 " + day + "일 " + "</td>" +
                             "</tr>" +
                             "<tr>" +
-                            "<th>시간</th>" +
-                            "<td>" + data.list[i].theaterDetailTime + "</td>" +
+                            "<th align='left'>시간</th>" +
+                            "<td>| " + data.list[i].theaterDetailTime + "</td>" +
                             "</tr>" +
-                            "<tr><th>인원수</th><td>성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/></td></tr>" +
-                            "<tr><th>결제 방식&nbsp;&nbsp;&nbsp;</th><td><input type='radio' name='radio' id='pay" + modalId + "'>&nbsp;현장에서 결제</td><br/>" +
+                            "<tr><th align='left'>인원수</th><td>| 성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/></td></tr>" +
+                            "<tr><th align='left'>결제 방식&nbsp;&nbsp;&nbsp;</th><td>| <input type='radio' name='radio' id='pay" + modalId + "'>&nbsp;현장에서 결제</td><br/>" +
                             "<tr><td colspan='2'><button type='button' class='reserve'>예약</button></td></tr>" +
                             "</table>" +
                             "<span onclick=\"document.getElementById(\'id" + modalId + "\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>" +
