@@ -48,7 +48,7 @@ public class UserController extends HttpServlet {
                 System.out.println(req);
             }
             if(msg.equals("loginSuccess")) {
-                resp.sendRedirect("user/hi.jsp");
+                resp.sendRedirect("user/updateUser.jsp");
             }
             else{
                 resp.sendRedirect("user/loginError.jsp");
@@ -187,18 +187,24 @@ public class UserController extends HttpServlet {
 
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             request.setCharacterEncoding("utf-8");
-            String id = request.getParameter("id");
+
+
+            UserDto dto = (UserDto) request.getSession().getAttribute("login");
+            String id = dto.getUserId();
+            System.out.println(id);
+
             String email = request.getParameter("email");
-            System.out.println("id + email : " + id + email);
+            String pwd = request.getParameter("pwd");
+            System.out.println("id + email : " + email + pwd);
             String path = null;
-            String password = UserDao.getInstance().findPwd(id, email);
-            System.out.println("password : " + password);
-//            if(password != null) {
-//                request.setAttribute("password", password);
-//                path = "findPwd-ok.jsp";
-//            }
-//            else path = "findPwd-fail.jsp";
-            request.getRequestDispatcher(path).forward(request, response);
+            UserDao dao = UserDao.getInstance();
+            boolean deleteId = dao.updateUser(email, pwd, id);
+            System.out.println("password : " + pwd);
+            if(deleteId){
+            System.out.println("유저정보 바뀜");
+}
+//            else path = "hi.jsp";
+//            request.getRequestDispatcher(path).forward(request, response);
         }
     }
 }

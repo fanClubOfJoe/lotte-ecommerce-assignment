@@ -277,7 +277,7 @@ public class UserDao {
 
         return count > 0;
     }
-    public boolean updateUser(String user_id, String user_email, String user_password) {
+    public boolean updateUser(String user_email, String user_password, String user_id) {
 
         String sql = " UPDATE users "
                 + " SET user_email=?, user_password=? "
@@ -290,19 +290,19 @@ public class UserDao {
 
         try {
             conn = DBConnection.getConnection();
-            System.out.println("1/3 delete success");
+            System.out.println("1/3 update success");
 
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1, user_id);
-            psmt.setString(2, user_email);
-            psmt.setString(3, user_password);
+            psmt.setString(1, user_email);
+            psmt.setString(2, user_password);
+            psmt.setString(3, user_id);
             System.out.println(psmt);
-            System.out.println("2/3 delete success");
+            System.out.println("2/3 update success");
             count = psmt.executeUpdate();
-            System.out.println("3/3 delete success");
+            System.out.println("3/3 update success");
 
         } catch (SQLException e) {
-            System.out.println("delete fail");
+            System.out.println("update fail");
         } finally {
             DBClose.close(conn, psmt, null);
         }
