@@ -64,16 +64,31 @@ $(document).ready(function() {
                     "</td>" +
                     "<td><button onclick=\"document.getElementById(\'id01\').style.display=\'block\'\" class='w3-button w3-black'>예매하기</button>" +
                         "<div id='id01' class='w3-modal'>"+
-                            "<div class='w3-modal-content w3-animate-zoom'>"+
+                            "<div class='w3-modal-content w3-animate-zoom' style='width:400px'>"+
                                 "<div class='w3-container''>"+
-
+                                    "<input type=\"hidden\" name=\"movieNo\" value=\"movieNo\">"+
+                                        "<table>"+
+                                        "<tr>"+
+                                        "<th>영화제목</th>"+
+                                        "<td>"+data.list[i].movieTitle+"</td>"+
+                                    "</tr>"+
+                                        "<tr>"+
+                                            "<th>날짜</th>"+
+                                            "<td>"+date[0] + "년 " + date[1] + "월 " + date[2] + "일 " +"</td>"+
+                                        "</tr>"+
+                                        "<tr>"+
+                                            "<th>시간</th>"+
+                                            "<td>"+data.list[0].theaterDetailTime+"</td>"+
+                                        "</tr>"+
+                                    "</table>" +
+                                    "성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/>"+
+                                    "현장에서 결제 <input type='radio' id='pay'><br/><button type='button' class='reserve'>TEST</button>" +
                                     "<span onclick=\"document.getElementById(\'id01\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>"+
                                 "</div>"+
                             "</div>"+
                         "</div>" +
                     "</td>"+
-                    // "<td><button type='button' class='reserve'>TEST" +
-                    // "</td></button>" +
+
                     "</tr>";
                 html += "</table>";
                 $('#container').append(html);
@@ -94,15 +109,13 @@ $(document).on("click", "button.reserve", function() {
         day: children[3].innerHTML.split(" ")[2],
         time: children[4].innerHTML
     }
-    <%--$.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data--%>
-
-    <%--    --%>
-    <%--).done(function(data) {--%>
-    <%--    console.log(data);--%>
-    <%--}).fail(function() {--%>
-    <%--    console.log("ERR");--%>
-    <%--})--%>
-
+    $.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)
+    .done(function(data) {
+        console.log(data);
+    }).
+    fail(function() {
+        console.log("ERR");
+    })
 })
 </script>
 </body>
