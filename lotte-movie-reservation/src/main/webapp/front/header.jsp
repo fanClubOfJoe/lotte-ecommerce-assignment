@@ -144,7 +144,7 @@
         location.href = "/movie?param=list";
     })
     $('.logoBox').click(function() {
-        location.href = "/movie/list.jsp";
+        location.href = "/movie?param=main";
     })
 </script>
 </body>
