@@ -20,13 +20,14 @@ public class ReserveDao {
 
     // 예매할 수 있는 인원인지 체크해주기(true, false)
     public boolean getRemainSeats(ReserveDto reserve) {
-        String sql = "SELECT IF(theater_detail_remain_seats >= ? , 1 , 0) FROM theater_details WHERE movie_no = ?";
+        String sql = "SELECT IF(theater_detail_remain_seats >= ? , 1 , 0) FROM theater_details WHERE movie_no = ? AND theater_detail_time = ?";
         Connection conn = null;
         PreparedStatement psmt = null;
         ResultSet rs = null;
 
         int canReserve = 0;
 
+        System.out.println(reserve);
         try {
             DBConnection.initConnection();
             conn = DBConnection.getConnection();
@@ -34,6 +35,7 @@ public class ReserveDao {
 
             psmt.setInt(1, reserve.getReserveEnterCount());
             psmt.setInt(2, reserve.getMovieNo());
+            psmt.setString(3, reserve.getReserveTime());
 
             rs = psmt.executeQuery();
             while(rs.next()) {
@@ -44,7 +46,7 @@ public class ReserveDao {
         } finally {
             DBClose.close(conn, psmt, rs);
         }
-        return canReserve > 0;
+        return canReserve == 1;
     }
 
     public MovieTheaterDetailDto getMovieReserveDtoByMovieNo(int movieNo) {
@@ -83,7 +85,7 @@ public class ReserveDao {
     // 예매하기
     public boolean setReserve(ReserveDto reserve) {
         String sql = "INSERT INTO reserves(user_no, movie_no, reserve_time, reserve_enter_count)" +
-                " VALUES(?, ?, STR_TO_DATE(?, '%H%i%s'), ?)";
+                " VALUES(?, ?, STR_TO_DATE(?, '%H%i'), ?)";
         Connection conn = null;
         PreparedStatement psmt = null;
 
@@ -98,7 +100,10 @@ public class ReserveDao {
             psmt.setInt(2, reserve.getMovieNo());
             psmt.setString(3, reserve.getReserveTime());
             psmt.setInt(4, reserve.getReserveEnterCount());
-
+            System.out.println(reserve.getUserNo());
+            System.out.println(reserve.getMovieNo());
+            System.out.println(reserve.getReserveTime());
+            System.out.println(reserve.getReserveEnterCount());
             count = psmt.executeUpdate();
 
         } catch(Exception e) {

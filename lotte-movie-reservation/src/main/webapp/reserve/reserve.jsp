@@ -443,22 +443,33 @@
             %>
 
             var date = parent.children().children()[1].lastChild.innerHTML;
+            console.dir(date.split(" "));
             let data = {
                 movieNo: parent.attr('id'),
-                movieTitle: parent.children().children()[0].lastChild.innerHTML,
-                year: date.split(" ")[0],
-                month: date.split(" ")[1],
-                day: date.split(" ")[2],
-                time: parent.children().children()[2].lastChild.innerHTML,
+                movieTitle: parent.children().children()[0].lastChild.innerHTML.split("| ")[1],
+                year: date.split(" ")[1].substring(0, 4),
+                month: date.split(" ")[2].substring(0, 2),
+                day: date.split(" ")[3].substring(0, 2),
+                theaterTime: parent.children().children()[2].lastChild.innerHTML.split("| ")[1],
                 adult: parent.children().children()[3].lastChild.childNodes[1].value,
                 child: parent.children().children()[3].lastChild.childNodes[3].value
             }
+            console.dir(data);
             $.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)
-                .done(function () {
-                    alert("예매 완료되었습니다.");
-                    location.href = "/movie?param=list"
+                .done(function (data) {
+                    console.log(data);
+                    if(data.result == 0) {
+                        alert("예매할 수 없습니다.");
+                        parent.children().children()[3].lastChild.childNodes[1].value = 0;
+                        parent.children().children()[3].lastChild.childNodes[3].value = 0
+                        return;
+                    }
+                    else {
+                        alert("예매 완료되었습니다.");
+                        // location.href = "/movie?param=list"
+                    }
                 }).fail(function () {
-                alert("예매에 실패했습니다.");
+                    alert("예매에 실패했습니다.");
             })
         })
     </script>

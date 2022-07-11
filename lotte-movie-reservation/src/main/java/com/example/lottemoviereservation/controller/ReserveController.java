@@ -50,7 +50,7 @@ public class ReserveController extends HttpServlet {
             month = month.substring(0, month.length()-1);
             String day = request.getParameter("day");
             day = day.substring(0, day.length()-1);
-            String time = request.getParameter("time");
+            String time = request.getParameter("theaterTime");
             int adult = Integer.parseInt(request.getParameter("adult"));
             int child = Integer.parseInt(request.getParameter("adult"));
 
@@ -58,7 +58,20 @@ public class ReserveController extends HttpServlet {
             HttpSession session = request.getSession(true);
             UserDto user = ((UserDto)session.getAttribute("login"));
 
-            dao.setReserve(new ReserveDto(user.getUserNo(), movieNo, time, adult+child));
+            JSONObject obj = new JSONObject();
+
+            System.out.println(dao.getRemainSeats(new ReserveDto(user.getUserNo(), movieNo, time, adult+child)));
+            if(dao.getRemainSeats(new ReserveDto(user.getUserNo(), movieNo, time, adult+child))) {
+                System.out.println("TRUE");
+                dao.setReserve(new ReserveDto(user.getUserNo(), movieNo, time, adult + child));
+                obj.put("result", 1);
+            }
+            else {
+                System.out.println("FALSE");
+                obj.put("result", 0);
+            }
+            response.setContentType("application/x-json; charset=utf-8;");
+            response.getWriter().println(obj);
         }
         else if(param.equals("reservedata")) {
             String year = request.getParameter("year");
