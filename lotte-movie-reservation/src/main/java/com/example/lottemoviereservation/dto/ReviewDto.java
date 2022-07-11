@@ -68,11 +68,26 @@ public class ReviewDto {
                 '}';
     }
 
+    public ReviewDto(int reviewNo, int movieNo, int userNo, String reviewTitle, String reviewContent, int reviewRate) {
+        this.reviewNo = reviewNo;
+        this.movieNo = movieNo;
+        this.userNo = userNo;
+        this.reviewTitle = reviewTitle;
+        this.reviewContent = reviewContent;
+        this.reviewRate = reviewRate;
+    }
+
     public ReviewDto(int movieNo, int userNo, String reviewTitle, String reviewContent, int reviewRate) {
         this.movieNo = movieNo;
         this.userNo = userNo;
         this.reviewTitle = reviewTitle;
         this.reviewContent = reviewContent;
         this.reviewRate = reviewRate;
+    }
+
+    public ReviewDto(int reviewNo, int userNo, String reviewContent) {
+        this.reviewNo = reviewNo;
+        this.userNo = userNo;
+        this.reviewContent = reviewContent;
     }
 }

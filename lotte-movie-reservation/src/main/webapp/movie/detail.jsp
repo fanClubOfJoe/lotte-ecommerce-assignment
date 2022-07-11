@@ -6,28 +6,21 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.lottemoviereservation.dto.UserNameDto" %>
 <%@ page import="java.util.Arrays" %>
+<%@ page import="com.example.lottemoviereservation.dto.UserDto" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     int movieno = Integer.parseInt(request.getParameter("movieno"));
 
+    Object objLoginCheck = session.getAttribute("login");
+    UserDto user = (UserDto) objLoginCheck;
+
     MovieDao movieDao = MovieDao.getInstance();
     MovieDto movieDto = movieDao.getMovieByMovieNo(movieno);
 
-    ReviewDao reviewDao = ReviewDao.getInstance();
-    UserDao userDao = UserDao.getInstance();
-
-    List<ReviewDto> reviewList = reviewDao.getReviewPageListByMovieNo(movieno, 2);
-    List<UserNameDto> userNameList = userDao.getUserNameByReview(reviewList);
-
+    pageContext.setAttribute("userNo", user.getUserNo());
     pageContext.setAttribute("movieDto", movieDto);
-    pageContext.setAttribute("reviewList", reviewList);
-    pageContext.setAttribute("userNameList", userNameList);
-
-    System.out.println(reviewList);
-    System.out.println(userNameList);
-
 %>
 <html>
 <head>
@@ -42,6 +35,10 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+        html{
+            font-family: 'Titan One', cursive;
+        }
         .moviePoster {
             width: 200px;
             height: auto;
@@ -102,7 +99,7 @@
 
         .redTitle {
             background-color: #e60012;
-            height:60px;
+            height: 60px;
             color: #ffffff;
         }
     </style>
@@ -128,7 +125,9 @@
             </div>
         </div>
     </div>
-    <div class="redTitle"><div>영화 정보</div></div>
+    <div class="redTitle">
+        <div>영화 정보</div>
+    </div>
     <div>
         <div>
             <strong>${movieDto.movieSummary}</strong></div>
@@ -141,33 +140,35 @@
     </div>
     <div>
         <div>
-            <div class="redTitle"><div>리뷰/평점</div></div>
+            <div class="redTitle">
+                <div>리뷰/평점</div>
+            </div>
             <div>
-                <form action="review" method="post">
-                    <div class="star-rating">
-                        <input type="radio" id="5-stars" name="rating" value="5"/>
-                        <label for="5-stars" class="star">&#9733;</label>
-                        <input type="radio" id="4-stars" name="rating" value="4"/>
-                        <label for="4-stars" class="star">&#9733;</label>
-                        <input type="radio" id="3-stars" name="rating" value="3"/>
-                        <label for="3-stars" class="star">&#9733;</label>
-                        <input type="radio" id="2-stars" name="rating" value="2"/>
-                        <label for="2-stars" class="star">&#9733;</label>
-                        <input type="radio" id="1-star" name="rating" value="1"/>
-                        <label for="1-star" class="star">&#9733;</label>
-                    </div>
-                    <div class="review_contents">
-                        <form name="insertReviewForm">
-                    <textarea rows="10" class="review_textarea"
-                              placeholder="평점 및 영화 관람평을 작성해주세요. 주제와 무관한 리뷰 또는 스포일러는 표시제한 또는 삭제될 수 있습니다."
-                              id="reviewContent" name="reviewContent"></textarea>
-                            <div class="cmd">
-                                <input type="button" class="insertReviewBtn" name="insertReviewBtn" id="insertReviewBtn"
-                                       value="등록">
-                            </div>
-                        </form>
-                    </div>
-                </form>
+
+                <div class="review_contents">
+                    <form name="insertReviewForm">
+                        <div class="star-rating">
+                            <input type="radio" id="5-stars" name="rating" value="5"/>
+                            <label for="5-stars" class="star">&#9733;</label>
+                            <input type="radio" id="4-stars" name="rating" value="4"/>
+                            <label for="4-stars" class="star">&#9733;</label>
+                            <input type="radio" id="3-stars" name="rating" value="3"/>
+                            <label for="3-stars" class="star">&#9733;</label>
+                            <input type="radio" id="2-stars" name="rating" value="2"/>
+                            <label for="2-stars" class="star">&#9733;</label>
+                            <input type="radio" id="1-star" name="rating" value="1"/>
+                            <label for="1-star" class="star">&#9733;</label>
+                        </div>
+                        <textarea rows="10" cols="20" class="review_textarea"
+                                  placeholder="평점 및 영화 관람평을 작성해주세요. 주제와 무관한 리뷰 또는 스포일러는 표시제한 또는 삭제될 수 있습니다."
+                                  id="reviewContent" name="reviewContent"></textarea>
+                        <div class="">
+                            <input type="button" class="insertReviewBtn" name="insertReviewBtn" id="insertReviewBtn"
+                                   value="등록">
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
 
