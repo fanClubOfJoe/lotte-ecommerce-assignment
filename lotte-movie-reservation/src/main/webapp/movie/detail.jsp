@@ -14,12 +14,17 @@
     int movieno = Integer.parseInt(request.getParameter("movieno"));
 
     Object objLoginCheck = session.getAttribute("login");
-    UserDto user = (UserDto) objLoginCheck;
-
+    boolean isLogin = true;
+    if(objLoginCheck == null){
+        isLogin = false;
+    }else {
+        UserDto user = (UserDto) objLoginCheck;
+        pageContext.setAttribute("userNo", user.getUserNo());
+    }
+    pageContext.setAttribute("isLogin", isLogin);
     MovieDao movieDao = MovieDao.getInstance();
     MovieDto movieDto = movieDao.getMovieByMovieNo(movieno);
 
-    pageContext.setAttribute("userNo", user.getUserNo());
     pageContext.setAttribute("movieDto", movieDto);
 
 %>
@@ -36,10 +41,10 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style type="text/css">
-        @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
         html {
-            font-family: 'Titan One', cursive;
+            font-family: "Noto Sans KR", "sans-serif";
         }
 
         .moviePoster {
@@ -102,7 +107,7 @@
 
         .redTitle {
             background-color: #e60012;
-            height: 30px;
+            height: 50px;
             color: #ffffff;
             display: flex;
             align-items: center;
@@ -219,15 +224,60 @@
             display: flex;
         }
 
-        .reviewTextArea{
+        .reviewTextArea {
             width: 850px;
             height: 100px;
             resize: none;
         }
+
+        .nonStar {
+            color: #cbcbcb;
+        }
+
+        .reviewStarContainer {
+            display: flex;
+        }
+
+        .reviewContentContainer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btnDefault {
+            border: none;
+            color: #595959;
+            background-color: #f8f8f8;
+        }
+
+        .btnMore {
+            border: none;
+            color: #595959;
+            background-color: #ffffff;
+            width: 100%;
+        }
+
+        .btnMore:hover {
+            border: none;
+            background-color: #595959;
+            color: #ffffff;
+        }
+
+        .movieContentContainer {
+            margin: 50px;
+        }
+        .movieSummary{
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .movieContent{
+            width: 700px;
+            line-height: 2.5;
+        }
     </style>
 </head>
 <body>
-<%--<jsp:include page="../front/header.jsp"/>--%>
+<jsp:include page="../front/header.jsp"/>
 <div class="container mt-3">
     <input type="hidden" id="movieNo" name="movieNo" value="${movieDto.movieNo}">
     <div>
@@ -268,10 +318,10 @@
     <div class="redTitle">
         <div>영화 정보</div>
     </div>
-    <div>
-        <div>
-            <strong>${movieDto.movieSummary}</strong></div>
-        <div>
+    <div class="movieContentContainer">
+        <div class="movieSummary">
+            ${movieDto.movieSummary}</div>
+        <div class="movieContent">
             ${movieDto.movieContent}</div>
     </div>
     <div>
@@ -304,8 +354,7 @@
                     </div>
                     <div>
                         <input type="button" class="insertReviewBtn btnDark" name="insertReviewBtn"
-                               id="insertReviewBtn"
-                               value="관람평 작성">
+                               id="insertReviewBtn" value="관람평 작성">
                     </div>
                 </div>
             </form>
@@ -316,11 +365,9 @@
             <div class="listReview"></div>
         </div>
         <%@ include file="review.jsp" %>
-
-
     </div>
-    <%--    <jsp:include page="../front/footer.jsp"/>--%>
 </div>
+<jsp:include page="../front/footer.jsp"/>
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -340,8 +387,8 @@
 
         $('#movieTitle').before(a);
 
-        $('#reserve').click(function() {
-            location.href="/reserve?param=reserve"
+        $('#reserve').click(function () {
+            location.href = "/reserve?param=reserve"
         })
     });
 </script>

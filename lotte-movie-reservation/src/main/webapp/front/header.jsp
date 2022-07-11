@@ -10,8 +10,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
-        .headerBox>.container{
-            width: 95%;
+        .headerBox>.containerBox{
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: 120px 30px 60px;
@@ -100,7 +99,7 @@
 %>
 
 <div class="headerBox">
-    <div class="container">
+    <div class="containerBox">
         <div class="searchBox">
         </div>
 
