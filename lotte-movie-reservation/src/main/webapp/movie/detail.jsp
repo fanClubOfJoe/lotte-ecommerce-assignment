@@ -102,12 +102,12 @@
 
         .redTitle {
             background-color: #e60012;
-            height: 60px;
+            height: 30px;
             color: #ffffff;
             display: flex;
             align-items: center;
             font-size: 15px;
-            padding: 5px;
+            padding: 10px;
             margin-top: 10px;
             margin-bottom: 10px;
         }
@@ -188,13 +188,40 @@
         }
 
         .reviewInputContainer {
-            text-align: center;
+            display: flex;
             align-items: center;
+            flex-direction: column;
+            text-align: center;
+            background-color: #f8f8f8;
+            padding: 10px;
         }
 
-        .starContainer{
+        .starContainer {
             display: flex;
             justify-content: center;
+            font-size: 50px;
+        }
+
+        .reviewInputTitle {
+            margin: 15px;
+        }
+
+        .btnDark {
+            border: none;
+            background-color: #595959;
+            color: #ffffff;
+            height: 100px;
+            width: 100px;
+        }
+
+        .inputReviewFormContainer {
+            display: flex;
+        }
+
+        .reviewTextArea{
+            width: 850px;
+            height: 100px;
+            resize: none;
         }
     </style>
 </head>
@@ -252,7 +279,7 @@
             <div>리뷰/평점</div>
         </div>
         <div class="reviewInputContainer">
-            <div>평점 · 관람평 작성</div>
+            <div class="reviewInputTitle">평점 · 관람평 작성</div>
             <form name="insertReviewForm">
                 <div class="starContainer">
                     <div class="star-rating">
@@ -268,13 +295,17 @@
                         <label for="1-star" class="star">&#9733;</label>
                     </div>
                 </div>
-                <textarea rows="10" cols="20" class="review_textarea"
-                          placeholder="평점 및 영화 관람평을 작성해주세요. 주제와 무관한 리뷰 또는 스포일러는 표시제한 또는 삭제될 수 있습니다."
+                <div class="inputReviewFormContainer">
+                    <div>
+                <textarea class="reviewTextArea"
+                          placeholder="평점 및 영화 관람평을 작성해주세요.&#13;&#10;주제와 무관한 리뷰 또는 스포일러는 표시제한 또는 삭제될 수 있습니다."
                           id="reviewContent" name="reviewContent"></textarea>
-                <div class="">
-                    <input type="button" class="insertReviewBtn btn btnRed" name="insertReviewBtn"
-                           id="insertReviewBtn"
-                           value="등록">
+                    </div>
+                    <div>
+                        <input type="button" class="insertReviewBtn btnDark" name="insertReviewBtn"
+                               id="insertReviewBtn"
+                               value="관람평 작성">
+                    </div>
                 </div>
             </form>
         </div>
