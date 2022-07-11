@@ -9,11 +9,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- JavaScript Bundle with Popper -->
 </head>
 <body>
 <h2>CGV강남</h2>
@@ -24,7 +25,7 @@
     </tr>
 </table>
 <div id="container">
-    동적으로 만든 테이블
+
 </div>
 <br/>
 <script type="text/javascript">
@@ -34,7 +35,7 @@ $(document).ready(function() {
     let day = 9;
     let title;
     $.ajax({
-        url: "<%=request.getContextPath()%>/reserve?param=reservedetail",
+        url: "<%=request.getContextPath()%>/reserve?param=reservedata",
         data: { 'year': year, 'month': month, 'day': day},
         method: "GET",
         success:function(data) {
@@ -44,23 +45,35 @@ $(document).ready(function() {
                 let date = data.list[i].theaterDetailStandardDate;
                 date = date.split(" ")[0];
                 date = date.split("-");
-                html += "<tr>" +
-                    "<td>" +
+                html += "<tr class='reserve'>" +
+                    "<td class='title'>" +
                     data.list[i].movieTitle +
                     "</td>" +
-                    "<td>" +
+                    "<td class='theaterno'>" +
                     data.list[i].theaterDetailNo +
                     "</td>" +
-                    "<td>" +
+                    "<td class='remainseats'>" +
                     data.list[i].theaterDetailRemainSeats + " / " +
                     data.list[i].theaterDetailSeats +
                     "</td>" +
-                    "<td>" +
+                    "<td class='date'>" +
                     date[0] + "년 " + date[1] + "월 " + date[2] + "일 " +
                     "</td>" +
-                    "<td>" +
+                    "<td class='detailtime'>" +
                     data.list[0].theaterDetailTime +
                     "</td>" +
+                    "<td><button onclick=\"document.getElementById(\'id01\').style.display=\'block\'\" class='w3-button w3-black'>예매하기</button>" +
+                        "<div id='id01' class='w3-modal'>"+
+                            "<div class='w3-modal-content w3-animate-zoom'>"+
+                                "<div class='w3-container''>"+
+
+                                    "<span onclick=\"document.getElementById(\'id01\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>" +
+                    "</td>"+
+                    // "<td><button type='button' class='reserve'>TEST" +
+                    // "</td></button>" +
                     "</tr>";
                 html += "</table>";
                 $('#container').append(html);
@@ -70,6 +83,26 @@ $(document).ready(function() {
             console.log("ERR");
         }
     })
+})
+$(document).on("click", "button.reserve", function() {
+    let parents = $(this).closest('tr');
+    let children = parents.children();
+    let data = {
+        movieTitle: children[0].innerHTML,
+        year: children[3].innerHTML.split(" ")[0],
+        month: children[3].innerHTML.split(" ")[1],
+        day: children[3].innerHTML.split(" ")[2],
+        time: children[4].innerHTML
+    }
+    <%--$.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data--%>
+
+    <%--    --%>
+    <%--).done(function(data) {--%>
+    <%--    console.log(data);--%>
+    <%--}).fail(function() {--%>
+    <%--    console.log("ERR");--%>
+    <%--})--%>
+
 })
 </script>
 </body>
