@@ -1,7 +1,6 @@
 package com.example.lottemoviereservation.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.example.lottemoviereservation.dao.MovieDao;
 import com.example.lottemoviereservation.dao.ReviewDao;
 import com.example.lottemoviereservation.dao.UserDao;
-import com.example.lottemoviereservation.dto.MovieDto;
-import com.example.lottemoviereservation.dto.MovieNameDto;
+import com.example.lottemoviereservation.dto.MovieTitleDto;
 import com.example.lottemoviereservation.dto.ReviewDto;
 import com.example.lottemoviereservation.dto.UserDto;
 import com.example.lottemoviereservation.dto.UserNameDto;
@@ -113,14 +111,14 @@ public class ReviewController extends HttpServlet {
             JSONObject obj = new JSONObject();
 
             List<ReviewDto> reviewList = reviewDao.getReviewPageListByUserNo(userNo, page);
-            List<MovieNameDto> movieNameList = movieDao.getMovieNameByReview(reviewList);
+            List<MovieTitleDto> movieTitleList = movieDao.getMovieTitleByReview(reviewList);
 
             int reviewCount = reviewDao.getReviewCount();
 
             if (!reviewList.isEmpty()) {
                 obj.put("reviewList", reviewList);
                 obj.put("list", reviewList);
-                obj.put("movieNameList", movieNameList);
+                obj.put("movieTitleList", movieTitleList);
                 obj.put("reviewCount", reviewCount);
             }
             response.setContentType("application/x-json; charset=utf-8;");

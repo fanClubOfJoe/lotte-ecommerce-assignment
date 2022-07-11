@@ -13,7 +13,7 @@
             success: function (data) {
 
                 let reviewList = data.reviewList;
-                let userNameList = data.userNameList;
+                let movieTitleList = data.movieTitleList;
                 let reivewCount = data.reviewCount;
                 let a = '';
 
@@ -28,7 +28,7 @@
                     // a += '<img alt="" src="../image/profile.png" style="width:35px; height: auto;">'
                     a += '<div class="reviewContentContainer">'
                     a += '<div style="display: flex;"> ';
-                    a += '<img alt="" src="../image/profile.png" style="width:35px; height: auto; margin-right: 10px;"><div class="reviewInfo" style="margin-right:15px;">' + userNameList[i].userName + '</div>';
+                    a += '<img alt="" src="../image/profile.png" style="width:35px; height: auto; margin-right: 10px;"><div class="reviewInfo" style="margin-right:15px;">' + movieTitleList[i].movieTitle + '</div>';
 
                     a += '<div class="reviewStarContainer">';
                     a += '<div class="star">';

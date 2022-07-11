@@ -132,6 +132,46 @@
             border: 1px solid #262626;
         }
 
+        .starContainer {
+            display: flex;
+            justify-content: center;
+            font-size: 50px;
+        }
+        .nonStar {
+            color: #cbcbcb;
+        }
+
+        .reviewStarContainer {
+            display: flex;
+        }
+
+        .reviewContentContainer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btnDefault {
+            border: none;
+            color: #595959;
+            background-color: #f8f8f8;
+        }
+
+        .btnMore {
+            border: none;
+            color: #595959;
+            background-color: #ffffff;
+            width: 100%;
+        }
+
+        .btnMore:hover {
+            border: none;
+            background-color: #595959;
+            color: #ffffff;
+        }
+
+        .star {
+            color: #fc0;
+        }
     </style>
 </head>
 <body>

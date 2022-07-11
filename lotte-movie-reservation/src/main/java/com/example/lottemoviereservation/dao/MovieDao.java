@@ -3,9 +3,8 @@ package com.example.lottemoviereservation.dao;
 import com.example.lottemoviereservation.db.DBClose;
 import com.example.lottemoviereservation.db.DBConnection;
 import com.example.lottemoviereservation.dto.MovieDto;
-import com.example.lottemoviereservation.dto.MovieNameDto;
+import com.example.lottemoviereservation.dto.MovieTitleDto;
 import com.example.lottemoviereservation.dto.ReviewDto;
-import com.example.lottemoviereservation.dto.UserNameDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -250,22 +249,23 @@ public class MovieDao {
         return findName;
     }
 
-    public List<MovieNameDto> getMovieNameByReview(List<ReviewDto> reviewList) {
-        List<MovieNameDto> userNameList = new ArrayList<>();
+    public List<MovieTitleDto> getMovieTitleByReview(List<ReviewDto> reviewList) {
+        List<MovieTitleDto> movieTitleList = new ArrayList<>();
 
         for (ReviewDto reviewDto : reviewList) {
             int movieNo = reviewDto.getMovieNo();
-            String userName = getMovieNameByMovieNo(movieNo);
+            String movieTitle = getMovieTitleByMovieNo(movieNo);
 
-            userNameList.add(new MovieNameDto(movieNo, userName));
+            movieTitleList.add(new MovieTitleDto(movieNo, movieTitle));
 
         }
-        return userNameList;
+
+        return movieTitleList;
     }
 
-    private String getMovieNameByMovieNo(int movieNo) {
+    private String getMovieTitleByMovieNo(int movieNo) {
 
-        String sql = " SELECT movie_name "
+        String sql = " SELECT movie_title "
                 + " FROM movies "
                 + " WHERE movie_no=? ";
 
@@ -273,7 +273,7 @@ public class MovieDao {
         PreparedStatement psmt = null;   // Query문을 실행
         ResultSet rs = null;         // 결과 취득
 
-        String findName = "";
+        String findTitle = "";
 
         try {
             conn = DBConnection.getConnection();
@@ -283,16 +283,16 @@ public class MovieDao {
 
             rs = psmt.executeQuery();
             if (rs.next()) {
-                findName = rs.getString(1);
+                findTitle = rs.getString(1);
             }
 
         } catch (SQLException e) {
-            System.out.println("getUserName fail");
+            System.out.println("getMovieTitle fail");
         } finally {
             DBClose.close(conn, psmt, rs);
         }
 
-        return findName;
+        return findTitle;
     }
 }
 
