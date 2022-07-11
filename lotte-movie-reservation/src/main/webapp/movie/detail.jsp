@@ -187,7 +187,7 @@
             border: #E60012 1px solid;
         }
 
-        .reviewContainer {
+        .reviewInputContainer {
             text-align: center;
             align-items: center;
         }
@@ -251,7 +251,7 @@
         <div class="redTitle">
             <div>리뷰/평점</div>
         </div>
-        <div class="reviewContainer">
+        <div class="reviewInputContainer">
             <div>평점 · 관람평 작성</div>
             <form name="insertReviewForm">
                 <div class="starContainer">
