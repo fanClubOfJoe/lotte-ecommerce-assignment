@@ -175,15 +175,6 @@
                 </div>
             </div>
 
-<%--            <div class="col-sm-6">--%>
-<%--                <input type="text" id="search" class="form-control" value="">--%>
-<%--            </div>--%>
-
-<%--            <div class="col-sm-3">--%>
-<%--                <button type="button" class="btn btn-outline-dark"--%>
-<%--                        onclick="searchBtn()">검색--%>
-<%--                </button>--%>
-<%--            </div>--%>
         </div>
     </div>
     <div class="container">
@@ -209,19 +200,19 @@
                                     <div>
                                         <c:choose>
                                             <c:when test="${movieDto.ageGrade eq '전체'}">
-                                                <div class="age_gradeAll"><p align="center">All</p></div>
+                                                <div class="age_gradeAll"><p align="center" style="margin-bottom: 0;">All</p></div>
                                             </c:when>
                                             <c:when test="${movieDto.ageGrade eq '12세 이상'}">
-                                                <div class="age_grade12"><p align="center">12</p></div>
+                                                <div class="age_grade12"><p align="center" style="margin-bottom: 0;">12</p></div>
                                             </c:when>
                                             <c:when test="${movieDto.ageGrade eq '15세 이상'}">
-                                                <div class="age_grade15"><p align="center">15</p></div>
+                                                <div class="age_grade15"><p align="center" style="margin-bottom: 0;">15</p></div>
                                             </c:when>
                                             <c:when test="${movieDto.ageGrade eq '청소년 관람불가'}">
-                                                <div class="age_grade19"><p align="center">19</p></div>
+                                                <div class="age_grade19"><p align="center" style="margin-bottom: 0;">19</p></div>
                                             </c:when>
                                             <c:otherwise>
-                                                <div class="age_gradeNone"><p align="center">-</p></div>
+                                                <div class="age_gradeNone"><p align="center" style="margin-bottom: 0;">-</p></div>
                                             </c:otherwise>
                                         </c:choose>
 
@@ -231,12 +222,7 @@
                                         <c:out value="${movieDto.movieCategory}"/>
                                     </div>
                                     <div>
-                                        <c:set var="screenDateTime" value="${movieDto.movieScreenDate}"/>
-                                        <c:set var="scrennDate" value="${fn:substring(screenDateTime, 0, 10)}"/>
-                                        <c:out value="${scrennDate}" />개봉
-                                    </div>
-                                    <div>
-                                        <strong> 예매율 | </strong><c:out value="${movieDto.reserveRate}"/>%
+                                        <strong> 예매율 | </strong><c:out value="${movieDto.reserveRate}"/> %
                                     </div>
                                     <div>
                                         <strong> 평점 | </strong><c:out value="${movieDto.movieRate}"/>
