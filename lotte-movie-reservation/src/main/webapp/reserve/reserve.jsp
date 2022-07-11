@@ -1,4 +1,5 @@
 <%@ page import="java.util.Calendar" %>
+<%@ page import="com.example.lottemoviereservation.dto.UserDto" %>
 <%--
   Created by IntelliJ IDEA.
   User: BTC-N10
@@ -386,7 +387,17 @@
             alert("인원수가 잘못되었습니다.");
             return;
         }
-
+        <%
+            Object obj = session.getAttribute("login");
+            UserDto mem = null;
+            if (obj == null) {
+        %>
+            alert('로그인 해 주십시오');
+            location.href = "/user?param=login";
+            return;
+        <%
+            }
+        %>
 
         var date = parent.children().children()[1].lastChild.innerHTML;
         let data = {

@@ -142,6 +142,7 @@ public class ReserveDao {
         }
         return list;
     }
+
     // 예매 취소
     public boolean deleteReserveDtoByReserveNo(int reserveNo) {
         String sql = "DELETE FROM reserves WHERE reserve_no = ?";
