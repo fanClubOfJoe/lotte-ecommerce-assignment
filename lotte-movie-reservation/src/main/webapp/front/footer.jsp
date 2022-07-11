@@ -59,7 +59,7 @@
         }
         .footerBox .legalBox {
             border-top: 1px solid rgba(255, 255, 255, 0.5);
-            margin: 50px;
+            margin: 50px 50px 0px 50px;
             height: 60px;
         }
         .footerBox .legal{
@@ -78,7 +78,7 @@
                 <div class="companyInfo">
                     <h2>Company Information</h2>
                     <p>
-                        회사명 : MOBIT<br>
+                        회사명 : MOOBIT<br>
                         대표 : 신은총<br>
                         개인정보관리 책임자 : 김은진 (info@lotte.com)<br>
                         사업자 등록번호 : 123-04-56789<br>
@@ -112,7 +112,7 @@
     </div>
     <div class="legalBox">
         <div class="legal">
-           @ 2022 Copyright: fanClubOfJoe
+            @ 2022 Copyright: fanClubOfJoe
         </div>
     </div>
 </div>
