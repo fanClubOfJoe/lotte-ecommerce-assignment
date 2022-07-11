@@ -36,10 +36,9 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style type="text/css">
-        @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
-
+        @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
         html {
-            font-family: 'Titan One', cursive;
+            font-family: "Noto Sans KR", "sans-serif";
         }
 
         .moviePoster {
@@ -102,7 +101,7 @@
 
         .redTitle {
             background-color: #e60012;
-            height: 30px;
+            height: 50px;
             color: #ffffff;
             display: flex;
             align-items: center;
@@ -224,10 +223,40 @@
             height: 100px;
             resize: none;
         }
+        .nonStar{
+            color: #cbcbcb;
+        }
+
+        .reviewStarContainer{
+            display: flex;
+        }
+
+        .reviewContentContainer{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btnDefault{
+            border: none;
+            color: #595959;
+            background-color: #f8f8f8;
+        }
+
+        .btnMore{
+            border: none;
+            color: #595959;
+            background-color: #ffffff;
+            width: 100%;
+        }
+        .btnMore:hover{
+            border: none;
+            background-color: #595959;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
-<%--<jsp:include page="../front/header.jsp"/>--%>
+<jsp:include page="../front/header.jsp"/>
 <div class="container mt-3">
     <input type="hidden" id="movieNo" name="movieNo" value="${movieDto.movieNo}">
     <div>
@@ -304,8 +333,7 @@
                     </div>
                     <div>
                         <input type="button" class="insertReviewBtn btnDark" name="insertReviewBtn"
-                               id="insertReviewBtn"
-                               value="관람평 작성">
+                               id="insertReviewBtn" value="관람평 작성">
                     </div>
                 </div>
             </form>
@@ -316,11 +344,9 @@
             <div class="listReview"></div>
         </div>
         <%@ include file="review.jsp" %>
-
-
     </div>
-    <%--    <jsp:include page="../front/footer.jsp"/>--%>
 </div>
+<jsp:include page="../front/footer.jsp"/>
 <script type="text/javascript">
     $(document).ready(function () {
 
