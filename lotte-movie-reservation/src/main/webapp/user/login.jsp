@@ -28,6 +28,7 @@
                 <h2 class="center">로그인</h2>
                 <br>
 
+
                 <form action="<%=request.getContextPath() %>/user?param=loginAf" method="post">
                     <div class="login_area">
                         <div class="login_input">
@@ -45,8 +46,9 @@
                 </form>
 
                 <div class="login_bot_wrap">
-                    <br>
-                    <label class="form-check-label" for="rememberID"><input class="check_box" type="checkbox" name="rememberID" id="rememberID">아이디 저장</label>
+                    <label class="form-check-label" for="rememberID"><input class="check_box" type="checkbox"
+                                                                            name="rememberID" id="rememberID">아이디
+                        저장</label>
                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                     <a href="<%=request.getContextPath() %>/user?param=regi" style="text-decoration-line: none">회원가입</a> &nbsp |  &nbsp
                     <a href="<%=request.getContextPath() %>/user?param=findId" style="text-decoration-line: none">아이디찾기</a> &nbsp |  &nbsp
@@ -57,10 +59,10 @@
         </div>
     </div>
 </div>
+<jsp:include page="../front/footer.jsp"/>
 <script type="text/javascript" src="js/login.js"></script>
 
 </body>
 </html>
-
 
 

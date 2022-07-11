@@ -15,9 +15,9 @@
     margin:auto;
 }
 .member_findId_wrap {
-     padding: 170px 0;
-     background-color: #F5F5F5;
- }
+    padding: 170px 0;
+    background-color: #F5F5F5;
+}
 #contents.contents_full .contents_inner {
     width: 980px;
     margin: 0 auto;
@@ -88,10 +88,10 @@ input[type="hidden" i] {
     border: initial;
 }
 button {
-     border: 1px solid #DDD;
-     cursor: pointer;
-     background-color: #fff;
- }
+    border: 1px solid #DDD;
+    cursor: pointer;
+    background-color: #fff;
+}
 input, select, button {
     vertical-align: middle;
     appearance: none;

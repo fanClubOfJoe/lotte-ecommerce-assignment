@@ -8,5 +8,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     session.invalidate();
-    response.sendRedirect("movie?param=main");
+    response.sendRedirect("/movie?param=main");
 %>

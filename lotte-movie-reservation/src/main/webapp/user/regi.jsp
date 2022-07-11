@@ -28,8 +28,8 @@
                     <p id="idcheck" style="font-size: 8px"></p>
                     <%-- style="width: 30%" --%>
                 </div>
-<%--                <button type="button" class="btn btn-primary" onclick="checkId()">중복확인</button><br><br>--%>
-                    <input type="button" id="idBtn" value="중복확인">
+                <%--                <button type="button" class="btn btn-primary" onclick="checkId()">중복확인</button><br><br>--%>
+                <input type="button" id="idBtn" value="중복확인">
                 <div class="form-group">
                     <label for="pwd">비밀번호:</label>
                     <input type="password" class="form-control" id="pwd" placeholder="비밀번호" name="pwd"
@@ -57,7 +57,7 @@
                 </div>
             </form>
         </div><!— card body —>
-<%--        <%— footer div - form 밖으로 분리, js통해 submit —%>--%>
+        <%--        <%— footer div - form 밖으로 분리, js통해 submit —%>--%>
         <div class="card-footer">
             <button type="submit" class="btn btn-success" onclick="formSubmit()">가입하기</button><br><br>
         </div>
@@ -160,7 +160,6 @@
 
 </body>
 </html>
-
 
 
 
