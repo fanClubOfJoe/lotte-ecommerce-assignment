@@ -70,10 +70,13 @@ public class ReviewController extends HttpServlet {
             List<ReviewDto> reviewList = reviewDao.getReviewPageListByMovieNo(movieNo, page);
             List<UserNameDto> userNameList = userDao.getUserNameByReview(reviewList);
 
+            int reviewCount = reviewDao.getReviewCount();
+
             if (!reviewList.isEmpty()) {
                 obj.put("reviewList", reviewList);
                 obj.put("list", reviewList);
                 obj.put("userNameList", userNameList);
+                obj.put("reviewCount", reviewCount);
             }
             response.setContentType("application/x-json; charset=utf-8;");
             response.getWriter().println(obj);
@@ -86,7 +89,7 @@ public class ReviewController extends HttpServlet {
 
             ReviewDto reviewDto = new ReviewDto(movieNo, user.getUserNo(), reviewTitle, reviewContent, rating);
             reviewDao.writeReview(reviewDto);
-        }  else if (param.equals("update")) {
+        } else if (param.equals("update")) {
 
             int reviewNo = Integer.parseInt(request.getParameter("reviewno"));
 
@@ -94,13 +97,11 @@ public class ReviewController extends HttpServlet {
 
             reviewDao.updateReview(reviewNo, updateContent);
 
-        }else if (param.equals("delete")) {
+        } else if (param.equals("delete")) {
 
-            int reviewNo = Integer.parseInt(request.getParameter("reivewno"));
+            int reviewNo = Integer.parseInt(request.getParameter("reviewno"));
 
             reviewDao.deleteReview(reviewNo, user.getUserNo());
         }
-
-
     }
 }

@@ -289,7 +289,7 @@ public class ReviewDao {
         return count > 0;
     }
 
-    public boolean deleteReview(int review_no, int user_no) {
+    public boolean deleteReview(int reviewNo, int userNo) {
         String sql = " delete from reviews "
                 + " where review_no=? and user_no=? ";
 
@@ -300,6 +300,10 @@ public class ReviewDao {
         try {
             conn = DBConnection.getConnection();
             psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, reviewNo);
+            psmt.setInt(2, userNo);
+
             count = psmt.executeUpdate();
 
         } catch (SQLException e) {

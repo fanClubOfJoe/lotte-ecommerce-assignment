@@ -20,6 +20,7 @@
 
                 let reviewList = data.reviewList;
                 let userNameList = data.userNameList;
+                let reivewCount = data.reviewCount;
                 let a = '';
 
                 console.log(data);
@@ -39,8 +40,10 @@
                     a += '</div>';
                 });
 
-                //if() 총 count 수 넘으면 더보기 버튼 안보이게 처리 필요
-                a += '<a class="button" href="#" onclick="listReview(' + movieNo + ', ' + ++reviewListSize + '); return false;">더보기</a>';
+                //총 count 수 넘으면 더보기 버튼 안보이게 처리 필요
+                if (reivewCount > reviewList.length) {
+                    a += '<a class="button" href="#" onclick="listReview(' + movieNo + ', ' + ++reviewListSize + '); return false;">더보기</a>';
+                }
 
                 $(".listReview").html(a);
 
@@ -96,7 +99,7 @@
             $.ajax({
                 url: '<%=request.getContextPath()%>/review?param=update&reviewno=' + reviewNo,
                 type: 'post',
-                data: {'updateContent':updateContent},
+                data: {'updateContent': updateContent},
                 success: function (data) {
                     console.log(updateContent);
                     alert('리뷰 수정 완료');
