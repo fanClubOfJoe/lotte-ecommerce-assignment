@@ -1,0 +1,124 @@
+.member_login_wrap {
+    padding: 60px 0;
+    background-color: #F5F5F5;
+}
+#contents.contents_full .contents_inner {
+    width: 980px;
+    margin: 0 auto;
+}
+.member_login_wrap .login_box {
+    position: relative;
+    width: 470px;
+    min-height: 220px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin:auto;
+}
+.member_login_wrap .login_box .login_area input {
+    display: block;
+    width: 100%;
+    height: 45px;
+}
+.member_login_wrap .login_box .login_area input + input {
+    margin-top: 10px;
+}
+input[type="password"], input[type="text"], input[type="number"], input[type="tel"] {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 18px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid #DDD;
+}
+body, input, button, select, textarea {
+    font-family: "Noto Sans KR", "Roboto", "dotum", "sans-serif";
+    font-size: 12px;
+    color: #000;
+}
+.member_login_wrap .login_box .login_area .btn_login {
+    right: 0;
+    top: 0;
+    width: 110px;
+    margin: 0;
+    height: 100px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #E60012;
+}
+
+input[type="hidden" i] {
+    appearance: none;
+    background-color: initial;
+    cursor: default;
+    display: none !important;
+    padding: initial;
+    border: initial;
+}
+button {
+     border: 1px solid #DDD;
+     cursor: pointer;
+     background-color: #fff;
+ }
+input, select, button {
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+button {
+    appearance: auto;
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: buttonface;
+    margin-left: 10px;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-image: initial;
+}
+div {
+    display: block;
+}
+.login_input{
+    float :left;
+    width: 300px;
+    margin-right: 10px;
+}
+.member_login_wrap .login_box .login_bot_wrap {
+    margin: 15px 0 40px;
+}
+.member_login_wrap .login_box .login_check {
+    float: left;
+}
+
+.check_box {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #000;
+    -webkit-appearance: checkbox;
+}
+.login_bot_wrap{
+    margin:auto;
+}
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;}

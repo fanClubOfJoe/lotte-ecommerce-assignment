@@ -157,7 +157,7 @@ public class UserDao {
         return null;
     }
     public UserDto login(UserDto dto) {
-        String sql = " select user_no, user_id, user_name, user_email, user_password "
+        String sql = " select user_no, user_id, user_email, user_name, user_password "
                 + " from users "
                 + " where user_id=? and user_password=? ";
         Connection conn = null;
@@ -172,19 +172,21 @@ public class UserDao {
             System.out.println("1/3 login success");
             psmt.setString(1, dto.getUserId());
             psmt.setString(2, dto.getUserPassword());
-
+            System.out.println(psmt);
             rs = psmt.executeQuery();
             System.out.println("2/3 login success");
 
             if(rs.next()) {
                 int no = rs.getInt(1);
                 String id = rs.getString(2);
-                String name = rs.getString(3);
+                String email = rs.getString(3);
+                String name = rs.getString(4);
 
-                user = new UserDto(no, id, name, null);
+                user = new UserDto(no, id, email, name, null);
+
+                System.out.println("3/3 login success");
                 return user;
             }
-            System.out.println("3/3 login success");
 
         } catch(SQLException e) {
             System.out.println("login fail");
