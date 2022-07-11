@@ -15,7 +15,7 @@
     margin:auto;
 }
 .member_findId_wrap {
-     padding: 200px 0;
+     padding: 170px 0;
      background-color: #F5F5F5;
  }
 #contents.contents_full .contents_inner {
@@ -151,7 +151,7 @@ div {
 .login_bot_wrap{
     margin:auto;
 }
-a:link { color: red; text-decoration: none;}
+a:link { color: black; text-decoration: none;}
 a:visited { color: black; text-decoration: none;}
 a:hover { color: blue; text-decoration: underline;}
 #div0{
@@ -165,7 +165,27 @@ a:hover { color: blue; text-decoration: underline;}
     position: absolute;
 }
 #div2{
-    top: 50px;
-    left:50px;
+    top: 300px;
+    left:35%;
     position: absolute;
+}
+.btnRed {
+    background-color: #e60012;
+    color: #ffffff;
+}
+
+.btnRed:hover {
+    color: #e60012;
+    background-color: #ffffff;
+    border: #E60012 1px solid;
+}
+.btnCancel {
+    color: #e60012;
+    background-color: #ffffff;
+}
+
+.btnCancel:hover {
+    color: #ffffff;
+    background-color: #e60012;
+    border: #ffffff 1px solid;
 }

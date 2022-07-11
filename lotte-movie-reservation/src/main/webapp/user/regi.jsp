@@ -71,6 +71,7 @@
 <script type="text/javascript">
     $(function () {
         $("#idBtn").click(function () {
+            alert("hihi");
 
             $.ajax({
                 type:"post",
@@ -83,7 +84,7 @@
                     }
                     else if(data.trim() === ""){
                         $("#idcheck").css("color", "#ff0000");
-                        $("#idcheck").html('아이디를 입력해주세요.);
+                        $("#idcheck").html('아이디를 입력해주세요.');
                         $("#id").val("");
                     }
                     else{

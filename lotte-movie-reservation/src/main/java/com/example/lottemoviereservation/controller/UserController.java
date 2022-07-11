@@ -89,7 +89,7 @@ public class UserController extends HttpServlet {
                 msg = "NO";
             }
 
-            resp.sendRedirect("message.jsp?msg=" + msg);
+            resp.sendRedirect("user/message.jsp?msg=" + msg);
 
         }
         else if(param.equals("findId")) {
