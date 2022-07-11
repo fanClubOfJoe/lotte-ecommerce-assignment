@@ -37,6 +37,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style type="text/css">
         @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
         html {
             font-family: "Noto Sans KR", "sans-serif";
         }
@@ -218,40 +219,55 @@
             display: flex;
         }
 
-        .reviewTextArea{
+        .reviewTextArea {
             width: 850px;
             height: 100px;
             resize: none;
         }
-        .nonStar{
+
+        .nonStar {
             color: #cbcbcb;
         }
 
-        .reviewStarContainer{
+        .reviewStarContainer {
             display: flex;
         }
 
-        .reviewContentContainer{
+        .reviewContentContainer {
             display: flex;
             justify-content: space-between;
         }
 
-        .btnDefault{
+        .btnDefault {
             border: none;
             color: #595959;
             background-color: #f8f8f8;
         }
 
-        .btnMore{
+        .btnMore {
             border: none;
             color: #595959;
             background-color: #ffffff;
             width: 100%;
         }
-        .btnMore:hover{
+
+        .btnMore:hover {
             border: none;
             background-color: #595959;
             color: #ffffff;
+        }
+
+        .movieContentContainer {
+            margin: 50px;
+        }
+        .movieSummary{
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .movieContent{
+            width: 700px;
+            line-height: 2.5;
         }
     </style>
 </head>
@@ -297,10 +313,10 @@
     <div class="redTitle">
         <div>영화 정보</div>
     </div>
-    <div>
-        <div>
-            <strong>${movieDto.movieSummary}</strong></div>
-        <div>
+    <div class="movieContentContainer">
+        <div class="movieSummary">
+            ${movieDto.movieSummary}</div>
+        <div class="movieContent">
             ${movieDto.movieContent}</div>
     </div>
     <div>
@@ -366,8 +382,8 @@
 
         $('#movieTitle').before(a);
 
-        $('#reserve').click(function() {
-            location.href="/reserve?param=reserve"
+        $('#reserve').click(function () {
+            location.href = "/reserve?param=reserve"
         })
     });
 </script>
