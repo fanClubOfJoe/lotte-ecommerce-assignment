@@ -1,11 +1,21 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2022-07-11
-  Time: 오전 11:09
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.lottemoviereservation.dao.UserDao" %>
+<%@ page import="com.example.lottemoviereservation.dto.UserDto" %>
+<%@ page import="com.example.lottemoviereservation.dao.ReserveDao" %>
+<%@ page import="com.example.lottemoviereservation.dto.ReserveDto" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    int userNo = Integer.parseInt(request.getParameter("userno"));
+    UserDao userDao = UserDao.getInstance();
+    UserDto userDto = userDao.getUserByUserNo(userNo);
+
+    pageContext.setAttribute("userDto", userDto);
+
+    ReserveDao reserveDao = ReserveDao.getInstance();
+    List<ReserveDto> reserveList = reserveDao.getReserveDtoByUserNo(userNo);
+
+    pageContext.setAttribute("reserveList", reserveList);
+%>
 <html>
 <head>
     <title>MyPage</title>
@@ -45,7 +55,7 @@
             float: left;
         }
 
-        .user_name {
+        .userName {
             margin-top: 40px;
             margin-bottom: 10px;
             padding: 0;
@@ -53,7 +63,7 @@
             color: #262626;
         }
 
-        .useremail {
+        .userEmail {
             margin: 0;
             padding: 0;
             /*margin-left: 20px;*/
@@ -94,7 +104,6 @@
             cursor: pointer;
         }
 
-
         .leaveBtn:hover {
             border: 1px solid #595959;
             background-color: white;
@@ -125,18 +134,51 @@
             border: 1px solid #262626;
         }
 
+        .starContainer {
+            display: flex;
+            justify-content: center;
+            font-size: 50px;
+        }
+
+        .nonStar {
+            color: #cbcbcb;
+        }
+
+        .reviewStarContainer {
+            display: flex;
+        }
+
+        .reviewContentContainer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btnDefault {
+            border: none;
+            color: #595959;
+            background-color: #f8f8f8;
+        }
+
+        .btnMore {
+            border: none;
+            color: #595959;
+            background-color: #ffffff;
+            width: 100%;
+        }
+
+        .btnMore:hover {
+            border: none;
+            background-color: #595959;
+            color: #ffffff;
+        }
+
+        .star {
+            color: #fc0;
+        }
     </style>
 </head>
 <body>
-
-<%-- 회원 정보 --%>
-<%-- 데이터 들어갈 곳 --%>
-<%
-    String username = "";
-    String useremail = "";
-    username = "홍길동";
-    useremail = "gildong_hong@lottecgv.com";
-%>
+<jsp:include page="../front/header.jsp"/>
 <div class="container">
     <div class="userinfo">
         <div class="data">
@@ -146,13 +188,14 @@
                 <tr>
                     <td>
                         <div id="userimgwithinfo">
-                        <img src="/main/images/user.png" class="userimg">
-                        <div>
-                            <div class="user_name"><%=String.format("%s님", username)%>
+                            <img src="/main/images/user.png" class="userimg">
+                            <div>
+                                <input type="hidden" name="userNo" value="${userDto.userNo}"/>
+                                <div class="userName">${userDto.userName}
+                                </div>
+                                <div class="userEmail">${userDto.userEmail}
+                                </div>
                             </div>
-                            <div class="useremail"><%=String.format("%s", useremail)%>
-                            </div>
-                        </div>
                         </div>
                     </td>
                     <td>
@@ -165,17 +208,6 @@
                 </tr>
             </table>
         </div>
-
-<%--        <img src="/main/images/user.png" class="userimg">--%>
-<%--        <div class="username"><%=String.format("%s님", username)%>--%>
-<%--        </div>--%>
-<%--        <div class="useremail"><%=String.format("%s", useremail)%>--%>
-<%--        </div>--%>
-
-<%--        <div class="userbutton">--%>
-<%--            <input type="button" class="editinfoBtn" value="정보 수정">--%>
-<%--            <input type="button" class="leaveBtn" value="회원 탈퇴">--%>
-<%--        </div>--%>
     </div>
 
     <div class="reserve_list">
@@ -200,7 +232,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">관람일자</th>
+                    <%--    <th scope="col">관람일자</th>--%>
                     <th scope="col">관람시간</th>
                     <th scope="col">영화 이름</th>
                     <th scope="col">상영영화관</th>
@@ -208,26 +240,31 @@
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="reserveDto" items="${reserveList}">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>${reserveDto.reserveTime}
+                        </td>
 
-                <tr>
-                    <th scope="row">1</th>
-                    <td><%=String.format("%s", movie_date)%>
-                    </td>
-                    <td><%=String.format("%s", movie_detail_time)%>
-                    </td>
-                    <td><%=String.format("%s", movie_title)%>
-                    </td>
-                    <td><%=String.format("%s", theater_name)%>
-                    </td>
-                    <td><%=String.format("%d", seatsCount)%>
-                    </td>
-                </tr>
+                        <td>${reserveDto.movieNo}
+                        </td>
+                        <td><%=String.format("%s", theater_name)%>
+                        </td>
+                        <td><%=String.format("%d", seatsCount)%>${reserveDto.reserveEnterCount}
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
         <div class="text_box">내가 쓴 리뷰</div>
+        <div class="reviewContainer">
+            <div class="listReview"></div>
+        </div>
+        <%@ include file="review.jsp" %>
     </div>
 
 </div>
+<jsp:include page="../front/footer.jsp"/>
 </body>
 </html>

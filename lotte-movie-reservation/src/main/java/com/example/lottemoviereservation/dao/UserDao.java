@@ -202,7 +202,7 @@ public class UserDao {
 
     }
 
-    public String getUserNameByUserNo(int userNo) {
+    private String getUserNameByUserNo(int userNo) {
 
         String sql = " SELECT user_name "
                 + " FROM users "
@@ -277,5 +277,70 @@ public class UserDao {
 
         return count > 0;
     }
+    public boolean updateUser(String user_id, String user_email, String user_password) {
 
+        String sql = " UPDATE users "
+                + " SET user_email=?, user_password=? "
+                + " WHERE user_id=? ";
+
+        Connection conn = null;         // DB 연결
+        PreparedStatement psmt = null;   // Query문을 실행
+
+        int count = 0;
+
+        try {
+            conn = DBConnection.getConnection();
+            System.out.println("1/3 delete success");
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, user_id);
+            psmt.setString(2, user_email);
+            psmt.setString(3, user_password);
+            System.out.println(psmt);
+            System.out.println("2/3 delete success");
+            count = psmt.executeUpdate();
+            System.out.println("3/3 delete success");
+
+        } catch (SQLException e) {
+            System.out.println("delete fail");
+        } finally {
+            DBClose.close(conn, psmt, null);
+        }
+
+        return count > 0;
+    }
+
+    public UserDto getUserByUserNo(int userNo) {
+        String sql = " select user_no, user_id, user_email, user_name "
+                + " from users "
+                + " where user_no=? and is_activated=true ";
+        Connection conn = null;
+        PreparedStatement psmt;
+        ResultSet rs = null;
+        UserDto user = null;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, userNo);
+            rs = psmt.executeQuery();
+
+            if (rs.next()) {
+                int no = rs.getInt(1);
+                String id = rs.getString(2);
+                String email = rs.getString(3);
+                String name = rs.getString(4);
+
+                user = new UserDto(no, id, email, name);
+
+                return user;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("getUser fail");
+        }
+        return null;
+
+    }
 }

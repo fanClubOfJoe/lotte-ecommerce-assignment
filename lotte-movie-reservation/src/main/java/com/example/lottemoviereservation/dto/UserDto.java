@@ -15,6 +15,12 @@ public class UserDto {
         this.userPassword = userPassword;
     }
 
+    public UserDto(int userNo, String userId, String userEmail, String userName) {
+        this.userNo = userNo;
+        this.userId = userId;
+        this.userEmail = userEmail;
+        this.userName = userName;
+    }
 
     public UserDto(int userNo, String userId, String userEmail, String userName, String userPassword) {
         this.userNo = userNo;
