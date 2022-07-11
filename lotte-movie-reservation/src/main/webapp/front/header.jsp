@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
         .headerBox>.container{
@@ -82,6 +82,12 @@
             background-color: white;
             border-bottom: solid 8px #E60012;
         }
+        #movielist {
+            cursor: pointer;
+        }
+        #reservelist {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -122,12 +128,19 @@
 
         <div class="buttonBox">
             <div class="btnInnerBox">
-                <button type="button" class="movePageBtn" >예매</button>
-                <button type="button" class="movePageBtn" >영화</button>
+                <button type="button" class="movePageBtn" id="reservelist">예매</button>
+                <button type="button" class="movePageBtn" id="movielist">영화</button>
             </div>
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+    $('#reservelist').click(function() {
+        location.href ="/reserve?param=reserve";
+    })
+    $('#movielist').click(function() {
+        location.href ="/movie?param=list";
+    })
+</script>
 </body>
 </html>
