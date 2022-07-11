@@ -76,6 +76,7 @@
         }
         .dto-block {
             width: 300px;
+            height: 415px;
             padding: 10px;
         }
         .moviePoster {

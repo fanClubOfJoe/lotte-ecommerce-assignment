@@ -12,7 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-<body>
 <jsp:include page="../front/header.jsp"/>
 <div class="container">
     <div class="card">
@@ -64,10 +63,7 @@
         </div>
     </div><!— card class —>
 </div><!—container class—>
-</body>
 <jsp:include page="../front/footer.jsp"/>
-</html>
-
 
 <script type="text/javascript">
     $(function () {
@@ -80,7 +76,7 @@
                 data:{ "id":$("#id").val() },
                 success:function( data ){
                     if(data.trim() === "YES"){
-                       $("#idcheck").css("color", "#0000ff");
+                        $("#idcheck").css("color", "#0000ff");
                         $("#idcheck").html('사용할 수 있는 id입니다');
                     }
                     else if(data.trim() === ""){
@@ -112,15 +108,15 @@
         //     return false;
         // }
     }
-   function checkId() {
-       let memberId = document.getElementById("id");
-       if(memberId.value === "") {
-           alert("아이디를 입력하세요!");
-           memberId.focus();
-       }else {
-           window.open("IdCheckServlet?id=" + memberId.value, "idcheckpopup", "width=250, height=150, top=150, left=400");
-       }
-   }
+    function checkId() {
+        let memberId = document.getElementById("id");
+        if(memberId.value === "") {
+            alert("아이디를 입력하세요!");
+            memberId.focus();
+        }else {
+            window.open("IdCheckServlet?id=" + memberId.value, "idcheckpopup", "width=250, height=150, top=150, left=400");
+        }
+    }
     function formSubmit() {
         let result = checkForm();
         if(result == false) {
@@ -162,8 +158,8 @@
     }
 </script>
 
-<%--</body>--%>
-<%--</html>--%>
+</body>
+</html>
 
 
 
