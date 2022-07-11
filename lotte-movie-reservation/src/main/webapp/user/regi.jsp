@@ -68,8 +68,6 @@
 <script type="text/javascript">
     $(function () {
         $("#idBtn").click(function () {
-            alert("hihi");
-
             $.ajax({
                 type:"post",
                 url:"./idcheck.jsp",

@@ -90,8 +90,7 @@
     <div class="redbox">회원정보 수정</div>
     <div class="userinfo">
 
-        <%--        <form action="updateUserController" method="post" id="platform">--%>
-        <form href="<%=request.getContextPath() %>/user?param=updateUser">
+        <form action="updateUserController" method="post" id="platform">
             <input type="hidden" id="flag" value="updateUser" name="param">
             <div class="user">
                 <div class="text">아이디</div>
@@ -111,7 +110,6 @@
             </div>
             <div class="updateBtn" align="center">
                 <input type="button" class="cancelBtn" value="취소">
-                <%--                <input type="submit" class="confirmBtn" value="확인" onclick="updateUser()">--%>
                 <input type="submit" class="confirmBtn" value="확인">
             </div>
         </form>
