@@ -23,6 +23,7 @@
 
 </head>
 <body>
+<jsp:include page="../front/header.jsp"/>
 <div class="findIdBody">
     <div class="findId_box member_findId_wrap contents_inner">
         <div id="div0">
@@ -46,5 +47,6 @@
             <btn href="login.js" class="btn btnCancel">취소</btn>
         </div>
     </div>
+</div>
 </body>
 </html>

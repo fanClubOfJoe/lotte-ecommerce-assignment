@@ -1,4 +1,5 @@
 <%@ page import="java.util.Calendar" %>
+<%@ page import="com.example.lottemoviereservation.dto.UserDto" %>
 <%--
   Created by IntelliJ IDEA.
   User: BTC-N10
@@ -18,7 +19,9 @@
         body {
             font-family: "Noto Sans KR", sans-serif;
         }
-
+        #container {
+            width: 100%;
+        }
         /* 일주일 일정 CSS */
         .showtimeform {
             margin: auto;
@@ -168,124 +171,128 @@
     int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 %>
 <body>
-<div class="showtimeform">
-    <hr class="boldhr">
-    <div class="calendarform" align="center">
+<jsp:include page="../front/header.jsp"/>
+<div id="container">
+    <div class="showtimeform">
+        <hr class="boldhr">
+        <div class="calendarform" align="center">
 
-        <%
-            String dayOfWeekString = "";
-            int count = 1;
-            int i = day;
-        %>
-        <%
-            while (count < 8) {
-        %>
-        <%
-            switch (dayOfWeek) {
-                case 1:
-                    dayOfWeekString = "일";
-                    break;
-                case 2:
-                    dayOfWeekString = "월";
-                    break;
-                case 3:
-                    dayOfWeekString = "화";
-                    break;
-                case 4:
-                    dayOfWeekString = "수";
-                    break;
-                case 5:
-                    dayOfWeekString = "목";
-                    break;
-                case 6:
-                    dayOfWeekString = "금";
-                    break;
-                case 7:
-                    dayOfWeekString = "토";
-                    break;
-            }
-        %>
-        <a href="#" id="geTheaterDetail(<%=year%>, <%=month%>, <%=day%>)">
-            <button type="submit" class="calendarBtn" >
-                <div class="monthdayofweekform">
-                    <%=String.format("%d월", month)%>
-                    <br>
-                    <%=String.format("%s", dayOfWeekString)%>
-                </div>
-                <font class="dayfont"><%=String.format("%d", i)%>
-                </font>
-            </button>
-        </a>
-        <%
-            if (i == lastday) {
-                month = month + 1;
-                i = 1;
-            } else {
-                i++;
-            }
-            ;
-            dayOfWeek++;
-            dayOfWeek = dayOfWeek % 7;
-            count++;
-        %>
-        <%
-            }
-        %>
+            <%
+                String dayOfWeekString = "";
+                int count = 1;
+                int i = day;
+            %>
+            <%
+                while (count < 8) {
+            %>
+            <%
+                switch (dayOfWeek) {
+                    case 1:
+                        dayOfWeekString = "일";
+                        break;
+                    case 2:
+                        dayOfWeekString = "월";
+                        break;
+                    case 3:
+                        dayOfWeekString = "화";
+                        break;
+                    case 4:
+                        dayOfWeekString = "수";
+                        break;
+                    case 5:
+                        dayOfWeekString = "목";
+                        break;
+                    case 6:
+                        dayOfWeekString = "금";
+                        break;
+                    case 7:
+                        dayOfWeekString = "토";
+                        break;
+                }
+            %>
+            <a href="#" id="geTheaterDetail(<%=year%>, <%=month%>, <%=day%>)">
+                <button type="submit" class="calendarBtn" >
+                    <div class="monthdayofweekform">
+                        <%=String.format("%d월", month)%>
+                        <br>
+                        <%=String.format("%s", dayOfWeekString)%>
+                    </div>
+                    <font class="dayfont"><%=String.format("%d", i)%>
+                    </font>
+                </button>
+            </a>
+            <%
+                if (i == lastday) {
+                    month = month + 1;
+                    i = 1;
+                } else {
+                    i++;
+                }
+                ;
+                dayOfWeek++;
+                dayOfWeek = dayOfWeek % 7;
+                count++;
+            %>
+            <%
+                }
+            %>
 
-    </div>
-    <hr class="boldhr">
-    <p class="infotext">* 시간을 클릭하시면 빠른 예매를 하실 수 있습니다.</p>
-    <hr class="thinhr">
-
-    <%--영화별 예매--%>
-    <div class="timetableform">
-        <br>
-        <%--&lt;%&ndash; 영화 데이터 들어올 곳 &ndash;%&gt;
-        <%
-            String movie_title = "";
-            movie_title = "토르 - 러브 앤 썬더";
-        %>
-        <div class="age_grade15"><p align="center">15</p></div>
-        <div>
-            <h3 class="movie_title"><%=String.format("%s", movie_title)%></h3>
-            <font class="isscreenfont" style="color: royalblue;"> 상영중</font>
         </div>
-        <%
-            /* 수정할 부분 */
-            String movie_category = "";
-            String movie_time = "";
-            String movie_screen_date = "";
+        <hr class="boldhr">
+        <p class="infotext">* 시간을 클릭하시면 빠른 예매를 하실 수 있습니다.</p>
+        <hr class="thinhr">
 
-            movie_category = "액션, 어드벤처, 환타지";
-            movie_time = "119분";
-            movie_screen_date = "2022.07.06 개봉";
-        %>
-        <p class="movieinfo">
-            <%=String.format("%s&nbsp;/&nbsp;%s&nbsp;/&nbsp;%s", movie_category, movie_time, movie_screen_date)%>
-        </p>
+        <%--영화별 예매--%>
+        <div class="timetableform">
+            <br>
+            <%--&lt;%&ndash; 영화 데이터 들어올 곳 &ndash;%&gt;
+            <%
+                String movie_title = "";
+                movie_title = "토르 - 러브 앤 썬더";
+            %>
+            <div class="age_grade15"><p align="center">15</p></div>
+            <div>
+                <h3 class="movie_title"><%=String.format("%s", movie_title)%></h3>
+                <font class="isscreenfont" style="color: royalblue;"> 상영중</font>
+            </div>
+            <%
+                /* 수정할 부분 */
+                String movie_category = "";
+                String movie_time = "";
+                String movie_screen_date = "";
 
-        &lt;%&ndash; 예매 시간 데이터 들어올 곳 &ndash;%&gt;
-        &lt;%&ndash; 모달 띄우는 a href 추가 필요함 &ndash;%&gt;
-        <%
-            /* 수정할 부분 */
-            String theater_detail_time = "";
-            int theater_detail_remain_seats = 0;
+                movie_category = "액션, 어드벤처, 환타지";
+                movie_time = "119분";
+                movie_screen_date = "2022.07.06 개봉";
+            %>
+            <p class="movieinfo">
+                <%=String.format("%s&nbsp;/&nbsp;%s&nbsp;/&nbsp;%s", movie_category, movie_time, movie_screen_date)%>
+            </p>
 
-            theater_detail_time = "17:00";
-            theater_detail_remain_seats = 180;
+            &lt;%&ndash; 예매 시간 데이터 들어올 곳 &ndash;%&gt;
+            &lt;%&ndash; 모달 띄우는 a href 추가 필요함 &ndash;%&gt;
+            <%
+                /* 수정할 부분 */
+                String theater_detail_time = "";
+                int theater_detail_remain_seats = 0;
 
-        %>
-        <button type="submit" class="goReserveBtn">
-            <strong><%=String.format("%s", theater_detail_time)%></strong>
-            <font class="seatsfont"  style="color: royalblue;"><%=String.format("%d석", theater_detail_remain_seats)%>
-            </font>
-        </button>--%>
-        <%--<br><br>
-        <hr class="thinhr">--%>
-<%--    </div>--%>
+                theater_detail_time = "17:00";
+                theater_detail_remain_seats = 180;
 
+            %>
+            <button type="submit" class="goReserveBtn">
+                <strong><%=String.format("%s", theater_detail_time)%></strong>
+                <font class="seatsfont"  style="color: royalblue;"><%=String.format("%d석", theater_detail_remain_seats)%>
+                </font>
+            </button>--%>
+            <%--<br><br>
+            <hr class="thinhr">--%>
+            <%--    </div>--%>
+
+        </div>
+        <br/>
 </div>
-<br/>
+<jsp:include page="../front/footer.jsp"/>
 <script type="text/javascript">
     $(document).ready(function() {
         getMovieData("2022", "07", "111");
@@ -296,7 +303,6 @@
             data: { 'year': year, 'month': month, 'day': day},
             method: "GET",
             success:function(data) {
-                console.dir(data.list[0]);
                 let idx = 1;
                 let html = "";
                 let prev = '';
@@ -333,7 +339,7 @@
                         "<div class='w3-modal-content w3-animate-zoom'>"+
                         "<div class='w3-container''>"+
                         "<input type=\"hidden\" name=\"movieNo\" value=\"movieNo\">"+
-                        "<table>"+
+                        "<table id='"+data.list[i].movieNo+"'>"+
                             "<tr>"+
                                 "<th>영화제목</th>"+
                                 "<td>"+data.list[i].movieTitle+"</td>"+
@@ -348,7 +354,7 @@
                             "</tr>"+
                             "<tr><th>인원수</th><td>성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/></td></tr>"+
                             "<tr><th>결제 방식&nbsp;&nbsp;&nbsp;</th><td><input type='radio' name='radio' id='pay"+modalId+"'>&nbsp;현장에서 결제</td><br/>" +
-                            "<tr><td colspan='2'><button type='button' class='reserve'>TEST</button></td></tr>" +
+                            "<tr><td colspan='2'><button type='button' class='reserve'>예약</button></td></tr>" +
                         "</table>" +
                         "<span onclick=\"document.getElementById(\'id"+modalId+"\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>"+
                         "</div>"+
@@ -373,31 +379,51 @@
         getMovieData(year, month, day);
     })
     $(document).on("click", "button.reserve", function() {
-        let thisButton = $("input[name='radio']:checked")
-        console.dir($(this))
+
         let parent = $(this).closest('table');
-        console.dir(parent.children().children()[0].lastChild.innerHTML);
-        console.dir(parent.children().children()[1].lastChild.innerHTML);
-        console.dir(parent.children().children()[2].lastChild.innerHTML);
-        console.dir(parent.children().children()[3].lastChild.childNodes[1].value);
-        console.dir(parent.children().children()[3].lastChild.childNodes[3].value);
+
+        let thisButton = parent.children().children()[4].lastChild.childNodes[0].checked;
+        if(thisButton == false) {
+            alert('결제방식을 선택해주세요');
+            return;
+        }
+        let adult = parent.children().children()[3].lastChild.childNodes[1].value;
+        let child = parent.children().children()[3].lastChild.childNodes[3].value;
+        if(adult == 0 && child == 0 || adult < 0 || child < 0) {
+            alert("인원수가 잘못되었습니다.");
+            return;
+        }
+        <%
+            Object obj = session.getAttribute("login");
+            UserDto mem = null;
+            if (obj == null) {
+        %>
+            alert('로그인 해 주십시오');
+            location.href = "/user?param=login";
+            return;
+        <%
+            }
+        %>
 
         var date = parent.children().children()[1].lastChild.innerHTML;
         let data = {
+            movieNo: parent.attr('id'),
             movieTitle: parent.children().children()[0].lastChild.innerHTML,
             year: date.split(" ")[0],
             month: date.split(" ")[1],
             day: date.split(" ")[2],
             time: parent.children().children()[2].lastChild.innerHTML,
+            adult: parent.children().children()[3].lastChild.childNodes[1].value,
+            child: parent.children().children()[3].lastChild.childNodes[3].value
         }
-
-        <%--$.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)--%>
-        <%--    .done(function(data) {--%>
-        <%--        console.log(data);--%>
-        <%--    }).--%>
-        <%--fail(function() {--%>
-        <%--    console.log("ERR");--%>
-        <%--})--%>
+        $.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)
+            .done(function() {
+                alert("예매 완료되었습니다.");
+                location.href = "/movie?param=list"
+            }).
+        fail(function() {
+            alert("예매에 실패했습니다.");
+        })
     })
 </script>
 </body>

@@ -13,7 +13,7 @@
 </head>
 <body>
 <body>
-
+<jsp:include page="../front/header.jsp"/>
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -65,6 +65,7 @@
     </div><!— card class —>
 </div><!—container class—>
 </body>
+<jsp:include page="../front/footer.jsp"/>
 </html>
 
 

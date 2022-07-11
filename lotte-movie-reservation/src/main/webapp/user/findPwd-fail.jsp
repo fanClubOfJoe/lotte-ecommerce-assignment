@@ -8,6 +8,7 @@
     <title>비밀번호 찾기</title>
 </head>
 <body>
+<jsp:include page="../front/header.jsp"/>
 <div class="container pt-200">
     <div class="card-body">
         <div class="align-center">
@@ -17,5 +18,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="../front/footer.jsp"/>
 </body>
 </html>

@@ -247,41 +247,35 @@ public class UserDao {
         return userNameList;
     }
 
-    public String deleteId(String user_name) {
+    public boolean deleteId(String user_id) {
 
         String sql = " UPDATE users "
                 + " SET is_activated=false "
-                + " WHERE user_name=? ";
+                + " WHERE user_id=? ";
 
         Connection conn = null;         // DB 연결
         PreparedStatement psmt = null;   // Query문을 실행
-        ResultSet rs = null;         // 결과 취득
 
-        String id;
+        int count = 0;
 
         try {
             conn = DBConnection.getConnection();
-            System.out.println("1/3 findId success");
+            System.out.println("1/3 delete success");
 
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1, user_name);
+            psmt.setString(1, user_id);
             System.out.println(psmt);
-            System.out.println("2/3 findId success");
-
-            rs = psmt.executeQuery();
-            if (rs.next()) {
-                id = rs.getString(1);
-                return id;
-            }
-            System.out.println("3/3 findId success");
+            System.out.println("2/3 delete success");
+            count = psmt.executeUpdate();
+            System.out.println("3/3 delete success");
 
         } catch (SQLException e) {
-            System.out.println("findId fail");
+            System.out.println("delete fail");
         } finally {
-            DBClose.close(conn, psmt, rs);
+            DBClose.close(conn, psmt, null);
         }
 
-        return null;
+        return count > 0;
     }
 
 }

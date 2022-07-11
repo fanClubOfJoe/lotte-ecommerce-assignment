@@ -20,6 +20,7 @@
     <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+<jsp:include page="../front/header.jsp"/>
 <body class="findIdBody">
 <div class="findId_box member_findId_wrap contents_inner">
     <div id="div0">
