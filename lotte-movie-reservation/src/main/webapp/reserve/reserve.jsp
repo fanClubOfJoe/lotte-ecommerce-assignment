@@ -327,9 +327,9 @@
                     if(modalId.length < 2)
                         modalId = "0"+idx;
                     idx++;
-                    html += "<button type='submit' class='goReserveBtn' onclick=\"document.getElementById(\'id"+idx+"\').style.display=\'block\'\" class='w3-button w3-black'><strong>"+data.list[i].theaterDetailTime+"</strong><br/>"+
+                    html += "<button type='submit' class='goReserveBtn' onclick=\"document.getElementById(\'id"+modalId+"\').style.display=\'block\'\" class='w3-button w3-black'><strong>"+data.list[i].theaterDetailTime+"</strong><br/>"+
                         "<font class='seatsfont' style='color: royalblue;'>"+data.list[i].theaterDetailRemainSeats+"석</font></button>&nbsp;&nbsp;&nbsp;"
-                    html += "<div id='id"+idx+"' class='w3-modal'>"+
+                    html += "<div id='id"+modalId+"' class='w3-modal'>"+
                         "<div class='w3-modal-content w3-animate-zoom'>"+
                         "<div class='w3-container''>"+
                         "<input type=\"hidden\" name=\"movieNo\" value=\"movieNo\">"+
@@ -347,10 +347,10 @@
                                 "<td>"+data.list[i].theaterDetailTime+"</td>"+
                             "</tr>"+
                             "<tr><th>인원수</th><td>성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/></td></tr>"+
-                            "<tr><th>결제 방식&nbsp;&nbsp;&nbsp;</th><td> 현장에서 결제&nbsp;&nbsp;<input type='radio' id='pay'></td><br/>" +
+                            "<tr><th>결제 방식&nbsp;&nbsp;&nbsp;</th><td><input type='radio' name='radio' id='pay"+modalId+"'>&nbsp;현장에서 결제</td><br/>" +
                             "<tr><td colspan='2'><button type='button' class='reserve'>TEST</button></td></tr>" +
                         "</table>" +
-                        "<span onclick=\"document.getElementById(\'id"+idx+"\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>"+
+                        "<span onclick=\"document.getElementById(\'id"+modalId+"\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>"+
                         "</div>"+
                         "</div>"+
                         "</div>";
@@ -373,27 +373,31 @@
         getMovieData(year, month, day);
     })
     $(document).on("click", "button.reserve", function() {
-        if($('#pay').prop('checked') == false) {
-            alert('결제 방식을 선택하여 주십시오');
-            return;
+        let thisButton = $("input[name='radio']:checked")
+        console.dir($(this))
+        let parent = $(this).closest('table');
+        console.dir(parent.children().children()[0].lastChild.innerHTML);
+        console.dir(parent.children().children()[1].lastChild.innerHTML);
+        console.dir(parent.children().children()[2].lastChild.innerHTML);
+        console.dir(parent.children().children()[3].lastChild.childNodes[1].value);
+        console.dir(parent.children().children()[3].lastChild.childNodes[3].value);
+
+        var date = parent.children().children()[1].lastChild.innerHTML;
+        let data = {
+            movieTitle: parent.children().children()[0].lastChild.innerHTML,
+            year: date.split(" ")[0],
+            month: date.split(" ")[1],
+            day: date.split(" ")[2],
+            time: parent.children().children()[2].lastChild.innerHTML,
         }
 
-        let parents = $(this).closest('tr');
-        let children = parents.children();
-        let data = {
-            movieTitle: children[0].innerHTML,
-            year: children[3].innerHTML.split(" ")[0],
-            month: children[3].innerHTML.split(" ")[1],
-            day: children[3].innerHTML.split(" ")[2],
-            time: children[4].innerHTML
-        }
-        $.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)
-            .done(function(data) {
-                console.log(data);
-            }).
-        fail(function() {
-            console.log("ERR");
-        })
+        <%--$.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)--%>
+        <%--    .done(function(data) {--%>
+        <%--        console.log(data);--%>
+        <%--    }).--%>
+        <%--fail(function() {--%>
+        <%--    console.log("ERR");--%>
+        <%--})--%>
     })
 </script>
 </body>
