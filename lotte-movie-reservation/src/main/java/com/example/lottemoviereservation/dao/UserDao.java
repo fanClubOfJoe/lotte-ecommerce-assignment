@@ -2,9 +2,13 @@ package com.example.lottemoviereservation.dao;
 
 import com.example.lottemoviereservation.db.DBConnection;
 import com.example.lottemoviereservation.db.DBClose;
+import com.example.lottemoviereservation.dto.ReviewDto;
 import com.example.lottemoviereservation.dto.UserDto;
+import com.example.lottemoviereservation.dto.UserNameDto;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UserDao {
@@ -19,8 +23,8 @@ public class UserDao {
     }
 
     public boolean addUser(UserDto dto) {
-        String sql =    " insert into users(user_id, user_name, user_email, user_password) "
-                    +   "      values(?, ?, ?, ?) ";
+        String sql = " insert into users(user_id, user_name, user_email, user_password) "
+                + "      values(?, ?, ?, ?) ";
 
 
         Connection conn = null;
@@ -69,7 +73,7 @@ public class UserDao {
             System.out.println("2/3 getId success");
 
             rs = psmt.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 findId = true;
             }
             System.out.println("3/3 getId success");
@@ -82,6 +86,7 @@ public class UserDao {
 
         return findId;
     }
+
     public String findId(String user_name, String user_email) {
 
         String sql = " SELECT user_id "
@@ -105,7 +110,7 @@ public class UserDao {
             System.out.println("2/3 findId success");
 
             rs = psmt.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 id = rs.getString(1);
                 return id;
             }
@@ -119,6 +124,7 @@ public class UserDao {
 
         return null;
     }
+
     public String findPwd(String user_id, String user_email) {
 
         String sql = " SELECT user_password "
@@ -142,7 +148,7 @@ public class UserDao {
             System.out.println("2/3 findPwd success");
 
             rs = psmt.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 pwd = rs.getString(1);
                 return pwd;
             }
@@ -156,6 +162,7 @@ public class UserDao {
 
         return null;
     }
+
     public UserDto login(UserDto dto) {
         String sql = " select user_no, user_id, user_email, user_name, user_password "
                 + " from users "
@@ -176,7 +183,7 @@ public class UserDao {
             rs = psmt.executeQuery();
             System.out.println("2/3 login success");
 
-            if(rs.next()) {
+            if (rs.next()) {
                 int no = rs.getInt(1);
                 String id = rs.getString(2);
                 String email = rs.getString(3);
@@ -188,11 +195,56 @@ public class UserDao {
                 return user;
             }
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println("login fail");
         }
         return null;
 
+    }
+
+    public String getUserNameByUserNo(int userNo) {
+
+        String sql = " SELECT user_name "
+                + " FROM users "
+                + " WHERE user_no=? ";
+
+        Connection conn = null;         // DB 연결
+        PreparedStatement psmt = null;   // Query문을 실행
+        ResultSet rs = null;         // 결과 취득
+
+        String findName = "";
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, userNo);
+
+            rs = psmt.executeQuery();
+            if (rs.next()) {
+                findName = rs.getString(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("getUserName fail");
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return findName;
+    }
+
+    public List<UserNameDto> getUserNameByReview(List<ReviewDto> reviewList) {
+        List<UserNameDto> userNameList = new ArrayList<>();
+
+        for (ReviewDto reviewDto : reviewList) {
+            int userNo = reviewDto.getUserNo();
+            String userName = getUserNameByUserNo(userNo);
+
+            userNameList.add(new UserNameDto(userNo, userName));
+
+        }
+        return userNameList;
     }
 
 }
