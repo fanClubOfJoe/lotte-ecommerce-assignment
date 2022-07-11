@@ -175,15 +175,6 @@
                 </div>
             </div>
 
-<%--            <div class="col-sm-6">--%>
-<%--                <input type="text" id="search" class="form-control" value="">--%>
-<%--            </div>--%>
-
-<%--            <div class="col-sm-3">--%>
-<%--                <button type="button" class="btn btn-outline-dark"--%>
-<%--                        onclick="searchBtn()">검색--%>
-<%--                </button>--%>
-<%--            </div>--%>
         </div>
     </div>
     <div class="container">
@@ -231,12 +222,7 @@
                                         <c:out value="${movieDto.movieCategory}"/>
                                     </div>
                                     <div>
-                                        <c:set var="screenDateTime" value="${movieDto.movieScreenDate}"/>
-                                        <c:set var="scrennDate" value="${fn:substring(screenDateTime, 0, 10)}"/>
-                                        <c:out value="${scrennDate}" />개봉
-                                    </div>
-                                    <div>
-                                        <strong> 예매율 | </strong><c:out value="${movieDto.reserveRate}"/>%
+                                        <strong> 예매율 | </strong><c:out value="${movieDto.reserveRate}"/> %
                                     </div>
                                     <div>
                                         <strong> 평점 | </strong><c:out value="${movieDto.movieRate}"/>
