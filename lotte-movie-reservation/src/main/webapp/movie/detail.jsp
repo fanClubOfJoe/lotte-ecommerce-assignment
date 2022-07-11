@@ -194,6 +194,7 @@
             text-align: center;
             background-color: #f8f8f8;
             padding: 10px;
+            margin-bottom: 20px;
         }
 
         .starContainer {

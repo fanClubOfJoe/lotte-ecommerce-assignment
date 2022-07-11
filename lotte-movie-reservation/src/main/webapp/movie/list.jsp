@@ -209,19 +209,19 @@
                                     <div>
                                         <c:choose>
                                             <c:when test="${movieDto.ageGrade eq '전체'}">
-                                                <div class="age_gradeAll"><p align="center">All</p></div>
+                                                <div class="age_gradeAll"><p align="center" style="margin-bottom: 0;">All</p></div>
                                             </c:when>
                                             <c:when test="${movieDto.ageGrade eq '12세 이상'}">
-                                                <div class="age_grade12"><p align="center">12</p></div>
+                                                <div class="age_grade12"><p align="center" style="margin-bottom: 0;">12</p></div>
                                             </c:when>
                                             <c:when test="${movieDto.ageGrade eq '15세 이상'}">
-                                                <div class="age_grade15"><p align="center">15</p></div>
+                                                <div class="age_grade15"><p align="center" style="margin-bottom: 0;">15</p></div>
                                             </c:when>
                                             <c:when test="${movieDto.ageGrade eq '청소년 관람불가'}">
-                                                <div class="age_grade19"><p align="center">19</p></div>
+                                                <div class="age_grade19"><p align="center" style="margin-bottom: 0;">19</p></div>
                                             </c:when>
                                             <c:otherwise>
-                                                <div class="age_gradeNone"><p align="center">-</p></div>
+                                                <div class="age_gradeNone"><p align="center" style="margin-bottom: 0;">-</p></div>
                                             </c:otherwise>
                                         </c:choose>
 

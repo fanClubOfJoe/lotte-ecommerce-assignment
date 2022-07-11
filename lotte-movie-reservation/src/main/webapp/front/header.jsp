@@ -1,4 +1,5 @@
 <%@ page import="org.json.JSONObject" %>
+<%@ page import="com.example.lottemoviereservation.dto.UserDto" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -64,7 +65,7 @@
 <body>
 
 <%
-    JSONObject user = (JSONObject)session.getAttribute("login");
+    UserDto user = (UserDto)session.getAttribute("login");
 %>
 
 <div class="headerBox">
