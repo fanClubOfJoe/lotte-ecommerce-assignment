@@ -277,5 +277,37 @@ public class UserDao {
 
         return count > 0;
     }
+    public boolean updateUser(String user_id, String user_email, String user_password) {
+
+        String sql = " UPDATE users "
+                + " SET user_email=?, user_password=? "
+                + " WHERE user_id=? ";
+
+        Connection conn = null;         // DB 연결
+        PreparedStatement psmt = null;   // Query문을 실행
+
+        int count = 0;
+
+        try {
+            conn = DBConnection.getConnection();
+            System.out.println("1/3 delete success");
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, user_id);
+            psmt.setString(2, user_email);
+            psmt.setString(3, user_password);
+            System.out.println(psmt);
+            System.out.println("2/3 delete success");
+            count = psmt.executeUpdate();
+            System.out.println("3/3 delete success");
+
+        } catch (SQLException e) {
+            System.out.println("delete fail");
+        } finally {
+            DBClose.close(conn, psmt, null);
+        }
+
+        return count > 0;
+    }
 
 }

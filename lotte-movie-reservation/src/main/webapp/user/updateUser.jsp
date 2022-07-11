@@ -90,27 +90,29 @@
     <div class="redbox">회원정보 수정</div>
     <div class="userinfo">
 
-        <form action="updateUserController" method="post" id="platform">
+        <%--        <form action="updateUserController" method="post" id="platform">--%>
+        <form href="<%=request.getContextPath() %>/user?param=updateUser">
             <input type="hidden" id="flag" value="updateUser" name="param">
             <div class="user">
                 <div class="text">아이디</div>
-                <input name="id" type="text" class="infoinput">
+                <input name="id" type="text" class="infoinput" id="id">
             </div>
             <div class="user">
                 <div class="text">이메일</div>
-                <input name="email" type="text" class="infoinput">
+                <input name="email" type="text" class="infoinput" id="email">
             </div>
             <div class="user">
                 <div class="text">비밀번호</div>
-                <input name="pwd" type="password" class="infoinput">
+                <input name="pwd" type="password" class="infoinput" id="pwd">
             </div>
             <div class="user">
                 <div class="text">비밀번호 확인</div>
-                <input name="pwdCheck" type="password" class="infoinput">
+                <input name="pwdCheck" type="password" class="infoinput" id="pwdCheck">
             </div>
             <div class="updateBtn" align="center">
                 <input type="button" class="cancelBtn" value="취소">
-                <input type="submit" class="confirmBtn" value="확인" onclick="updateUser()">
+                <%--                <input type="submit" class="confirmBtn" value="확인" onclick="updateUser()">--%>
+                <input type="submit" class="confirmBtn" value="확인">
             </div>
         </form>
     </div>

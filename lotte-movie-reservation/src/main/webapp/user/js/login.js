@@ -3,12 +3,12 @@
  */
 
 var id = document.getElementById('id');
-var rememberID = document.getElementById('rememberId');
+var rememberID = document.getElementById('rememberID');
 
 var key = getCookie("key");
 id.value = key;
 
-if(id.value !== ""){
+if(id.value != ""){
     rememberID.setAttribute("checked", true);
 }
 
