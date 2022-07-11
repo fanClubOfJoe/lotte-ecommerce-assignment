@@ -12,17 +12,6 @@ import java.util.List;
 
 public class MovieDataCrawling {
 
-    public static void main(String[] args) throws Exception {
-        MovieDataCrawling m = new MovieDataCrawling();
-        List<MovieDto> dtos = m.getMovieData();
-
-        MovieDao dao = MovieDao.getInstance();
-
-        for(int i=0; i<dtos.size(); i++){
-            dao.insertMovieDate(dtos.get(i));
-        }
-    }
-
     public static List<MovieDto> getMovieData() throws Exception{
 
         String[] pageID = {"85999", "82120", "85852", "85997", "86008", "85813", "85871", "85857", "85238", "86000",
