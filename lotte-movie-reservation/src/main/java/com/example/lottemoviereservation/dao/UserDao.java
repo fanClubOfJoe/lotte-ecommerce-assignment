@@ -56,7 +56,7 @@ public class UserDao {
 
         String sql = " SELECT user_id "
                 + " FROM users "
-                + " WHERE user_id=? ";
+                + " WHERE user_id=? and is_activated=true ";
 
         Connection conn = null;         // DB 연결
         PreparedStatement psmt = null;   // Query문을 실행
@@ -91,7 +91,7 @@ public class UserDao {
 
         String sql = " SELECT user_id "
                 + " FROM users "
-                + " WHERE user_name=? and user_email=?";
+                + " WHERE user_name=? and user_email=? and is_activated=true ";
 
         Connection conn = null;         // DB 연결
         PreparedStatement psmt = null;   // Query문을 실행
@@ -129,7 +129,7 @@ public class UserDao {
 
         String sql = " SELECT user_password "
                 + " FROM users "
-                + " WHERE user_id=? and user_email=?";
+                + " WHERE user_id=? and user_email=? and is_activated=true ";
 
         Connection conn = null;         // DB 연결
         PreparedStatement psmt = null;   // Query문을 실행
@@ -164,9 +164,9 @@ public class UserDao {
     }
 
     public UserDto login(UserDto dto) {
-        String sql = " select user_no, user_id, user_email, user_name, user_password "
+        String sql = " select user_no, user_id, user_email, user_name, user_password, is_activated "
                 + " from users "
-                + " where user_id=? and user_password=? ";
+                + " where user_id=? and user_password=? and is_activated=true ";
         Connection conn = null;
         PreparedStatement psmt;
         ResultSet rs = null;
@@ -245,6 +245,37 @@ public class UserDao {
 
         }
         return userNameList;
+    }
+
+    public boolean deleteId(String user_id) {
+
+        String sql = " UPDATE users "
+                + " SET is_activated=false "
+                + " WHERE user_id=? ";
+
+        Connection conn = null;         // DB 연결
+        PreparedStatement psmt = null;   // Query문을 실행
+
+        int count = 0;
+
+        try {
+            conn = DBConnection.getConnection();
+            System.out.println("1/3 delete success");
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, user_id);
+            System.out.println(psmt);
+            System.out.println("2/3 delete success");
+            count = psmt.executeUpdate();
+            System.out.println("3/3 delete success");
+
+        } catch (SQLException e) {
+            System.out.println("delete fail");
+        } finally {
+            DBClose.close(conn, psmt, null);
+        }
+
+        return count > 0;
     }
 
 }

@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet("/user")
 public class UserController extends HttpServlet {
@@ -89,7 +91,7 @@ public class UserController extends HttpServlet {
                 msg = "NO";
             }
 
-            resp.sendRedirect("message.jsp?msg=" + msg);
+            resp.sendRedirect("user/message.jsp?msg=" + msg);
 
         }
         else if(param.equals("findId")) {
@@ -100,6 +102,69 @@ public class UserController extends HttpServlet {
                     "" +
                     "" +
                     ".jsp");
+        }
+        else if(param.equals("deleteId")){
+            HttpSession session = req.getSession();
+            UserDto dto = (UserDto) session.getAttribute("login");
+            String id = dto.getUserId();
+            System.out.println(id);
+            UserDao dao = UserDao.getInstance();
+            boolean deleteId = dao.deleteId(id);
+            if(deleteId){
+                System.out.println("아이디가 지워짐");
+            }
+        }
+    }
+
+    /**
+     * Servlet implementation class FindIdServlet
+     */
+    @WebServlet("/user/FindIdController")
+    public static class FindIdController extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("utf-8");
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String path = null;
+            String id;
+            System.out.println("servlet name = " + name);
+            id = String.valueOf(UserDao.getInstance().findId(name, email));
+            System.out.println(id);
+            // 등록된 이메일과 이름이 존재한 경우 (회원)
+            if(id != null) {
+                request.setAttribute("user_id", id);
+                path = "findId-ok.jsp";
+            }
+            // 존재하지 않는 회원인 경우
+            else {
+                path="findId-fail.jsp";
+            }
+            request.getRequestDispatcher(path).forward(request, response);
+        }
+    }
+
+    /**
+     * Servlet implementation class FindPasswordServlet
+     */
+    @WebServlet("/user/FindPwdController")
+    public static class FindPwdController extends HttpServlet {
+        private static final long serialVersionUID = -6972658214051531827L;
+
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            request.setCharacterEncoding("utf-8");
+            String id = request.getParameter("userId");
+            String email = request.getParameter("email");
+            String path = null;
+            String password = UserDao.getInstance().findPwd(id, email);
+            System.out.println("password : " + password);
+            if(password != null) {
+                request.setAttribute("password", password);
+                path = "findPwd-ok.jsp";
+            }
+            else path = "findPwd-fail.jsp";
+            request.getRequestDispatcher(path).forward(request, response);
         }
     }
 }

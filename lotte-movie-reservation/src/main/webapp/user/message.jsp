@@ -10,7 +10,7 @@ if(msg.equals("OK")){
 	%>
 	<script type="text/javascript">
 	alert("회원가입되었습니다.");
-	location.href = "user?param=login";
+	location.href = "login.jsp";
 	</script>
 	
 	<%
@@ -20,7 +20,7 @@ else{
 	
 	<script type="text/javascript">
 	alert("가입되지 않았습니다. 다시 작성해 주십시오.");
-	location.href = "user?param=regi";
+	location.href = "regi.jsp";
 	</script>
 	
 	<%

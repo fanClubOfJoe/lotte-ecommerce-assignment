@@ -10,6 +10,9 @@
 <head>
     <title>Title</title>
     <a href="logout.jsp">로그아웃하기</a>
+    <a href="<%=request.getContextPath() %>/user?param=deleteId" style="text-decoration-line: none">지우기</a>
+
+    </form>
 </head>
 <body>
 
