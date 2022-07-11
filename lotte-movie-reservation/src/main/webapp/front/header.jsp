@@ -14,7 +14,7 @@
             width: 95%;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 120px 30px;
+            grid-template-rows: 120px 30px 60px;
             margin: 20px auto;
         }
         .headerBox .searchBox{
@@ -38,6 +38,11 @@
             grid-row: 2/3;
             grid-column: 1/4;
         }
+        .headerBox .buttonBox{
+            grid-row: 3/4;
+            grid-column: 1/4;
+            border-bottom: solid 2px #E60012;
+        }
 
         .headerBox #logoImg {
             width: 36px;
@@ -60,6 +65,23 @@
             background-color: #E60012;
             height: 30px;
         }
+
+        .headerBox .btnInnerBox{
+            width: 280px;
+            margin: 0px auto;
+        }
+        .headerBox .movePageBtn{
+            background-color: white;
+            border: none;
+            width: 85px;
+            height: 55px;
+            margin: 0px 25px;
+            padding: 10px;
+        }
+        .headerBox .movePageBtn:hover{
+            background-color: white;
+            border-bottom: solid 8px #E60012;
+        }
     </style>
 </head>
 <body>
@@ -75,19 +97,20 @@
 
         <div class="logoBox">
             <img id="logoImg" src="/front/images/logoImg.png">
-            <span>MOBIT</span>
+            <span>MOOBIT</span>
         </div>
 
         <div class="loginBox">
             <%
                 if(user == null){
             %>
-                <a href="/user?param=login">로그인 | 회원가입</a>
+            <a href="/user?param=login">로그인 | 회원가입</a>
             <%
-                }
-                else{
+            }
+            else{
             %>
-                <a href="/user/logout.jsp">로그아웃</a>
+            <a href="/user/logout.jsp">로그아웃</a>
+            <a>마이 페이지</a>
             <%
                 }
             %>
@@ -95,6 +118,13 @@
 
         <div class="lineBox">
             <div id="line"></div>
+        </div>
+
+        <div class="buttonBox">
+            <div class="btnInnerBox">
+                <button type="button" class="movePageBtn" >예매</button>
+                <button type="button" class="movePageBtn" >영화</button>
+            </div>
         </div>
     </div>
 </div>
