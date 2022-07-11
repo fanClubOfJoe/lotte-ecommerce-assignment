@@ -67,7 +67,7 @@
             justify-content: space-around;
             padding: 0 .2em;
             text-align: center;
-            width: 5em;
+            width: 5emf;
         }
 
         .star-rating input {

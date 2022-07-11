@@ -115,6 +115,20 @@ public class UserController extends HttpServlet {
 
             resp.sendRedirect("user/mypage.jsp?userno=" + userNo);
         }
+        else if(param.equals("updateUser")){
+            HttpSession session = req.getSession();
+            UserDto dto = (UserDto) session.getAttribute("login");
+            String id = dto.getUserId();
+            System.out.println("id : " + id);
+            String email = req.getParameter("email");
+            String pwd = req.getParameter("pwd");
+            System.out.println(email + pwd);
+            UserDao dao = UserDao.getInstance();
+            boolean deleteId = dao.updateUser(id, email, pwd);
+            if(deleteId){
+                System.out.println("유저정보 바뀜");
+            }
+        }
     }
 
     /**
@@ -165,6 +179,26 @@ public class UserController extends HttpServlet {
                 request.setAttribute("password", password);
                 path = "findPwd-ok.jsp";
             } else path = "findPwd-fail.jsp";
+            request.getRequestDispatcher(path).forward(request, response);
+        }
+    }
+    @WebServlet("/user/updateUserController")
+    public static class updateUserController extends HttpServlet {
+        private static final long serialVersionUID = -6972658214051531827L;
+
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            request.setCharacterEncoding("utf-8");
+            String id = request.getParameter("id");
+            String email = request.getParameter("email");
+            System.out.println("id + email : " + id + email);
+            String path = null;
+            String password = UserDao.getInstance().findPwd(id, email);
+            System.out.println("password : " + password);
+//            if(password != null) {
+//                request.setAttribute("password", password);
+//                path = "findPwd-ok.jsp";
+//            }
+//            else path = "findPwd-fail.jsp";
             request.getRequestDispatcher(path).forward(request, response);
         }
     }
