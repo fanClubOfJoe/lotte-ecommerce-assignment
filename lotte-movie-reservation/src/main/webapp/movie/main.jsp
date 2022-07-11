@@ -27,11 +27,16 @@
         .movieListBox{
             width: 920px;
             margin: 10px auto;
+            align-items:center;
+            display: flex;
+            justify-content:center;
         }
         .movieBox{
             display: inline-block;
             width: 180px;
+            height: 365px;
             padding: 5px;
+            position: relative;
         }
         .moviePoster{
             width: 170px;
@@ -41,7 +46,7 @@
         #movieTitle {
             color: black;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 900;
         }
 
 
