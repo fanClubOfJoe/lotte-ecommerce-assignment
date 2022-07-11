@@ -1,11 +1,8 @@
 <%@ page import="com.example.lottemoviereservation.dao.UserDao" %>
-<%@ page import="com.example.lottemoviereservation.dto.UserDto" %><%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2022-07-11
-  Time: 오전 11:09
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.lottemoviereservation.dto.UserDto" %>
+<%@ page import="com.example.lottemoviereservation.dao.ReserveDao" %>
+<%@ page import="com.example.lottemoviereservation.dto.ReserveDto" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     int userNo = Integer.parseInt(request.getParameter("userno"));
@@ -13,6 +10,11 @@
     UserDto userDto = userDao.getUserByUserNo(userNo);
 
     pageContext.setAttribute("userDto", userDto);
+
+    ReserveDao reserveDao = ReserveDao.getInstance();
+    List<ReserveDto> reserveList = reserveDao.getReserveDtoByUserNo(userNo);
+
+    pageContext.setAttribute("reserveList", reserveList);
 %>
 <html>
 <head>
@@ -137,6 +139,7 @@
             justify-content: center;
             font-size: 50px;
         }
+
         .nonStar {
             color: #cbcbcb;
         }
@@ -185,14 +188,14 @@
                 <tr>
                     <td>
                         <div id="userimgwithinfo">
-                        <img src="/main/images/user.png" class="userimg">
-                        <div>
-                            <input type="hidden" name="userNo" value="${userDto.userNo}"/>
-                            <div class="userName">${userDto.userName}
+                            <img src="/main/images/user.png" class="userimg">
+                            <div>
+                                <input type="hidden" name="userNo" value="${userDto.userNo}"/>
+                                <div class="userName">${userDto.userName}
+                                </div>
+                                <div class="userEmail">${userDto.userEmail}
+                                </div>
                             </div>
-                            <div class="userEmail">${userDto.userEmail}
-                            </div>
-                        </div>
                         </div>
                     </td>
                     <td>
@@ -229,7 +232,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">관람일자</th>
+                    <%--    <th scope="col">관람일자</th>--%>
                     <th scope="col">관람시간</th>
                     <th scope="col">영화 이름</th>
                     <th scope="col">상영영화관</th>
@@ -237,20 +240,20 @@
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="reserveDto" items="${reserveList}">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>${reserveDto.reserveTime}
+                        </td>
 
-                <tr>
-                    <th scope="row">1</th>
-                    <td><%=String.format("%s", movie_date)%>
-                    </td>
-                    <td><%=String.format("%s", movie_detail_time)%>
-                    </td>
-                    <td><%=String.format("%s", movie_title)%>
-                    </td>
-                    <td><%=String.format("%s", theater_name)%>
-                    </td>
-                    <td><%=String.format("%d", seatsCount)%>
-                    </td>
-                </tr>
+                        <td>${reserveDto.movieNo}
+                        </td>
+                        <td><%=String.format("%s", theater_name)%>
+                        </td>
+                        <td><%=String.format("%d", seatsCount)%>${reserveDto.reserveEnterCount}
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
