@@ -48,7 +48,7 @@ public class UserController extends HttpServlet {
                 System.out.println(req);
             }
             if(msg.equals("loginSuccess")) {
-                resp.sendRedirect("user/updateUser.jsp");
+                resp.sendRedirect("movie/main.jsp");
             }
             else{
                 resp.sendRedirect("user/loginError.jsp");
