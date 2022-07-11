@@ -4,7 +4,9 @@ import com.example.lottemoviereservation.dao.ReserveDao;
 import com.example.lottemoviereservation.dto.MovieTheaterDetailDto;
 import com.example.lottemoviereservation.dto.ReserveDto;
 import com.example.lottemoviereservation.dto.TheaterDetailDto;
+import com.example.lottemoviereservation.dto.UserDto;
 import com.example.lottemoviereservation.util.CalendarUtil;
+import com.mysql.cj.Session;
 import org.json.JSONObject;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -39,8 +42,8 @@ public class ReserveController extends HttpServlet {
             response.sendRedirect("reserve/reserve.jsp");
         }
         else if(param.equals("reservedetail")) {
-            System.out.println("RESERVEDETAIL");
             String movieTitle = request.getParameter("movieTitle");
+            int movieNo = Integer.parseInt(request.getParameter("movieNo"));
             String year = request.getParameter("year");
             year = year.substring(0, year.length()-1);
             String month = request.getParameter("month");
@@ -48,21 +51,14 @@ public class ReserveController extends HttpServlet {
             String day = request.getParameter("day");
             day = day.substring(0, day.length()-1);
             String time = request.getParameter("time");
+            int adult = Integer.parseInt(request.getParameter("adult"));
+            int child = Integer.parseInt(request.getParameter("adult"));
 
-            System.out.println(movieTitle);
-            System.out.println(year+"\t"+month+"\t"+day);
-            System.out.println(time);
+            ReserveDao dao = ReserveDao.getInstance();
+            HttpSession session = request.getSession(true);
+            UserDto user = ((UserDto)session.getAttribute("login"));
 
-            request.setAttribute("movieTitle", movieTitle);
-            request.setAttribute("year", year);
-            request.setAttribute("month", month);
-            request.setAttribute("day", day);
-            request.setAttribute("time", time);
-
-
-//            RequestDispatcher rd = request.getRequestDispatcher("reserve?param=reservedetailpage");
-            RequestDispatcher rd = request.getRequestDispatcher("reserve/reservedetail.jsp");
-            rd.forward(request, response);
+            dao.setReserve(new ReserveDto(user.getUserNo(), movieNo, time, adult+child));
         }
         else if(param.equals("reservedata")) {
             String year = request.getParameter("year");
