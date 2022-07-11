@@ -296,7 +296,6 @@
             data: { 'year': year, 'month': month, 'day': day},
             method: "GET",
             success:function(data) {
-                console.dir(data.list[0]);
                 let idx = 1;
                 let html = "";
                 let prev = '';
@@ -333,7 +332,7 @@
                         "<div class='w3-modal-content w3-animate-zoom'>"+
                         "<div class='w3-container''>"+
                         "<input type=\"hidden\" name=\"movieNo\" value=\"movieNo\">"+
-                        "<table>"+
+                        "<table id='"+data.list[i].movieNo+"'>"+
                             "<tr>"+
                                 "<th>영화제목</th>"+
                                 "<td>"+data.list[i].movieTitle+"</td>"+
@@ -348,7 +347,7 @@
                             "</tr>"+
                             "<tr><th>인원수</th><td>성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/></td></tr>"+
                             "<tr><th>결제 방식&nbsp;&nbsp;&nbsp;</th><td><input type='radio' name='radio' id='pay"+modalId+"'>&nbsp;현장에서 결제</td><br/>" +
-                            "<tr><td colspan='2'><button type='button' class='reserve'>TEST</button></td></tr>" +
+                            "<tr><td colspan='2'><button type='button' class='reserve'>예약</button></td></tr>" +
                         "</table>" +
                         "<span onclick=\"document.getElementById(\'id"+modalId+"\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>"+
                         "</div>"+
@@ -373,31 +372,42 @@
         getMovieData(year, month, day);
     })
     $(document).on("click", "button.reserve", function() {
-        let thisButton = $("input[name='radio']:checked")
-        console.dir($(this))
+
         let parent = $(this).closest('table');
-        console.dir(parent.children().children()[0].lastChild.innerHTML);
-        console.dir(parent.children().children()[1].lastChild.innerHTML);
-        console.dir(parent.children().children()[2].lastChild.innerHTML);
-        console.dir(parent.children().children()[3].lastChild.childNodes[1].value);
-        console.dir(parent.children().children()[3].lastChild.childNodes[3].value);
+
+        let thisButton = parent.children().children()[4].lastChild.childNodes[0].checked;
+        if(thisButton == false) {
+            alert('결제방식을 선택해주세요');
+            return;
+        }
+        let adult = parent.children().children()[3].lastChild.childNodes[1].value;
+        let child = parent.children().children()[3].lastChild.childNodes[3].value;
+        if(adult == 0 && child == 0 || adult < 0 || child < 0) {
+            alert("인원수가 잘못되었습니다.");
+            return;
+        }
+
 
         var date = parent.children().children()[1].lastChild.innerHTML;
         let data = {
+            movieNo: parent.attr('id'),
             movieTitle: parent.children().children()[0].lastChild.innerHTML,
             year: date.split(" ")[0],
             month: date.split(" ")[1],
             day: date.split(" ")[2],
             time: parent.children().children()[2].lastChild.innerHTML,
+            adult: parent.children().children()[3].lastChild.childNodes[1].value,
+            child: parent.children().children()[3].lastChild.childNodes[3].value
         }
-
-        <%--$.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)--%>
-        <%--    .done(function(data) {--%>
-        <%--        console.log(data);--%>
-        <%--    }).--%>
-        <%--fail(function() {--%>
-        <%--    console.log("ERR");--%>
-        <%--})--%>
+        $.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)
+            .done(function() {
+                alert("예매 완료되었습니다.");
+                console.log("SUCCESS");
+            }).
+        fail(function() {
+            alert("예매에 실패했습니다.");
+            console.log("ERR");
+        })
     })
 </script>
 </body>
