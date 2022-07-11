@@ -28,7 +28,6 @@
                 <h2 class="center">로그인</h2>
                 <br>
 
-
                 <form action="<%=request.getContextPath() %>/user?param=loginAf" method="post">
                     <div class="login_area">
                         <div class="login_input">

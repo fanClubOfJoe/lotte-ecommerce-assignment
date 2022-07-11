@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.example.lottemoviereservation.dao.UserDao" %>
+<%@ page import="com.example.lottemoviereservation.dto.UserDto" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 2022-07-11
@@ -6,6 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    int userNo = Integer.parseInt(request.getParameter("userno"));
+    UserDao userDao = UserDao.getInstance();
+    UserDto userDto = userDao.getUserByUserNo(userNo);
+
+    pageContext.setAttribute("userDto", userDto);
+%>
 <html>
 <head>
     <title>MyPage</title>
@@ -45,7 +53,7 @@
             float: left;
         }
 
-        .user_name {
+        .userName {
             margin-top: 40px;
             margin-bottom: 10px;
             padding: 0;
@@ -53,7 +61,7 @@
             color: #262626;
         }
 
-        .useremail {
+        .userEmail {
             margin: 0;
             padding: 0;
             /*margin-left: 20px;*/
@@ -94,7 +102,6 @@
             cursor: pointer;
         }
 
-
         .leaveBtn:hover {
             border: 1px solid #595959;
             background-color: white;
@@ -128,15 +135,7 @@
     </style>
 </head>
 <body>
-
-<%-- 회원 정보 --%>
-<%-- 데이터 들어갈 곳 --%>
-<%
-    String username = "";
-    String useremail = "";
-    username = "홍길동";
-    useremail = "gildong_hong@lottecgv.com";
-%>
+<jsp:include page="../front/header.jsp"/>
 <div class="container">
     <div class="userinfo">
         <div class="data">
@@ -148,9 +147,10 @@
                         <div id="userimgwithinfo">
                         <img src="/main/images/user.png" class="userimg">
                         <div>
-                            <div class="user_name"><%=String.format("%s님", username)%>
+                            <input type="hidden" name="userNo" value="${userDto.userNo}"/>
+                            <div class="userName">${userDto.userName}
                             </div>
-                            <div class="useremail"><%=String.format("%s", useremail)%>
+                            <div class="userEmail">${userDto.userEmail}
                             </div>
                         </div>
                         </div>
@@ -165,17 +165,6 @@
                 </tr>
             </table>
         </div>
-
-<%--        <img src="/main/images/user.png" class="userimg">--%>
-<%--        <div class="username"><%=String.format("%s님", username)%>--%>
-<%--        </div>--%>
-<%--        <div class="useremail"><%=String.format("%s", useremail)%>--%>
-<%--        </div>--%>
-
-<%--        <div class="userbutton">--%>
-<%--            <input type="button" class="editinfoBtn" value="정보 수정">--%>
-<%--            <input type="button" class="leaveBtn" value="회원 탈퇴">--%>
-<%--        </div>--%>
     </div>
 
     <div class="reserve_list">
@@ -226,8 +215,13 @@
             </table>
         </div>
         <div class="text_box">내가 쓴 리뷰</div>
+        <div class="reviewContainer">
+            <div class="listReview"></div>
+        </div>
+        <%@ include file="review.jsp" %>
     </div>
 
 </div>
+<jsp:include page="../front/footer.jsp"/>
 </body>
 </html>

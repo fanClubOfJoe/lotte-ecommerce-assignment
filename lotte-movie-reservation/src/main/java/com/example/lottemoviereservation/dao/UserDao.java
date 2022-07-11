@@ -278,4 +278,37 @@ public class UserDao {
         return count > 0;
     }
 
+    public UserDto getUserByUserNo(int userNo) {
+        String sql = " select user_no, user_id, user_email, user_name "
+                + " from users "
+                + " where user_no=? and is_activated=true ";
+        Connection conn = null;
+        PreparedStatement psmt;
+        ResultSet rs = null;
+        UserDto user = null;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, userNo);
+            rs = psmt.executeQuery();
+
+            if (rs.next()) {
+                int no = rs.getInt(1);
+                String id = rs.getString(2);
+                String email = rs.getString(3);
+                String name = rs.getString(4);
+
+                user = new UserDto(no, id, email, name);
+
+                return user;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("getUser fail");
+        }
+        return null;
+
+    }
 }

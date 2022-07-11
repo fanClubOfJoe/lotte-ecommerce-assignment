@@ -1,32 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript">
 
-    let movieNo = '${movieDto.movieNo}';
-
-    let isLogin = '${isLogin}';
-
-    let userNo = '';
-
-    if (isLogin) {
-        userNo = '${userNo}';
-    }
+    let userNo = '${userDto.userNo}';
 
     let reviewListSize = 1;
 
-    $('[name=insertReviewBtn]').click(function () {
-        var insertData = $('[name=insertReviewForm]').serialize();
-        if (isLogin == 'false') {
-            console.log(isLogin);
-            alert("로그인 후 작성가능합니다!");
-        } else {
-            insertReview(insertData);
-        }
-    });
-
-
-    function listReview(movieNo, page) {
+    function listReview(userNo, page) {
         $.ajax({
-            url: '<%=request.getContextPath()%>/review?param=movielist&movieno=' + movieNo + '&page=' + page,
+            url: '<%=request.getContextPath()%>/review?param=userlist&userno=' + userNo + '&page=' + page,
             type: 'get',
             data: {},
             success: function (data) {
@@ -77,7 +58,7 @@
 
                 //총 count 수 넘으면 더보기 버튼 안보이게 처리 필요
                 if (reivewCount > reviewList.length) {
-                    a += '<div><a class="btn btnMore" href="#" onclick="listReview(' + movieNo + ', ' + ++reviewListSize + '); return false;">더보기 ⌄ </a></div>';
+                    a += '<div><a class="btn btnMore" href="#" onclick="listReview(' + userNo + ', ' + ++reviewListSize + '); return false;">더보기 ⌄ </a></div>';
                 }
 
                 $(".listReview").html(a);
@@ -85,28 +66,6 @@
             }
         });
     }
-
-    function insertReview(insertData) {
-        if (!$('[name=reviewContent]').val()) {
-            alert("내용을 입력하세요!");
-        } else {
-            console.log("insertData : ", insertData);
-            $.ajax({
-                url: '<%=request.getContextPath()%>/review?param=insert&movieno=' + movieNo,
-                type: 'post',
-                data: insertData,
-                success: function (data) {
-                    alert("리뷰 등록 완료");
-                    console.log(insertData);
-                    console.log(data);
-                    $('[name=reviewContent]').val('');
-                    listReview(movieNo, 1);
-                    location.reload();
-                }
-            });
-        }
-    }
-
 
     function updateReview(reviewNo, reviewContent) {
         console.log("updateReview");
@@ -138,7 +97,7 @@
                 success: function (data) {
                     console.log(updateContent);
                     alert('리뷰 수정 완료');
-                    listReview(movieNo, 1); //리뷰 수정 후 목록 출력
+                    listReview(userNo, 1); //리뷰 수정 후 목록 출력
                 }
             });
         }
@@ -153,12 +112,12 @@
             success: function (data) {
                 alert('리뷰 삭제');
                 location.reload();
-                listReview(movieNo, 1);
+                listReview(userNo, 1);
             }
         });
     }
 
     $(document).ready(function () {
-        listReview(movieNo, reviewListSize);
+        listReview(userNo, reviewListSize);
     });
 </script>

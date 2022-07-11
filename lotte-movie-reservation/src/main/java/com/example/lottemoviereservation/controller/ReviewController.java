@@ -61,7 +61,7 @@ public class ReviewController extends HttpServlet {
         ReviewDao reviewDao = ReviewDao.getInstance();
         UserDao userDao = UserDao.getInstance();
 
-        if (param.equals("list")) {
+        if (param.equals("movielist")) {
             int movieNo = Integer.parseInt(request.getParameter("movieno"));
             int page = Integer.parseInt(request.getParameter("page"));
 
@@ -102,6 +102,27 @@ public class ReviewController extends HttpServlet {
             int reviewNo = Integer.parseInt(request.getParameter("reviewno"));
 
             reviewDao.deleteReview(reviewNo, user.getUserNo());
+        }else if (param.equals("userlist")) {
+            int userNo = Integer.parseInt(request.getParameter("userno"));
+            int page = Integer.parseInt(request.getParameter("page"));
+
+            JSONObject obj = new JSONObject();
+
+            List<ReviewDto> reviewList = reviewDao.getReviewPageListByUserNo(userNo, page);
+            List<UserNameDto> userNameList = userDao.getUserNameByReview(reviewList);
+
+            int reviewCount = reviewDao.getReviewCount();
+
+            if (!reviewList.isEmpty()) {
+                obj.put("reviewList", reviewList);
+                obj.put("list", reviewList);
+                obj.put("userNameList", userNameList);
+                obj.put("reviewCount", reviewCount);
+            }
+            response.setContentType("application/x-json; charset=utf-8;");
+            response.getWriter().println(obj);
+
         }
+
     }
 }
