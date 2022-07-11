@@ -26,7 +26,7 @@ public class ReviewDao {
 
     public List<ReviewDto> getReviewList() {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
-        String sql = " select movie_no, user_no, review_title, review_content, review_rate "
+        String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
                 + " from reviews "
                 + " order by review_no ";
         Connection conn = null;
@@ -44,9 +44,10 @@ public class ReviewDao {
                 ReviewDto dto = new ReviewDto(
                         rs.getInt(1),
                         rs.getInt(2),
-                        rs.getString(3),
+                        rs.getInt(3),
                         rs.getString(4),
-                        rs.getInt(5)
+                        rs.getString(5),
+                        rs.getInt(6)
                 );
                 list.add(dto);
             }
@@ -62,7 +63,7 @@ public class ReviewDao {
 
     public List<ReviewDto> getReviewListByMovieNo(int movieNo) {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
-        String sql = " select movie_no, user_no, review_title, review_content, review_rate "
+        String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
                 + " from reviews "
                 + " where movie_no=? "
                 + " order by review_no ";
@@ -82,9 +83,10 @@ public class ReviewDao {
                 ReviewDto dto = new ReviewDto(
                         rs.getInt(1),
                         rs.getInt(2),
-                        rs.getString(3),
+                        rs.getInt(3),
                         rs.getString(4),
-                        rs.getInt(5)
+                        rs.getString(5),
+                        rs.getInt(6)
                 );
                 list.add(dto);
             }
@@ -100,9 +102,9 @@ public class ReviewDao {
 
     public List<ReviewDto> getReviewPageListByMovieNo(int movieNo, int page) {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
-        String sql = " select movie_no, user_no, review_title, review_content, review_rate "
+        String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
                 + " from ( "
-                + " select row_number()over(order by review_no desc) as rnum, "
+                + " select row_number()over(order by review_no desc) as rnum, review_no, "
                 + " movie_no, user_no, review_title, review_content, review_rate "
                 + " from reviews "
                 + " where movie_no=? "
@@ -130,9 +132,10 @@ public class ReviewDao {
                 ReviewDto dto = new ReviewDto(
                         rs.getInt(1),
                         rs.getInt(2),
-                        rs.getString(3),
+                        rs.getInt(3),
                         rs.getString(4),
-                        rs.getInt(5)
+                        rs.getString(5),
+                        rs.getInt(6)
                 );
                 list.add(dto);
             }
@@ -146,31 +149,42 @@ public class ReviewDao {
         return list;
     }
 
-    public List<ReviewDto> getReviewListByUserNo(int user_no) {
+    public List<ReviewDto> getReviewPageListByUserNo(int userNo, int page) {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
-        String sql = " select movie_no, user_no, review_title, review_content, review_rate "
+        String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
+                + " from ( "
+                + " select row_number()over(order by review_no desc) as rnum, review_no, "
+                + " movie_no, user_no, review_title, review_content, review_rate "
                 + " from reviews "
                 + " where user_no=? "
-                + " order by review_no ";
+                + " order by review_no desc ) a ";
+        sql += " where rnum between ? and ? ";
+
         Connection conn = null;
         PreparedStatement psmt = null;
         ResultSet rs = null;
 
         List<ReviewDto> list = new ArrayList<>();
 
+        int startPage = 1;
+        int endPage = page * 5;
+
         try {
             conn = DBConnection.getConnection();
             psmt = conn.prepareStatement(sql);
-            psmt.setInt(1, user_no);
+            psmt.setInt(1, userNo);
+            psmt.setInt(2, startPage);
+            psmt.setInt(3, endPage);
             rs = psmt.executeQuery();
 
             while (rs.next()) {
                 ReviewDto dto = new ReviewDto(
                         rs.getInt(1),
                         rs.getInt(2),
-                        rs.getString(3),
+                        rs.getInt(3),
                         rs.getString(4),
-                        rs.getInt(5)
+                        rs.getString(5),
+                        rs.getInt(6)
                 );
                 list.add(dto);
             }
@@ -184,13 +198,9 @@ public class ReviewDao {
         return list;
     }
 
-    //getReviewListByMovieNo
-
-    //
-
     public boolean writeReview(ReviewDto dto) {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
-        String sql = " insert into reviews (movie_no, user_no, review_title, review_content, review_rate "
+        String sql = " insert into reviews (movie_no, user_no, review_title, review_content, review_rate) "
                 + " values(?, ?, ?, ?, ?) ";
 
         Connection conn = null;
@@ -214,13 +224,13 @@ public class ReviewDao {
             System.out.println("Write Review fail");
             DBClose.close(conn, psmt, null);
         }
-        return count > 0 ? true : false;
+        return count > 0;
     }
 
     public ReviewDto getReview(int review_no) {
-        String sql = " select movie_no, user_no, review_title, review_content, review_rate "
+        String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
                 + " from reviews "
-                + " where seq=? ";
+                + " where review_no=? ";
 
         Connection conn = null;
         PreparedStatement psmt = null;
@@ -239,6 +249,7 @@ public class ReviewDao {
                 dto = new ReviewDto(
                         rs.getInt(n++),
                         rs.getInt(n++),
+                        rs.getInt(n++),
                         rs.getString(n++),
                         rs.getString(n++),
                         rs.getInt(n++)
@@ -253,9 +264,9 @@ public class ReviewDao {
         return dto;
     }
 
-    public boolean updateReview(int review_no, String title, String content) {
+    public boolean updateReview(int review_no, String content) {
         String sql = " update reviews "
-                + " set review_title=?, review_content=? "
+                + " set review_title='.', review_content=? "
                 + " where review_no=? ";
 
         Connection conn = null;
@@ -265,9 +276,8 @@ public class ReviewDao {
         try {
             conn = DBConnection.getConnection();
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1, title);
-            psmt.setString(2, content);
-            psmt.setInt(3, review_no);
+            psmt.setString(1, content);
+            psmt.setInt(2, review_no);
 
             count = psmt.executeUpdate();
 
@@ -276,10 +286,10 @@ public class ReviewDao {
         } finally {
             DBClose.close(conn, psmt, null);
         }
-        return count > 0 ? true : false;
+        return count > 0;
     }
 
-    public boolean deleteReview(int review_no, int user_no) {
+    public boolean deleteReview(int reviewNo, int userNo) {
         String sql = " delete from reviews "
                 + " where review_no=? and user_no=? ";
 
@@ -290,6 +300,10 @@ public class ReviewDao {
         try {
             conn = DBConnection.getConnection();
             psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, reviewNo);
+            psmt.setInt(2, userNo);
+
             count = psmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -297,6 +311,33 @@ public class ReviewDao {
             e.printStackTrace();
         }
 
-        return count > 0 ? true : false;
+        return count > 0;
+    }
+    public int getReviewCount(){
+        String sql = " select count(*) from reviews ";
+
+        Connection conn = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+
+        int len = 0;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+
+            rs = psmt.executeQuery();
+            if (rs.next()) {
+                len = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return len;
     }
 }
