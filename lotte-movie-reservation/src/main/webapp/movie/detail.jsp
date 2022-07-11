@@ -14,12 +14,17 @@
     int movieno = Integer.parseInt(request.getParameter("movieno"));
 
     Object objLoginCheck = session.getAttribute("login");
-    UserDto user = (UserDto) objLoginCheck;
-
+    boolean isLogin = true;
+    if(objLoginCheck == null){
+        isLogin = false;
+    }else {
+        UserDto user = (UserDto) objLoginCheck;
+        pageContext.setAttribute("userNo", user.getUserNo());
+    }
+    pageContext.setAttribute("isLogin", isLogin);
     MovieDao movieDao = MovieDao.getInstance();
     MovieDto movieDto = movieDao.getMovieByMovieNo(movieno);
 
-    pageContext.setAttribute("userNo", user.getUserNo());
     pageContext.setAttribute("movieDto", movieDto);
 
 %>

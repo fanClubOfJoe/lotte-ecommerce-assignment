@@ -2,12 +2,25 @@
 <script type="text/javascript">
 
     let movieNo = '${movieDto.movieNo}';
-    let userNo = '${userNo}';
+
+    let isLogin = '${isLogin}';
+
+    let userNo = '';
+
+    if (isLogin) {
+        userNo = '${userNo}';
+    }
+
     let reviewListSize = 1;
 
     $('[name=insertReviewBtn]').click(function () {
         var insertData = $('[name=insertReviewForm]').serialize();
-        insertReview(insertData);
+        if (isLogin == 'false') {
+            console.log(isLogin);
+            alert("로그인 후 작성가능합니다!");
+        } else {
+            insertReview(insertData);
+        }
     });
 
 
