@@ -194,6 +194,7 @@
             text-align: center;
             background-color: #f8f8f8;
             padding: 10px;
+            margin-bottom: 20px;
         }
 
         .starContainer {
@@ -241,7 +242,7 @@
                             ${movieDto.movieTitle}</div>
                     </div>
                     <div>
-                        <button type="button" class="btn btnRed">예매하기</button>
+                        <button type="button" class="btn btnRed" id="reserve">예매하기</button>
                     </div>
                 </div>
                 <hr/>
@@ -339,6 +340,9 @@
 
         $('#movieTitle').before(a);
 
+        $('#reserve').click(function() {
+            location.href="/reserve?param=reserve"
+        })
     });
 </script>
 </body>

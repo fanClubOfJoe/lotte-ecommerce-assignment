@@ -32,6 +32,7 @@
                     a += '<input type="hidden" name="user_no_' + value.userNo + '" value="' + value.userNo + '"/>'
                     a += '<div class="reviewInfo">' + '작성자 :  ' + userNameList[i].userName + '</div>';
                     a += '<div class="reviewContent' + value.reviewNo + '">' + value.reviewContent + '</div>';
+
                     a += '<div class="reviewRate">' + value.reviewRate + '</div>';
                     if (userNo == value.userNo) {
                         a += '<a class="btn-default" onclick="updateReview(' + value.reviewNo + ',\'' + value.reviewContent + '\');"> 수정 </a>';
