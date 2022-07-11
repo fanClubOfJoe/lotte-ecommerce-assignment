@@ -10,6 +10,7 @@ public class MovieTheaterDetailDto {
     private int theaterDetailRemainSeats;
     private int theaterDetailSeats;
 
+
     @Override
     public String toString() {
         return "MovieTheaterDetailDto{" +

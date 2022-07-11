@@ -80,9 +80,11 @@ $(document).ready(function() {
                                             "<th>시간</th>"+
                                             "<td>"+data.list[0].theaterDetailTime+"</td>"+
                                         "</tr>"+
+                                        "<tr><th>인원수</th><td>성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/></td></tr>"+
+                                        "<tr><th>현장에서 결제&nbsp;&nbsp;&nbsp;</th><td> <input type='radio' id='pay'></td><br/>" +
+                                        "<tr><td colspan='2'><button type='button' class='reserve'>TEST</button></td></tr>" +
                                     "</table>" +
-                                    "성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/>"+
-                                    "현장에서 결제 <input type='radio' id='pay'><br/><button type='button' class='reserve'>TEST</button>" +
+
                                     "<span onclick=\"document.getElementById(\'id01\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>"+
                                 "</div>"+
                             "</div>"+
@@ -100,6 +102,11 @@ $(document).ready(function() {
     })
 })
 $(document).on("click", "button.reserve", function() {
+    if($('#pay').prop('checked') == false) {
+        alert('결제 방식을 선택하여 주십시오');
+        return;
+    }
+
     let parents = $(this).closest('tr');
     let children = parents.children();
     let data = {
