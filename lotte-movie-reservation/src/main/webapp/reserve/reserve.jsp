@@ -297,14 +297,17 @@
             method: "GET",
             success:function(data) {
                 console.dir(data.list[0]);
+                let idx = 1;
                 let html = "";
                 let prev = '';
                 for(let i = 0; i < data.list.length; i++) {
+                    let date = data.list[i].theaterDetailStandardDate;
+                    date = date.split(" ")[0];
+                    date = date.split("-");
                     if(prev != data.list[i].movieTitle) {
                         if(prev != '') {
                             html += "<hr class='thinhr'>"
                         }
-                        console.log(prev+"is not equals "+data.list[i].movieTitle);
                         let age = data.list[i].ageGrade.split("세");
                         if (age.length < 2) {
                             html += "<div class='age_gradeAll'>" + data.list[i].ageGroup + "</div>"
@@ -319,12 +322,39 @@
 
                         html += "<p class='movieinfo'>" + data.list[i].movieCategory.replaceAll("/", ", ") + "&nbsp;/&nbsp;" + data.list[i].movieTime + "분&nbsp;/&nbsp;" + data.list[i].theaterDetailStandardDate.replaceAll("-", ".").split(" ")[0] + "&nbsp;개봉</p>";
                     }
-                    else {
-                        console.log(prev+"is equals "+data.list[i].movieTitle);
-                    }
                     prev = data.list[i].movieTitle;
-                    html += "<button type='submit' class='goReserveBtn'><strong>"+data.list[i].theaterDetailTime+"</strong><br/>"+
+                    let modalId = idx;
+                    if(modalId.length < 2)
+                        modalId = "0"+idx;
+                    idx++;
+                    html += "<button type='submit' class='goReserveBtn' onclick=\"document.getElementById(\'id"+idx+"\').style.display=\'block\'\" class='w3-button w3-black'><strong>"+data.list[i].theaterDetailTime+"</strong><br/>"+
                         "<font class='seatsfont' style='color: royalblue;'>"+data.list[i].theaterDetailRemainSeats+"석</font></button>&nbsp;&nbsp;&nbsp;"
+                    html += "<div id='id"+idx+"' class='w3-modal'>"+
+                        "<div class='w3-modal-content w3-animate-zoom'>"+
+                        "<div class='w3-container''>"+
+                        "<input type=\"hidden\" name=\"movieNo\" value=\"movieNo\">"+
+                        "<table>"+
+                            "<tr>"+
+                                "<th>영화제목</th>"+
+                                "<td>"+data.list[i].movieTitle+"</td>"+
+                            "</tr>"+
+                            "<tr>"+
+                                "<th>날짜</th>"+
+                                "<td>"+date[0] + "년 " + month + "월 " + day + "일 " +"</td>"+
+                            "</tr>"+
+                            "<tr>"+
+                                "<th>시간</th>"+
+                                "<td>"+data.list[i].theaterDetailTime+"</td>"+
+                            "</tr>"+
+                            "<tr><th>인원수</th><td>성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/></td></tr>"+
+                            "<tr><th>결제 방식&nbsp;&nbsp;&nbsp;</th><td> 현장에서 결제&nbsp;&nbsp;<input type='radio' id='pay'></td><br/>" +
+                            "<tr><td colspan='2'><button type='button' class='reserve'>TEST</button></td></tr>" +
+                        "</table>" +
+                        "<span onclick=\"document.getElementById(\'id"+idx+"\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>"+
+                        "</div>"+
+                        "</div>"+
+                        "</div>";
+
                 }
                 html += "<br/><br/><hr class='thinhr'>"
                 $('.timetableform').append(html);
