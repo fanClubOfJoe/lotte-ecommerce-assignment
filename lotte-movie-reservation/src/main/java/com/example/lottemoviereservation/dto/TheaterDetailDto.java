@@ -9,11 +9,16 @@ public class TheaterDetailDto {
     private int theaterDetailRemainSeats;
     private int theaterDetailSeats;
 
-    public TheaterDetailDto(int theaterDetailNo, int theaterNo, int movieNo, String theaterDetailStandardDate, String theaterDetailTime, int theaterDetailRemainSeats, int theaterDetailSeats) {
-        this.theaterDetailNo = theaterDetailNo;
-        this.theaterNo = theaterNo;
+    public TheaterDetailDto(int movieNo, String theaterDetailStandardDate, String theaterDetailTime, int theaterDetailRemainSeats, int theaterDetailSeats) {
         this.movieNo = movieNo;
         this.theaterDetailStandardDate = theaterDetailStandardDate;
+        this.theaterDetailTime = theaterDetailTime;
+        this.theaterDetailRemainSeats = theaterDetailRemainSeats;
+        this.theaterDetailSeats = theaterDetailSeats;
+    }
+
+    public TheaterDetailDto(int movieNo, String theaterDetailTime, int theaterDetailRemainSeats, int theaterDetailSeats) {
+        this.movieNo = movieNo;
         this.theaterDetailTime = theaterDetailTime;
         this.theaterDetailRemainSeats = theaterDetailRemainSeats;
         this.theaterDetailSeats = theaterDetailSeats;

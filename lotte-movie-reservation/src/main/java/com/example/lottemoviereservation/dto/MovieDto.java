@@ -13,6 +13,22 @@ public class MovieDto {
     private double reserveRate;
     private String ageGrade;
 
+    public MovieDto(){
+
+    }
+
+    public MovieDto(String movieTitle, double movieRate, String movieContent, String movieSummary, String movieImg, String movieTime, String movieCategory, double reserveRate, String ageGrade) {
+        this.movieTitle = movieTitle;
+        this.movieRate = movieRate;
+        this.movieContent = movieContent;
+        this.movieSummary = movieSummary;
+        this.movieImg = movieImg;
+        this.movieTime = movieTime;
+        this.movieCategory = movieCategory;
+        this.reserveRate = reserveRate;
+        this.ageGrade = ageGrade;
+    }
+
     public MovieDto(int movieNo, String movieTitle, double movieRate, String movieContent, String movieSummary, String movieImg, String movieScreenDate, String movieTime, String movieCategory, double reserveRate, String ageGrade) {
         this.movieNo = movieNo;
         this.movieTitle = movieTitle;

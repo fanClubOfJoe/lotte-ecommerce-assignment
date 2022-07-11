@@ -5,10 +5,17 @@ public class ReserveDto {
     private int userNo;
     private int movieNo;
     private String reserveTime;
-    private String reserveEnterCount;
+    private int reserveEnterCount;
 
-    public ReserveDto(int reserveNo, int userNo, int movieNo, String reserveTime, String reserveEnterCount) {
+    public ReserveDto(int reserveNo, int userNo, int movieNo, String reserveTime, int reserveEnterCount) {
         this.reserveNo = reserveNo;
+        this.userNo = userNo;
+        this.movieNo = movieNo;
+        this.reserveTime = reserveTime;
+        this.reserveEnterCount = reserveEnterCount;
+    }
+
+    public ReserveDto(int userNo, int movieNo, String reserveTime, int reserveEnterCount) {
         this.userNo = userNo;
         this.movieNo = movieNo;
         this.reserveTime = reserveTime;
@@ -47,11 +54,11 @@ public class ReserveDto {
         this.reserveTime = reserveTime;
     }
 
-    public String getReserveEnterCount() {
+    public int getReserveEnterCount() {
         return reserveEnterCount;
     }
 
-    public void setReserveEnterCount(String reserveEnterCount) {
+    public void setReserveEnterCount(int reserveEnterCount) {
         this.reserveEnterCount = reserveEnterCount;
     }
 
