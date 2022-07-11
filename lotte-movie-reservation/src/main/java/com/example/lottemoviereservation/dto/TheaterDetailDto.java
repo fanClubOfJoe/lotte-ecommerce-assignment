@@ -17,6 +17,13 @@ public class TheaterDetailDto {
         this.theaterDetailSeats = theaterDetailSeats;
     }
 
+    public TheaterDetailDto(int movieNo, String theaterDetailTime, int theaterDetailRemainSeats, int theaterDetailSeats) {
+        this.movieNo = movieNo;
+        this.theaterDetailTime = theaterDetailTime;
+        this.theaterDetailRemainSeats = theaterDetailRemainSeats;
+        this.theaterDetailSeats = theaterDetailSeats;
+    }
+
     public int getTheaterNo() {
         return theaterNo;
     }

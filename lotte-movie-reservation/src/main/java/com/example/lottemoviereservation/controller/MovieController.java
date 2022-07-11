@@ -25,8 +25,8 @@ public class MovieController extends HttpServlet {
 
         String param = req.getParameter("param");
 
-//        HttpSession session = req.getSession(true);
-//        Object objLoginCheck = session.getAttribute("login");
+        HttpSession session = req.getSession(true);
+        Object objLoginCheck = session.getAttribute("login");
 //        if (objLoginCheck == null) {
 //            String msg = "NO";
 //            resp.sendRedirect("message.jsp?msg=" + msg);
