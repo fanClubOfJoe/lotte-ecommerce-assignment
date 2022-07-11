@@ -1,3 +1,4 @@
+<%@ page import="org.json.JSONObject" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,57 +8,54 @@
     <title>Title</title>
 
     <style type="text/css">
-        .container{
-            width: 90%;
+        @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+        .headerBox>.container{
+            width: 95%;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: 120px 30px;
             margin: 20px auto;
         }
-        .searchBox{
+        .headerBox .searchBox{
             grid-row: 1/2;
             grid-column: 1/2;
         }
-        .logoBox{
+        .headerBox .logoBox{
             grid-row: 1/2;
             grid-column: 2/3;
-            margin: auto;
+            margin: 20px auto;
+            height: 60px;
+            align-items:center;
+            display: flex;
+            justify-content:center;
         }
-        .loginBox{
+        .headerBox .loginBox{
             grid-row: 1/2;
             grid-column: 3/4;
         }
-        .lineBox{
+        .headerBox .lineBox{
             grid-row: 2/3;
             grid-column: 1/4;
         }
 
-        .inputBox{
-            border: solid 1px black;
-            border-radius: 3px;
-            width: 180px;
-            height: 27px;
-            margin-left: 20px;
-            margin-top: 70px;
-            padding-bottom: 5px;
+        .headerBox #logoImg {
+            width: 36px;
+            height: 36px;
+            margin: 0px 5px;
         }
-        #keyword{
-            border: none;
-            height: 23px;
+        .headerBox .logoBox span {
+            font-family: 'Titan One', cursive;
+            font-size: 48px;
+            color: #E60012;
         }
-        #searchImg{
-            width: 15px;
-            margin-left: 5px;
-            margin-top: 8px;
-        }
-
-        a{
+        .headerBox a{
             float: right;
             margin-right: 20px;
             margin-top: 70px;
+            color: black;
         }
 
-        #line{
+        .headerBox #line{
             background-color: #E60012;
             height: 30px;
         }
@@ -65,24 +63,38 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="searchBox">
-        <div class="inputBox">
-            <input type="text" id="keyword">
-            <img src="images/search.png" id="searchImg">
+<%
+    JSONObject user = (JSONObject)session.getAttribute("login");
+%>
+
+<div class="headerBox">
+    <div class="container">
+        <div class="searchBox">
         </div>
-    </div>
 
-    <div class="logoBox">
-        logo
-    </div>
+        <div class="logoBox">
+            <img id="logoImg" src="/front/images/logoImg.png">
+            <span>MOBIT</span>
+        </div>
 
-    <div class="loginBox">
-        <a>로그인 | 회원가입</a>
-    </div>
+        <div class="loginBox">
+            <%
+                if(user == null){
+            %>
+                <a href="/user?param=login">로그인 | 회원가입</a>
+            <%
+                }
+                else{
+            %>
+                <a href="/user/logout.jsp">로그아웃</a>
+            <%
+                }
+            %>
+        </div>
 
-    <div class="lineBox">
-        <div id="line"></div>
+        <div class="lineBox">
+            <div id="line"></div>
+        </div>
     </div>
 </div>
 

@@ -8,61 +8,61 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <style>
-        .footer {
+        .footerBox {
             background-color: #000000;
             padding: 50px 0 0 0;
             color: #ffffff;
             margin-top: 100px;
         }
-        .footer .grid2 {
+        .footerBox .gridBox {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-gap: 20px;
         }
-        .footer p {
+        .footerBox p {
             color: #fff;
             margin: 20px 0;
         }
-        .footer .socialIcon i {
+        .footerBox .socialIcon i {
             background: transparent;
             margin-right: 20px;
             font-size: 20px;
         }
-        .footer h2 {
+        .footerBox h2 {
             margin-bottom: 30px;
             font-size: 20px;
         }
-        .footer .box p {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .footer .boxLeft {
+        .footerBox .boxLeft {
             grid-column: 1/2;
             padding-left: 70px;
         }
-        .footer .boxRight {
+        .footerBox .boxLeft .box{
+            width: 350px;
+            float: right;
+        }
+        .footerBox .boxRight {
             grid-column: 2/3;
         }
-        .footer span {
+        .footerBox span {
             color: #386ad1;
             opacity: 1;
         }
-        .footer .icon {
+        .footerBox .icon {
             margin-top: 20px;
             display: flex;
         }
-        .footer .icon i {
+        .footerBox .icon i {
             color: #386ad1;
             margin-right: 20px;
             width: 20px;
             height: 20px;
         }
-        .legalBox {
+        .footerBox .legalBox {
             border-top: 1px solid rgba(255, 255, 255, 0.5);
             margin: 50px;
             height: 60px;
         }
-        .legal{
+        .footerBox .legal{
             width: 250px;
             margin: 20px auto;
         }
@@ -71,23 +71,25 @@
 </head>
 <body>
 
-<div class="footer">
-    <div class="container grid2">
+<div class="footerBox">
+    <div class="gridBox">
         <div class="boxLeft">
-            <div class="companyInfo">
-                <p>
+            <div class="box">
+                <div class="companyInfo">
                     <h2>Company Information</h2>
-                    회사명 : Lotte cgv<br>
-                    대표 : 신은총<br>
-                    개인정보관리 책임자 : 김은진 (info@lotte.com)<br>
-                    사업자 등록번호 : 123-04-56789<br>
-                </p>
-            </div>
-            <div class="socialIcon">
-                <i class="fab fa-facebook-f "></i>
-                <i class="fab fa-instagram "></i>
-                <i class="fab fa-twitter "></i>
-                <i class="fab fa-youtube "></i>
+                    <p>
+                        회사명 : MOBIT<br>
+                        대표 : 신은총<br>
+                        개인정보관리 책임자 : 김은진 (info@lotte.com)<br>
+                        사업자 등록번호 : 123-04-56789<br>
+                    </p>
+                </div>
+                <div class="socialIcon">
+                    <i class="fab fa-facebook-f "></i>
+                    <i class="fab fa-instagram "></i>
+                    <i class="fab fa-twitter "></i>
+                    <i class="fab fa-youtube "></i>
+                </div>
             </div>
         </div>
 
