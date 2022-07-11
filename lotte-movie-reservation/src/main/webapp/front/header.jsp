@@ -88,6 +88,9 @@
         #reservelist {
             cursor: pointer;
         }
+        .logoBox {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -136,10 +139,13 @@
 </div>
 <script type="text/javascript">
     $('#reservelist').click(function() {
-        location.href ="/reserve?param=reserve";
+        location.href = "/reserve?param=reserve";
     })
     $('#movielist').click(function() {
-        location.href ="/movie?param=list";
+        location.href = "/movie?param=list";
+    })
+    $('.logoBox').click(function() {
+        location.href = "/movie/list.jsp";
     })
 </script>
 </body>
