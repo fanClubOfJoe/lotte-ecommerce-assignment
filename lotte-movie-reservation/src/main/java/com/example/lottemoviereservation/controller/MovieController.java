@@ -5,7 +5,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/movie")
@@ -24,13 +23,6 @@ public class MovieController extends HttpServlet {
         req.setCharacterEncoding("utf-8");
 
         String param = req.getParameter("param");
-
-        HttpSession session = req.getSession(true);
-        Object objLoginCheck = session.getAttribute("login");
-//        if (objLoginCheck == null) {
-//            String msg = "NO";
-//            resp.sendRedirect("message.jsp?msg=" + msg);
-//        }
 
         if (param.equals("detail")) {
 

@@ -4,6 +4,7 @@ import com.example.lottemoviereservation.db.DBClose;
 import com.example.lottemoviereservation.db.DBConnection;
 import com.example.lottemoviereservation.dto.MovieDto;
 import com.example.lottemoviereservation.dto.MovieTitleDto;
+import com.example.lottemoviereservation.dto.ReserveDto;
 import com.example.lottemoviereservation.dto.ReviewDto;
 
 import java.sql.Connection;
@@ -254,6 +255,20 @@ public class MovieDao {
 
         for (ReviewDto reviewDto : reviewList) {
             int movieNo = reviewDto.getMovieNo();
+            String movieTitle = getMovieTitleByMovieNo(movieNo);
+
+            movieTitleList.add(new MovieTitleDto(movieNo, movieTitle));
+
+        }
+
+        return movieTitleList;
+    }
+
+    public List<MovieTitleDto> getMovieTitleByReserve(List<ReserveDto> reserveList) {
+        List<MovieTitleDto> movieTitleList = new ArrayList<>();
+
+        for (ReserveDto reserveDto : reserveList) {
+            int movieNo = reserveDto.getMovieNo();
             String movieTitle = getMovieTitleByMovieNo(movieNo);
 
             movieTitleList.add(new MovieTitleDto(movieNo, movieTitle));

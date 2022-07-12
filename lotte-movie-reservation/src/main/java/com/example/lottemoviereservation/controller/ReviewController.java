@@ -117,7 +117,15 @@ public class ReviewController extends HttpServlet {
 
             if (!reviewList.isEmpty()) {
                 obj.put("reviewList", reviewList);
+                System.out.println("reviewList");
+                System.out.println(reviewList);
+
+
                 obj.put("list", reviewList);
+
+                System.out.println(reviewList);
+
+
                 obj.put("movieTitleList", movieTitleList);
                 obj.put("reviewCount", reviewCount);
             }

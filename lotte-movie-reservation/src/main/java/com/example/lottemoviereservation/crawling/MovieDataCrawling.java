@@ -1,6 +1,5 @@
 package com.example.lottemoviereservation.crawling;
 
-import com.example.lottemoviereservation.dao.MovieDao;
 import com.example.lottemoviereservation.dto.MovieDto;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
