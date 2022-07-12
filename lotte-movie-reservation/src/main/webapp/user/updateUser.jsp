@@ -96,6 +96,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="../front/header.jsp"/>
 
 <div class="container">
     <div class="redbox">회원정보 수정</div>
@@ -130,6 +131,7 @@
         </form>
     </div>
 </div>
+<jsp:include page="../front/footer.jsp"/>
 <script>
 
     function checkForm() {
