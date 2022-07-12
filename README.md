@@ -59,7 +59,7 @@
 
 |리뷰|
 | :--: |
-| ![]() | 
+| (![image](https://user-images.githubusercontent.com/49293971/178494212-675483bd-b6f3-4cfc-9f40-4c2976dd9d63.png) | 
 |영화의 리뷰 보여주기 |
 | ![]() | 
 | 리뷰 작성 |
