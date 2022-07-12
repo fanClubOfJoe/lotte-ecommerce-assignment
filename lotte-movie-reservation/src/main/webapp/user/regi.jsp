@@ -4,65 +4,63 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/styles.css">
+
     <title>Insert title here</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/formPage.css">
+
 </head>
 <body>
 <jsp:include page="../front/header.jsp"/>
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h2>회원가입</h2>
-        </div>
-        <div class="card-body">
-            <!-- onsubmit="return checkForm()" 삭제 -->
-            <form action="<%=request.getContextPath() %>/user" method="post" id="form">
-                <input type="hidden" id="flag" value="regiAf" name="param">
-                <div class="form-group">
-                    <label for="id">아이디:</label>
-                    <input type="text" class="form-control" id="id" placeholder="아이디" name="id" required="required">
-                    <p id="idcheck" style="font-size: 8px"></p>
-                    <%-- style="width: 30%" --%>
-                </div>
-                <%--                <button type="button" class="btn btn-primary" onclick="checkId()">중복확인</button><br><br>--%>
-                <input type="button" id="idBtn" value="중복확인">
-                <div class="form-group">
-                    <label for="pwd">비밀번호:</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="비밀번호" name="pwd"
-                           size="15" maxlength="100" onkeyup="return passwordChanged()" required="required">
-                    <span id="strength">Type Password</span>
-                </div>
+<div class="regiBox">
+    <div class="titleBox">
+        <h1>회원가입</h1>
+    </div>
+    <div class="outerInputBox">
+        <!-- onsubmit="return checkForm()" 삭제 -->
+        <form action="<%=request.getContextPath() %>/user" method="post" id="form">
+            <input type="hidden" id="flag" value="regiAf" name="param">
+            <div class="innerInputBox">
+                <label for="id">아이디 : </label>
+                <input type="text" class="inputs" id="id" placeholder="아이디" name="id" required="required">
+                <input type="button" class="btn submitBtn" id="idBtn" value="중복확인">
+                <p id="idcheck" style="font-size: 8px"></p>
+            </div>
+            <%--                <button type="button" class="btn btn-primary" onclick="checkId()">중복확인</button><br><br>--%>
+            <div class="innerInputBox">
+                <label for="pwd">비밀번호 : </label>
+                <input type="password" class="inputs" id="pwd" placeholder="비밀번호" name="pwd"
+                       size="15" maxlength="100" onkeyup="return passwordChanged()" required="required">
+                <span id="strength">Type Password</span>
+            </div>
 
-                <!-- <input name="password" id="password" type="text" size="15" maxlength="100" onkeyup="return passwordChanged();" /> -->
+            <!-- <input name="password" id="password" type="text" size="15" maxlength="100" onkeyup="return passwordChanged();" /> -->
 
-                <div class="form-group">
-                    <label for="confirmPwd">비밀번호 확인:</label>
-                    <input type="password" class="form-control" id="confirmPwd" placeholder="비밀번호확인" name="confirmPswd"
-                           size="15" maxlength="100" onkeyup="return passwordMatch()"  required="required">
-                    <span id="passMatch">Type Password</span>
-                </div>
-                <div class="form-group">
-                    <%--@declare id="name"--%><label for="name">이름:</label>
-                    <input type="text" class="form-control" placeholder="이름" name="name" required="required">
-                </div>
-                <div class="form-group">
-                    <%--@declare id="email"--%><label for="email">이메일:</label>
-                    <input type="text" class="form-control" placeholder="이메일주소" name="email" required="required">
-                </div>
-                <div class="form-group">
-                </div>
-            </form>
-        </div><!— card body —>
-        <%--        <%— footer div - form 밖으로 분리, js통해 submit —%>--%>
-        <div class="card-footer">
-            <button type="submit" class="btn btn-success" onclick="formSubmit()">가입하기</button><br><br>
-        </div>
-    </div><!— card class —>
-</div><!—container class—>
+            <div class="innerInputBox">
+                <label for="confirmPwd">비밀번호 확인 : </label>
+                <input type="password" class="inputs" id="confirmPwd" placeholder="비밀번호확인" name="confirmPswd"
+                       size="15" maxlength="100" onkeyup="return passwordMatch()"  required="required">
+                <span id="passMatch">Type Password</span>
+            </div>
+            <div class="innerInputBox">
+                <%--@declare id="name"--%><label for="name">이름 : </label>
+                <input type="text" class="inputs" placeholder="이름" name="name" required="required">
+            </div>
+            <div class="innerInputBox">
+                <%--@declare id="email"--%><label for="email">이메일 : </label>
+                <input type="text" class="inputs" placeholder="이메일주소" name="email" required="required">
+            </div>
+        </form>
+    </div><!— card body —>
+    <%--        <%— footer div - form 밖으로 분리, js통해 submit —%>--%>
+    <div class="buttonBox">
+        <button type="submit" class="btn submitBtn" onclick="formSubmit()">가입하기</button>
+        <button type="button" class="btn cancelBtn" onclick="gotoLogin()">취소</button>
+    </div>
+</div>
 <jsp:include page="../front/footer.jsp"/>
 
 <script type="text/javascript">
@@ -153,6 +151,9 @@
         } else {
             strength.innerHTML = '<span style="color:rosybrown">Weak!</span>';
         }
+    }
+    function gotoLogin() {
+        location.href = "./login.jsp";
     }
 </script>
 

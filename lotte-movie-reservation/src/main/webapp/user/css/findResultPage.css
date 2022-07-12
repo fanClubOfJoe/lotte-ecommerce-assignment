@@ -1,0 +1,43 @@
+
+.containerBox{
+    min-height: 300px;
+}
+
+.resultBox{
+    width: 240px;
+    height: 100px;
+    margin: 50px auto;
+    padding: 25px 40px;
+    border: solid 1px #E60012;
+    border-radius: 3px;
+}
+.resultBox .textBox{
+    margin-bottom: 20px;
+}
+.resultBox a{
+    width: 90px;
+    height: 40px;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.moveBtn {
+    background-color: #E60012;
+    border: none;
+}
+.cancelBtn {
+    background-color: #595959;
+    border: none;
+}
+.moveBtn:hover {
+    border: solid 1px #E60012;
+    background-color: white;
+    color: #E60012;
+}
+.cancelBtn:hover {
+    border: solid 1px #595959;
+    background-color: white;
+    color: #595959;
+}

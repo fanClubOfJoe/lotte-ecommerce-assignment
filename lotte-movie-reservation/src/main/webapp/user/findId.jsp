@@ -4,22 +4,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>아이디 찾기</title>
-    <%--    <link rel="stylesheet"--%>
-    <%--          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">--%>
-    <%--    <script--%>
-    <%--            src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>--%>
-    <%--    <script--%>
-    <%--            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--%>
-    <%--    <script--%>
-    <%--            src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>--%>
+    <link rel="stylesheet" type="text/css" href="css/formPage.css">
+    <title>아이디 찾기</title>s
 </head>
 <body>
 <jsp:include page="../front/header.jsp"/>
 <div class="findBox">
     <div class="titleBox">
-        <h1>아이디 찾기</h1>
+        <h2>아이디 찾기</h2>
     </div>
     <div class="outerInputBox">
         <form action="FindIdController" method="post" id="findForm">
