@@ -13,7 +13,7 @@ public class MovieDto {
     private double reserveRate;
     private String ageGrade;
 
-    public MovieDto(){
+    public MovieDto() {
 
     }
 

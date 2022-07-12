@@ -2,9 +2,9 @@
 <script type="text/javascript">
 
     let userNo = '${userDto.userNo}';
-
     let reviewListSize = 1;
 
+    // 리뷰 목록 출력
     function listReview(userNo, page) {
         $.ajax({
             url: '<%=request.getContextPath()%>/review?param=userlist&userno=' + userNo + '&page=' + page,
@@ -17,7 +17,16 @@
                 let reivewCount = data.reviewCount;
                 let a = '';
 
-                console.log(data);
+                // Object가 빈 Object인지 확인
+                function isEmptyObject(obj) {
+                    return !obj || obj == null || obj == 'undefined' || !Object.keys(obj).length;
+                }
+
+                if (isEmptyObject(reviewList)) {
+                    // reviewList empty
+                    return;
+                }
+
                 var i = 0;
                 $.each(reviewList, function (key, value) {
 
@@ -25,8 +34,7 @@
                     a += '<div class="reviewArea" style="background-color:#f8f8f8; padding:10px; margin-bottom: 15px; line-height: 2.2;">';
                     a += '<input type="hidden" name="review_no_' + value.reviewNo + '" value="' + value.reviewNo + '"/>'
                     a += '<input type="hidden" name="user_no_' + value.userNo + '" value="' + value.userNo + '"/>'
-                    // a += '<div style="display: flex;"> ';
-                    // a += '<img alt="" src="../image/profile.png" style="width:35px; height: auto;">'
+
                     a += '<div class="reviewContentContainer">'
                     a += '<div style="display: flex;"> ';
                     a += '<img alt="" src="../image/profile.png" style="width:35px; height: auto; margin-right: 10px;"><div class="reviewInfo" style="margin-right:15px;">' + movieTitleList[i].movieTitle + '</div>';
@@ -49,13 +57,13 @@
                         a += '<btn class="btn btnDefault"  onclick="deleteReview(' + value.reviewNo + ');"> 삭제 </btn>';
                     }
                     a += '</div></div>';
-                    // a += '<div class="reviewRate">' + value.reviewRate + '</div>';
+
 
                     a += '<div class="reviewContent' + value.reviewNo + '" style="margin-top:10px; margin-left: 45px;">' + value.reviewContent + '</div>';
 
                     a += '</div>';
                     i++;
-                    // a += '</div>';
+
                 });
 
                 //총 count 수 넘으면 더보기 버튼 안보이게 처리 필요
@@ -69,6 +77,7 @@
         });
     }
 
+    // 리뷰 update 뷰 변경
     function updateReview(reviewNo, reviewContent) {
         console.log("updateReview");
         let a = '';
@@ -82,7 +91,7 @@
 
     }
 
-    //리뷰 수정
+    // 리뷰 update (ajax)
     function updateReviewProc(reviewNo) {
         let updateContent = $('[name=content_' + reviewNo + ']').val();
 
@@ -105,7 +114,7 @@
         }
     }
 
-    //리뷰 삭제
+    // 리뷰 delete (ajax)
     function deleteReview(reviewNo) {
         $.ajax({
             url: '<%=request.getContextPath()%>/review?param=delete&reviewno=' + reviewNo,
@@ -119,6 +128,7 @@
         });
     }
 
+    // 로딩 시 첫 리뷰 목록 출력부
     $(document).ready(function () {
         listReview(userNo, reviewListSize);
     });

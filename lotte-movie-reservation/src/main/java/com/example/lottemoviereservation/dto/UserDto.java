@@ -62,9 +62,13 @@ public class UserDto {
         this.userPassword = userPassword;
     }
 
-    public void setUserEmail(String userEmail) {this.userEmail = userEmail;}
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
 
-    public String getUserEmail() {return userEmail;}
+    public String getUserEmail() {
+        return userEmail;
+    }
 
     public boolean isActivated() {
         return isActivated;

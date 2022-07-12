@@ -4,7 +4,6 @@
 <%
 // DB 접속 Data를 산출
 String id = request.getParameter("id");
-System.out.println("id:" + id);
 
 // Dao 호출
 UserDao dao = UserDao.getInstance();

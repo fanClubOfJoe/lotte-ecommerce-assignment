@@ -3,7 +3,6 @@ package com.example.lottemoviereservation.dao;
 import com.example.lottemoviereservation.db.DBClose;
 import com.example.lottemoviereservation.db.DBConnection;
 import com.example.lottemoviereservation.dto.TheaterDetailDto;
-import com.example.lottemoviereservation.dto.TheaterDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,15 +12,15 @@ public class TheaterDao {
 
     private static TheaterDao dao = new TheaterDao();
 
-    private TheaterDao(){
+    private TheaterDao() {
         DBConnection.initConnection();
     }
 
-    public static TheaterDao getInstance(){
+    public static TheaterDao getInstance() {
         return dao;
     }
 
-    public boolean insertTimeData(TheaterDetailDto dto){
+    public boolean insertTimeData(TheaterDetailDto dto) {
 
         String sql = "insert into theater_details(theater_no, movie_no, theater_detail_time, theater_detail_remain_seats, theater_detail_seats)"
                 + " values(1, ?, ?, ?, ?)";
@@ -43,7 +42,7 @@ public class TheaterDao {
 
             count = psmt.executeUpdate();
 
-            if(count > 0){
+            if (count > 0) {
                 result = true;
             }
 

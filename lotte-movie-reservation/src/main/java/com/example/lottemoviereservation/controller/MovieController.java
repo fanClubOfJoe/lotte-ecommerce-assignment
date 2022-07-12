@@ -24,16 +24,16 @@ public class MovieController extends HttpServlet {
 
         String param = req.getParameter("param");
 
-        if (param.equals("detail")) {
+        if (param.equals("detail")) {   // 영화 상세 정보 페이지
 
             int movieno = Integer.parseInt(req.getParameter("movieno"));
 
             resp.sendRedirect("movie/detail.jsp?movieno="+movieno);
 
-        }else if (param.equals("main")) {
+        }else if (param.equals("main")) {   // 메인 페이지
             resp.sendRedirect("movie/main.jsp");
         }
-        else if (param.equals("list")) {
+        else if (param.equals("list")) {    // 영화 리스트 페이지
             resp.sendRedirect("movie/list.jsp");
         }
     }

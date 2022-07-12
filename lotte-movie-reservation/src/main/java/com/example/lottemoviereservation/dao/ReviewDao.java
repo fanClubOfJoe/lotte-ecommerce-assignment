@@ -1,17 +1,15 @@
 package com.example.lottemoviereservation.dao;
 
+import com.example.lottemoviereservation.db.DBClose;
+import com.example.lottemoviereservation.db.DBConnection;
+import com.example.lottemoviereservation.dto.ReviewDto;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.lottemoviereservation.db.DBClose;
-import com.example.lottemoviereservation.db.DBConnection;
-import com.example.lottemoviereservation.dto.ReviewDto;
-//reviews rate int ....
-
 
 public class ReviewDao {
     private static ReviewDao dao = new ReviewDao();
@@ -24,6 +22,7 @@ public class ReviewDao {
         return dao;
     }
 
+    // paging 처리 X, 모든 리뷰 조회
     public List<ReviewDto> getReviewList() {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
         String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
@@ -61,6 +60,7 @@ public class ReviewDao {
         return list;
     }
 
+    // movieNo로 ReviewList 조회
     public List<ReviewDto> getReviewListByMovieNo(int movieNo) {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
         String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
@@ -100,6 +100,7 @@ public class ReviewDao {
         return list;
     }
 
+    // movieNo로 ReviewList 조회 (paging O)
     public List<ReviewDto> getReviewPageListByMovieNo(int movieNo, int page) {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
         String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
@@ -141,7 +142,7 @@ public class ReviewDao {
             }
 
         } catch (SQLException e) {
-            System.out.println("Get reviewList fail");
+            System.out.println("Get reviewPageList fail");
             e.printStackTrace();
         } finally {
             DBClose.close(conn, psmt, rs);
@@ -149,6 +150,7 @@ public class ReviewDao {
         return list;
     }
 
+    // userNo로 ReviewList 조회 (paging O)
     public List<ReviewDto> getReviewPageListByUserNo(int userNo, int page) {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
         String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
@@ -172,9 +174,11 @@ public class ReviewDao {
         try {
             conn = DBConnection.getConnection();
             psmt = conn.prepareStatement(sql);
+
             psmt.setInt(1, userNo);
             psmt.setInt(2, startPage);
             psmt.setInt(3, endPage);
+
             rs = psmt.executeQuery();
 
             while (rs.next()) {
@@ -190,7 +194,7 @@ public class ReviewDao {
             }
 
         } catch (SQLException e) {
-            System.out.println("Get reviewList fail");
+            System.out.println("Get reviewPageList fail");
             e.printStackTrace();
         } finally {
             DBClose.close(conn, psmt, rs);
@@ -198,6 +202,7 @@ public class ReviewDao {
         return list;
     }
 
+    // review insert method
     public boolean writeReview(ReviewDto dto) {
         //(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate
         String sql = " insert into reviews (movie_no, user_no, review_title, review_content, review_rate) "
@@ -227,6 +232,7 @@ public class ReviewDao {
         return count > 0;
     }
 
+    // review 단건 조회
     public ReviewDto getReview(int review_no) {
         String sql = " select review_no, movie_no, user_no, review_title, review_content, review_rate "
                 + " from reviews "
@@ -256,14 +262,14 @@ public class ReviewDao {
                 );
             }
         } catch (SQLException e) {
-            System.out.println("GET REVIEW FAIL ! ! ! ");
-            e.printStackTrace();
+            System.out.println("Get Review Fail!");
         } finally {
             DBClose.close(conn, psmt, rs);
         }
         return dto;
     }
 
+    // review update method
     public boolean updateReview(int review_no, String content) {
         String sql = " update reviews "
                 + " set review_title='.', review_content=? "
@@ -289,6 +295,7 @@ public class ReviewDao {
         return count > 0;
     }
 
+    // review delete method
     public boolean deleteReview(int reviewNo, int userNo) {
         String sql = " delete from reviews "
                 + " where review_no=? and user_no=? ";
@@ -313,7 +320,9 @@ public class ReviewDao {
 
         return count > 0;
     }
-    public int getReviewCountByMovieNo(int movieNo){
+
+    // movieNo로 리뷰 총 갯수 조회
+    public int getReviewCountByMovieNo(int movieNo) {
         String sql = " select count(*) from reviews where movie_no=? ";
 
         Connection conn = null;
@@ -326,7 +335,7 @@ public class ReviewDao {
             conn = DBConnection.getConnection();
 
             psmt = conn.prepareStatement(sql);
-            psmt.setInt(1,movieNo);
+            psmt.setInt(1, movieNo);
 
             rs = psmt.executeQuery();
             if (rs.next()) {
@@ -342,7 +351,8 @@ public class ReviewDao {
         return len;
     }
 
-    public int getReviewCountByUserNo(int userNo){
+    // userNo로 리뷰 총 갯수 조회
+    public int getReviewCountByUserNo(int userNo) {
         String sql = " select count(*) from reviews where user_no=? ";
 
         Connection conn = null;
@@ -355,7 +365,7 @@ public class ReviewDao {
             conn = DBConnection.getConnection();
 
             psmt = conn.prepareStatement(sql);
-            psmt.setInt(1,userNo);
+            psmt.setInt(1, userNo);
 
             rs = psmt.executeQuery();
             if (rs.next()) {
@@ -369,5 +379,37 @@ public class ReviewDao {
         }
 
         return len;
+    }
+
+    // 이미 리뷰를 작성한 유저인지 조회
+    public boolean getReviewByMovieNoAndUserNo(int movieNo, int userNo) {
+
+        String sql = " select count(*) from reviews where movie_no=? and user_no=? ";
+
+        Connection conn = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+
+        int count = 0;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, movieNo);
+            psmt.setInt(2, userNo);
+
+            rs = psmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return count > 0;
     }
 }

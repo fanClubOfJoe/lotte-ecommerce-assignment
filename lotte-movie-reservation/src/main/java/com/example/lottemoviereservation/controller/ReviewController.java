@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.example.lottemoviereservation.dao.MovieDao;
+import com.example.lottemoviereservation.dao.ReserveDao;
 import com.example.lottemoviereservation.dao.ReviewDao;
 import com.example.lottemoviereservation.dao.UserDao;
 import com.example.lottemoviereservation.dto.MovieTitleDto;
@@ -41,27 +42,18 @@ public class ReviewController extends HttpServlet {
     public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-
         request.setCharacterEncoding("utf-8");
-
-        HttpSession session = request.getSession(true);
-        Object objLoginCheck = session.getAttribute("login");
-//        if (objLoginCheck == null) {
-//            String msg = "NO";
-//            response.sendRedirect("message.jsp?msg=" + msg);
-//        }
-        UserDto user = (UserDto) objLoginCheck;
 
         String param = request.getParameter("param");
 
-
-//        int userNo = 1;
-//        String reviewContent = request.getParameter("reviewContent");
-//        int rating = Integer.parseInt(request.getParameter("rating"));
+        HttpSession session = request.getSession(true);
+        Object objLoginCheck = session.getAttribute("login");
+        UserDto user = (UserDto) objLoginCheck;
 
         ReviewDao reviewDao = ReviewDao.getInstance();
         MovieDao movieDao = MovieDao.getInstance();
         UserDao userDao = UserDao.getInstance();
+        ReserveDao reserveDao = ReserveDao.getInstance();
 
         if (param.equals("movielist")) {
             int movieNo = Integer.parseInt(request.getParameter("movieno"));
@@ -104,7 +96,7 @@ public class ReviewController extends HttpServlet {
             int reviewNo = Integer.parseInt(request.getParameter("reviewno"));
 
             reviewDao.deleteReview(reviewNo, user.getUserNo());
-        }else if (param.equals("userlist")) {
+        } else if (param.equals("userlist")) {
             int userNo = Integer.parseInt(request.getParameter("userno"));
             int page = Integer.parseInt(request.getParameter("page"));
 
@@ -117,14 +109,8 @@ public class ReviewController extends HttpServlet {
 
             if (!reviewList.isEmpty()) {
                 obj.put("reviewList", reviewList);
-                System.out.println("reviewList");
-                System.out.println(reviewList);
-
 
                 obj.put("list", reviewList);
-
-                System.out.println(reviewList);
-
 
                 obj.put("movieTitleList", movieTitleList);
                 obj.put("reviewCount", reviewCount);
@@ -132,6 +118,30 @@ public class ReviewController extends HttpServlet {
             response.setContentType("application/x-json; charset=utf-8;");
             response.getWriter().println(obj);
 
+        } else if (param.equals("validreview")) {
+            int movieNo = Integer.parseInt(request.getParameter("movieno"));
+            int userNo = Integer.parseInt(request.getParameter("userno"));
+
+            JSONObject obj = new JSONObject();
+
+            boolean validation = reserveDao.getReserveByMovieNoAndUserNo(movieNo, userNo);
+
+            obj.put("validation", validation);
+
+            response.setContentType("application/x-json; charset=utf-8;");
+            response.getWriter().println(obj);
+        } else if (param.equals("isalreadyreview")) {
+            int movieNo = Integer.parseInt(request.getParameter("movieno"));
+            int userNo = Integer.parseInt(request.getParameter("userno"));
+
+            JSONObject obj = new JSONObject();
+
+            boolean isAlreadyReviewed = reviewDao.getReviewByMovieNoAndUserNo(movieNo, userNo);
+
+            obj.put("isAlreadyReviewed", isAlreadyReviewed);
+
+            response.setContentType("application/x-json; charset=utf-8;");
+            response.getWriter().println(obj);
         }
 
     }

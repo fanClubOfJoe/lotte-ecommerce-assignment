@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +25,10 @@ public class MovieDao {
         return dao;
     }
 
+    // movieNo로 Movie 가져오는 함수 - detail에서 사용
     public MovieDto getMovieByMovieNo(int movieNo) {
         String sql = "SELECT movie_title, movie_rate, movie_content, movie_summary,movie_img, movie_screen_date, movie_time, movie_category, reserve_rate, age_grade " +
                 "FROM movies WHERE movie_no = ?";
-
 
         MovieDto dto = null;
         Connection conn = null;
@@ -48,16 +47,16 @@ public class MovieDao {
             while (rs.next()) {
                 int i = 1;
                 dto = new MovieDto(movieNo, rs.getString(i++), rs.getDouble(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDouble(i++), rs.getString(i++));
-                System.out.println(dto);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         } finally {
             DBClose.close(conn, psmt, rs);
         }
         return dto;
     }
 
+    // paging 처리 X, 모든 영화 리스트 조회
     public List<MovieDto> getMovieList() {
         String sql = " select movie_no, movie_title, movie_rate, movie_content, movie_summary, movie_img, movie_screen_date, "
                 + "			movie_time, movie_category, reserve_rate, age_grade "
@@ -71,16 +70,13 @@ public class MovieDao {
 
         try {
             conn = DBConnection.getConnection();
-
             psmt = conn.prepareStatement(sql);
-
             rs = psmt.executeQuery();
 
             while (rs.next()) {
 
                 int i = 1;
                 MovieDto dto = new MovieDto(rs.getInt(i++), rs.getString(i++), rs.getDouble(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDouble(i++), rs.getString(i++));
-
                 list.add(dto);
             }
 
@@ -93,6 +89,7 @@ public class MovieDao {
         return list;
     }
 
+    // 예약율 상위 5개 영화 조회
     public List<MovieDto> getMovieListTop5() {
         String sql = " select movie_no, movie_title, movie_rate, movie_content, movie_summary, movie_img, movie_screen_date, "
                 + "			movie_time, movie_category, reserve_rate, age_grade "
@@ -108,16 +105,13 @@ public class MovieDao {
 
         try {
             conn = DBConnection.getConnection();
-
             psmt = conn.prepareStatement(sql);
-
             rs = psmt.executeQuery();
 
             while (rs.next()) {
 
                 int i = 1;
                 MovieDto dto = new MovieDto(rs.getInt(i++), rs.getString(i++), rs.getDouble(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDouble(i++), rs.getString(i++));
-
                 list.add(dto);
             }
 
@@ -130,6 +124,7 @@ public class MovieDao {
         return list;
     }
 
+    // 영화 검색 리스트 - 제목, 장르, 줄거리 검색
     public List<MovieDto> getMovieSearchList(String choice, String search) {
 
         String sql = " select movie_no, movie_title, movie_rate, movie_content, movie_summary, movie_img, movie_screen_date, "
@@ -145,7 +140,6 @@ public class MovieDao {
             sWord = " where movie_content like '%" + search + "%' ";
         }
         sql = sql + sWord;
-
         sql = sql + " order by reserve_rate desc, movie_title asc ";
 
         Connection conn = null;
@@ -156,15 +150,13 @@ public class MovieDao {
 
         try {
             conn = DBConnection.getConnection();
-
             psmt = conn.prepareStatement(sql);
-
             rs = psmt.executeQuery();
+
             while (rs.next()) {
 
                 int i = 1;
                 MovieDto dto = new MovieDto(rs.getInt(i++), rs.getString(i++), rs.getDouble(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDouble(i++), rs.getString(i++));
-
                 list.add(dto);
             }
 
@@ -177,6 +169,7 @@ public class MovieDao {
         return list;
     }
 
+    // crawling에서 이용하는 Movie 정보 insert method
     public boolean insertMovieDate(MovieDto dto) {
 
         boolean result = false;
@@ -218,38 +211,7 @@ public class MovieDao {
         return result;
     }
 
-    public String getUserNameByUserNo(int userNo) {
-
-        String sql = " SELECT user_name "
-                + " FROM users "
-                + " WHERE user_no=? ";
-
-        Connection conn = null;         // DB 연결
-        PreparedStatement psmt = null;   // Query문을 실행
-        ResultSet rs = null;         // 결과 취득
-
-        String findName = "";
-
-        try {
-            conn = DBConnection.getConnection();
-
-            psmt = conn.prepareStatement(sql);
-            psmt.setInt(1, userNo);
-
-            rs = psmt.executeQuery();
-            if (rs.next()) {
-                findName = rs.getString(1);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("getUserName fail");
-        } finally {
-            DBClose.close(conn, psmt, rs);
-        }
-
-        return findName;
-    }
-
+    // reviewList - movieTitle mapping method
     public List<MovieTitleDto> getMovieTitleByReview(List<ReviewDto> reviewList) {
         List<MovieTitleDto> movieTitleList = new ArrayList<>();
 
@@ -264,6 +226,7 @@ public class MovieDao {
         return movieTitleList;
     }
 
+    // reserveList - movieTitle mapping method
     public List<MovieTitleDto> getMovieTitleByReserve(List<ReserveDto> reserveList) {
         List<MovieTitleDto> movieTitleList = new ArrayList<>();
 
@@ -278,6 +241,7 @@ public class MovieDao {
         return movieTitleList;
     }
 
+    // movieNo로 movieTitle 조회
     private String getMovieTitleByMovieNo(int movieNo) {
 
         String sql = " SELECT movie_title "

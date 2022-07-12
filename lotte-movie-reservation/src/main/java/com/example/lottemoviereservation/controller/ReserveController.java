@@ -3,13 +3,10 @@ package com.example.lottemoviereservation.controller;
 import com.example.lottemoviereservation.dao.ReserveDao;
 import com.example.lottemoviereservation.dto.MovieTheaterDetailDto;
 import com.example.lottemoviereservation.dto.ReserveDto;
-import com.example.lottemoviereservation.dto.TheaterDetailDto;
 import com.example.lottemoviereservation.dto.UserDto;
 import com.example.lottemoviereservation.util.CalendarUtil;
-import com.mysql.cj.Session;
 import org.json.JSONObject;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 @WebServlet("/reserve")
 public class ReserveController extends HttpServlet {
@@ -33,14 +33,16 @@ public class ReserveController extends HttpServlet {
     }
 
     public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         request.setCharacterEncoding("utf-8");
 
         String param = request.getParameter("param");
 
-        if(param.equals("reserve")) {
+        if(param.equals("reserve")) {   // 예약 페이지
             response.sendRedirect("reserve/reserve.jsp");
         }
-        else if(param.equals("reservedetail")) {
+        else if(param.equals("reservedetail")) {    // 예약 상세 페이지
+
             String movieTitle = request.getParameter("movieTitle");
             int movieNo = Integer.parseInt(request.getParameter("movieNo"));
             String time = request.getParameter("theaterTime").split(" ")[1];
@@ -51,20 +53,14 @@ public class ReserveController extends HttpServlet {
             HttpSession session = request.getSession(true);
             UserDto user = ((UserDto)session.getAttribute("login"));
 
-            System.out.println(adult+"\t"+child);
-            System.out.println(new ReserveDto(user.getUserNo(), movieNo, time, adult+child));
-            System.out.println(dao.getRemainSeats(new ReserveDto(user.getUserNo(), movieNo, time, adult+child)));
-
             JSONObject obj = new JSONObject();
             if(dao.getRemainSeats(new ReserveDto(user.getUserNo(), movieNo, time, adult+child))) {
-                System.out.println("TRUE");
                 ReserveDto dto = new ReserveDto(user.getUserNo(), movieNo, time, adult + child);
                 dao.setReserve(dto);
                 dao.updateTheaterDetailRemainSeats(dto);
                 obj.put("result", 1);
             }
             else {
-                System.out.println("FALSE");
                 obj.put("result", 0);
             }
             response.setContentType("application/x-json; charset=utf-8;");
@@ -99,7 +95,6 @@ public class ReserveController extends HttpServlet {
 
             JSONObject obj = new JSONObject();
             obj.put("list", list);
-            System.out.println(obj);
             response.setContentType("application/x-json; charset=utf-8;");
             response.getWriter().println(obj);
         }

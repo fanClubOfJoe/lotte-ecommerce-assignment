@@ -1,12 +1,15 @@
 package com.example.lottemoviereservation.dao;
 
-import com.example.lottemoviereservation.db.DBConnection;
 import com.example.lottemoviereservation.db.DBClose;
+import com.example.lottemoviereservation.db.DBConnection;
 import com.example.lottemoviereservation.dto.ReviewDto;
 import com.example.lottemoviereservation.dto.UserDto;
 import com.example.lottemoviereservation.dto.UserNameDto;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,17 +69,13 @@ public class UserDao {
 
         try {
             conn = DBConnection.getConnection();
-            System.out.println("1/3 getId success");
-
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, user_id);
-            System.out.println("2/3 getId success");
 
             rs = psmt.executeQuery();
             if (rs.next()) {
                 findId = true;
             }
-            System.out.println("3/3 getId success");
 
         } catch (SQLException e) {
             System.out.println("getId fail");
@@ -101,20 +100,16 @@ public class UserDao {
 
         try {
             conn = DBConnection.getConnection();
-            System.out.println("1/3 findId success");
 
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, user_name);
             psmt.setString(2, user_email);
-            System.out.println(psmt);
-            System.out.println("2/3 findId success");
 
             rs = psmt.executeQuery();
             if (rs.next()) {
                 id = rs.getString(1);
                 return id;
             }
-            System.out.println("3/3 findId success");
 
         } catch (SQLException e) {
             System.out.println("findId fail");
@@ -139,20 +134,16 @@ public class UserDao {
 
         try {
             conn = DBConnection.getConnection();
-            System.out.println("1/3 findPwd success");
 
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, user_id);
             psmt.setString(2, user_email);
-            System.out.println(psmt);
-            System.out.println("2/3 findPwd success");
 
             rs = psmt.executeQuery();
             if (rs.next()) {
                 pwd = rs.getString(1);
                 return pwd;
             }
-            System.out.println("3/3 findPwd success");
 
         } catch (SQLException e) {
             System.out.println("findPwd fail");
@@ -178,20 +169,15 @@ public class UserDao {
 
         try {
             conn = DBConnection.getConnection();
-            System.out.println("1/3 checkEmail success");
 
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, user_email);
-            System.out.println(psmt);
-            System.out.println("2/3 checkEmail success");
 
             rs = psmt.executeQuery();
-            System.out.println("rs.nex()" + rs.next());
-            if (rs.next()){
+
+            if (rs.next()) {
                 return "false";
-            }
-            else{
-                System.out.println("3/3 checkEmail success");
+            } else {
                 return "true";
             }
 
@@ -217,12 +203,11 @@ public class UserDao {
             conn = DBConnection.getConnection();
 
             psmt = conn.prepareStatement(sql);
-            System.out.println("1/3 login success");
+
             psmt.setString(1, dto.getUserId());
             psmt.setString(2, dto.getUserPassword());
-            System.out.println(psmt);
+
             rs = psmt.executeQuery();
-            System.out.println("2/3 login success");
 
             if (rs.next()) {
                 int no = rs.getInt(1);
@@ -232,7 +217,6 @@ public class UserDao {
 
                 user = new UserDto(no, id, email, name, null);
 
-                System.out.println("3/3 login success");
                 return user;
             }
 
@@ -301,14 +285,11 @@ public class UserDao {
 
         try {
             conn = DBConnection.getConnection();
-            System.out.println("1/3 delete success");
 
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, user_id);
-            System.out.println(psmt);
-            System.out.println("2/3 delete success");
+
             count = psmt.executeUpdate();
-            System.out.println("3/3 delete success");
 
         } catch (SQLException e) {
             System.out.println("delete fail");
@@ -318,6 +299,7 @@ public class UserDao {
 
         return count > 0;
     }
+
     public boolean updateUser(String user_email, String user_password, String user_id) {
 
         String sql = " UPDATE users "
@@ -331,16 +313,13 @@ public class UserDao {
 
         try {
             conn = DBConnection.getConnection();
-            System.out.println("1/3 update success");
 
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, user_email);
             psmt.setString(2, user_password);
             psmt.setString(3, user_id);
-            System.out.println(psmt);
-            System.out.println("2/3 update success");
+
             count = psmt.executeUpdate();
-            System.out.println("3/3 update success");
 
         } catch (SQLException e) {
             System.out.println("update fail");

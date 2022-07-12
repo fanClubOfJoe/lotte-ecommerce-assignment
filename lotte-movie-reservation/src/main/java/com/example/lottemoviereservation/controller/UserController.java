@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Objects;
 
 @WebServlet("/user")
 public class UserController extends HttpServlet {
@@ -33,8 +32,7 @@ public class UserController extends HttpServlet {
 
         if (param.equals("login")) {
             resp.sendRedirect("user/login.jsp");
-        }
-        else if (param.equals("loginAf")) {
+        } else if (param.equals("loginAf")) {
 
             String id = req.getParameter("id");
             String pwd = req.getParameter("pwd");
@@ -45,21 +43,16 @@ public class UserController extends HttpServlet {
                 resp.setContentType("application/x-json; charset=utf-8");
                 msg = "loginSuccess";
                 req.getSession().setAttribute("login", user);
-                System.out.println(req);
             }
             if (msg.equals("loginSuccess")) {
                 resp.sendRedirect("movie/main.jsp");
-//                resp.sendRedirect("user/updateUser.jsp");
             } else {
                 resp.sendRedirect("user/loginError.jsp");
             }
-        }
-        else if (param.equals("regi")) {
+        } else if (param.equals("regi")) {
             resp.sendRedirect("user/regi.jsp");
-        }
-        else if (param.equals("idcheck")) {
+        } else if (param.equals("idcheck")) {
             String id = req.getParameter("id");
-            System.out.println("id : " + id);
 
             UserDao dao = UserDao.getInstance();
             boolean b = dao.getId(id);
@@ -69,14 +62,13 @@ public class UserController extends HttpServlet {
                 str = "YES";
             }
             JSONObject obj = new JSONObject();
-            obj.put("msg", str); // 짐싸라
+            obj.put("msg", str);
 
             resp.setContentType("application/x-json; charset=utf-8");
             resp.getWriter().print(obj);
 
 
-        }
-        else if (param.equals("regiAf")) {
+        } else if (param.equals("regiAf")) {
 
             String id = req.getParameter("id");
             String name = req.getParameter("name");
@@ -93,39 +85,32 @@ public class UserController extends HttpServlet {
 
             resp.sendRedirect("user/message.jsp?msg=" + msg);
 
-        }
-        else if (param.equals("findId")) {
+        } else if (param.equals("findId")) {
             resp.sendRedirect("user/findId.jsp");
-        }
-        else if (param.equals("findPwd")) {
+        } else if (param.equals("findPwd")) {
             resp.sendRedirect("user/findPwd.jsp");
-        }
-        else if (param.equals("deleteId")) {
+        } else if (param.equals("deleteId")) {
             HttpSession session = req.getSession();
             UserDto dto = (UserDto) session.getAttribute("login");
             String id = dto.getUserId();
-            System.out.println(id);
+
             UserDao dao = UserDao.getInstance();
             boolean deleteId = dao.deleteId(id);
             if (deleteId) {
                 session.invalidate();
-                System.out.println("아이디가 지워짐");
                 resp.sendRedirect("movie/main.jsp");
             }
-        }
-        else if (param.equals("updateUser")) {
+        } else if (param.equals("updateUser")) {
             resp.sendRedirect("user/updateUser.jsp");
-        }else if (param.equals("mypage")) {
+        } else if (param.equals("mypage")) {
 
             HttpSession session = req.getSession();
             UserDto dto = (UserDto) session.getAttribute("login");
             int userNo = dto.getUserNo();
 
-            System.out.println("userNo: " + userNo);
-
             resp.sendRedirect("user/mypage.jsp?userno=" + userNo);
-        }
-        else if (param.equals("logout")) {
+
+        } else if (param.equals("logout")) {
             req.getSession().invalidate();
             resp.sendRedirect("movie/main.jsp");
         }
@@ -144,9 +129,9 @@ public class UserController extends HttpServlet {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String path = "";
-            System.out.println("servlet name = " + name);
+
             String id = UserDao.getInstance().findId(name, email);
-            System.out.println(id);
+
             // 등록된 이메일과 이름이 존재한 경우 (회원)
             if (id != null) {
                 request.setAttribute("user_id", id);
@@ -173,7 +158,7 @@ public class UserController extends HttpServlet {
             String email = request.getParameter("email");
             String path = null;
             String password = UserDao.getInstance().findPwd(id, email);
-            System.out.println("password : " + password);
+
             if (password != null) {
                 request.setAttribute("password", password);
                 path = "findPwd-ok.jsp";
@@ -189,29 +174,26 @@ public class UserController extends HttpServlet {
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             request.setCharacterEncoding("utf-8");
 
-
             UserDto dto = (UserDto) request.getSession().getAttribute("login");
             String id = dto.getUserId();
             int userNo = dto.getUserNo();
-            System.out.println(id);
 
             String email = request.getParameter("email");
             String pwd = request.getParameter("pwd");
-            System.out.println("id + email : " + email + pwd);
+
             String path = null;
             UserDao dao = UserDao.getInstance();
             String flag = dao.checkEmail(email);
-            if(flag.equals("true")) {
+
+            if (flag.equals("true")) {
                 boolean deleteId = dao.updateUser(email, pwd, id);
-                System.out.println("password : " + pwd);
+
                 if (deleteId) {
-                    System.out.println("유저정보 바뀜");
-                    path = "mypage.jsp?userno="+userNo;
+                    path = "mypage.jsp?userno=" + userNo;
                     request.getRequestDispatcher(path).forward(request, response);
                 }
 
-            }
-            else{
+            } else {
                 path = "updateUser-Fail.jsp";
                 request.getRequestDispatcher(path).forward(request, response);
             }

@@ -1,8 +1,6 @@
 package com.example.lottemoviereservation.crawling;
 
-import com.example.lottemoviereservation.dao.MovieDao;
 import com.example.lottemoviereservation.dao.TheaterDao;
-import com.example.lottemoviereservation.dto.MovieDto;
 import com.example.lottemoviereservation.dto.TheaterDetailDto;
 
 import java.util.List;
