@@ -9,7 +9,7 @@
 <br/><br/>
 
 ### :open_file_folder: Databse
-![dbdiagram](https://user-images.githubusercontent.com/21255149/178396331-52047bae-8119-4f43-b0d4-c446be46dd59.PNG)
+![dbdiagram](https://user-images.githubusercontent.com/21255149/178399917-238577e1-e6ad-4e2e-9f1d-482db4a9f794.PNG)
 <br/><br/>
 
 ### 👩‍팀원
