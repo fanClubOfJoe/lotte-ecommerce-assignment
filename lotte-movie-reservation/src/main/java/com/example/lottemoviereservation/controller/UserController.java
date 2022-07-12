@@ -197,6 +197,8 @@ public class UserController extends HttpServlet {
                 System.out.println("password : " + pwd);
                 if (deleteId) {
                     System.out.println("유저정보 바뀜");
+                    path = "user/mypage.jsp";
+                    request.getRequestDispatcher(path).forward(request, response);
                 }
             }
             else{

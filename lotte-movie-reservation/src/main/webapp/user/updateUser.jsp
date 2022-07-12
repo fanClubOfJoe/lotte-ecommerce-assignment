@@ -9,6 +9,7 @@
 <%
     UserDto dto = (UserDto) session.getAttribute("login");
     String id = dto.getUserId();
+    String email = dto.getUserEmail();
 %>
 <html>
 <head>
@@ -109,7 +110,7 @@
             </div>
             <div class="user">
                 <div class="text">이메일</div>
-                <input name="email" type="text" class="infoinput" id="email">
+                <input name="email" type="text" class="infoinput" id="email" value="<%= email%>">
                 <span class="blank"></span>
             </div>
             <div class="user">
