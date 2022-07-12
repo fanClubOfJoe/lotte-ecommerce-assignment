@@ -399,24 +399,27 @@
 
             var date = parent.children().children()[1].lastChild.innerHTML;
             console.dir(date.split(" "));
+            let year = date.split(" ")[1].substring(0, 4);
+            let month = date.split(" ")[2].substring(0, 1);
+            let day = date.split(" ")[3].substring(0, 2);
+            if(month.length < 2)
+                month = "0"+month;
             let data = {
                 movieNo: parent.attr('id'),
                 movieTitle: parent.children().children()[0].lastChild.innerHTML.split("| ")[1],
-                year: date.split(" ")[1].substring(0, 4),
-                month: date.split(" ")[2].substring(0, 2),
-                day: date.split(" ")[3].substring(0, 2),
-                theaterTime: parent.children().children()[2].lastChild.innerHTML.split("| ")[1],
+                theaterTime: year+"-"+month+"-"+day+" "+parent.children().children()[2].lastChild.innerHTML.split("| ")[1],
                 adult: parent.children().children()[3].lastChild.childNodes[1].value,
                 child: parent.children().children()[3].lastChild.childNodes[3].value
             }
             console.dir(data);
+            console.log("?");
             $.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)
-                .done(function (data) {
-                    console.log(data);
-                    if(data.result == 0) {
+                .done(function (res) {
+                    console.log(res);
+                    if(res.result == 0) {
                         alert("예매할 수 없습니다.");
                         parent.children().children()[3].lastChild.childNodes[1].value = 0;
-                        parent.children().children()[3].lastChild.childNodes[3].value = 0
+                        parent.children().children()[3].lastChild.childNodes[3].value = 0;
                         return;
                     }
                     else {
@@ -424,6 +427,7 @@
                         location.href = "/movie?param=list"
                     }
                 }).fail(function () {
+                    $('.w3-modal-content').off();
                     alert("예매에 실패했습니다.");
             })
         })

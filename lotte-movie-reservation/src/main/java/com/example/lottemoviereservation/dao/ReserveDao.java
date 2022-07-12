@@ -82,13 +82,40 @@ public class ReserveDao {
 
         return dto;
     }
-    // 예매하기
-    public boolean setReserve(ReserveDto reserve) {
-        String sql = "INSERT INTO reserves(user_no, movie_no, reserve_time, reserve_enter_count)" +
-                " VALUES(?, ?, STR_TO_DATE(?, '%H%i'), ?)";
+    public boolean updateTheaterDetailRemainSeats(ReserveDto reserve) {
+        String sql = "UPDATE theater_details " +
+                "SET theater_detail_remain_seats = theater_detail_remain_seats-"+reserve.getReserveEnterCount()+
+                " WHERE movie_no = ? AND theater_detail_time = ?";
         Connection conn = null;
         PreparedStatement psmt = null;
 
+        System.out.println(reserve);
+        int count = 0;
+
+        try {
+            DBConnection.initConnection();
+            conn = DBConnection.getConnection();
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, reserve.getMovieNo());
+            psmt.setString(2, reserve.getReserveTime());
+            count = psmt.executeUpdate();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, null);
+        }
+        return count > 0;
+    }
+    // 예매하기
+    public boolean setReserve(ReserveDto reserve) {
+        String sql = "INSERT INTO reserves(user_no, movie_no, reserve_time, reserve_enter_count)" +
+                " VALUES(?, ?, ?, ?)";
+        Connection conn = null;
+        PreparedStatement psmt = null;
+
+        System.out.println(reserve);
         int count = 0;
 
         try {
@@ -100,10 +127,6 @@ public class ReserveDao {
             psmt.setInt(2, reserve.getMovieNo());
             psmt.setString(3, reserve.getReserveTime());
             psmt.setInt(4, reserve.getReserveEnterCount());
-            System.out.println(reserve.getUserNo());
-            System.out.println(reserve.getMovieNo());
-            System.out.println(reserve.getReserveTime());
-            System.out.println(reserve.getReserveEnterCount());
             count = psmt.executeUpdate();
 
         } catch(Exception e) {
