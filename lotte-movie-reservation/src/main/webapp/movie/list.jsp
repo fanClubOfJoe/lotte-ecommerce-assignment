@@ -34,7 +34,7 @@
     <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <style type="text/css">
-        .wrapper{
+        .wrapper {
             width: 930px;
             margin: 0px auto;
         }
@@ -46,22 +46,25 @@
             margin-left: 30px;
         }
 
-        .inputBox{
+        .inputBox {
             border: solid 1px black;
             border-radius: 3px;
             width: 340px;
             height: 35px;
         }
-        #search{
+
+        #search {
             border: none;
             width: 300px;
             height: 30px;
         }
-        #searchBtn{
+
+        #searchBtn {
             border: none;
             background-color: white;
         }
-        #searchImg{
+
+        #searchImg {
             width: 20px;
         }
 
@@ -74,18 +77,21 @@
         .list-block {
             width: 100%;
         }
+
         .dto-block {
             width: 300px;
             height: 415px;
             padding: 10px;
         }
+
         .moviePoster {
             margin-bottom: 15px;
             width: 200px;
             height: auto;
             border-radius: 5px;
         }
-        #movieTitle{
+
+        #movieTitle {
             color: #000;
             font-size: 18px;
             font-weight: 700;
@@ -93,7 +99,7 @@
 
         /* 연령 */
         /* 전체 이용가 */
-        .age_gradeAll{
+        .age_gradeAll {
             width: 25px;
             height: 25px;
             font-size: 16px;
@@ -201,23 +207,29 @@
                                     <div>
                                         <c:choose>
                                             <c:when test="${movieDto.ageGrade eq '전체'}">
-                                                <div class="age_gradeAll"><p align="center" style="margin-bottom: 0;">All</p></div>
+                                                <div class="age_gradeAll"><p align="center" style="margin-bottom: 0;">
+                                                    All</p></div>
                                             </c:when>
                                             <c:when test="${movieDto.ageGrade eq '12세 이상'}">
-                                                <div class="age_grade12"><p align="center" style="margin-bottom: 0;">12</p></div>
+                                                <div class="age_grade12"><p align="center" style="margin-bottom: 0;">
+                                                    12</p></div>
                                             </c:when>
                                             <c:when test="${movieDto.ageGrade eq '15세 이상'}">
-                                                <div class="age_grade15"><p align="center" style="margin-bottom: 0;">15</p></div>
+                                                <div class="age_grade15"><p align="center" style="margin-bottom: 0;">
+                                                    15</p></div>
                                             </c:when>
                                             <c:when test="${movieDto.ageGrade eq '청소년 관람불가'}">
-                                                <div class="age_grade19"><p align="center" style="margin-bottom: 0;">19</p></div>
+                                                <div class="age_grade19"><p align="center" style="margin-bottom: 0;">
+                                                    19</p></div>
                                             </c:when>
                                             <c:otherwise>
-                                                <div class="age_gradeNone"><p align="center" style="margin-bottom: 0;">-</p></div>
+                                                <div class="age_gradeNone"><p align="center" style="margin-bottom: 0;">
+                                                    -</p></div>
                                             </c:otherwise>
                                         </c:choose>
 
-                                        <a id="movieTitle" href="<%=request.getContextPath() %>/movie?param=detail&movieno=${movieDto.movieNo}">${movieDto.movieTitle}</a>
+                                        <a id="movieTitle"
+                                           href="<%=request.getContextPath() %>/movie?param=detail&movieno=${movieDto.movieNo}">${movieDto.movieTitle}</a>
                                     </div>
                                     <div>
                                         <c:out value="${movieDto.movieCategory}"/>
