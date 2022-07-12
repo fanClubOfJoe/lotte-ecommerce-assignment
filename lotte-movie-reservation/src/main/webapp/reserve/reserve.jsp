@@ -421,7 +421,7 @@
                     }
                     else {
                         alert("예매 완료되었습니다.");
-                        // location.href = "/movie?param=list"
+                        location.href = "/movie?param=list"
                     }
                 }).fail(function () {
                     alert("예매에 실패했습니다.");

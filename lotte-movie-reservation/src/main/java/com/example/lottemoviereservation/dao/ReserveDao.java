@@ -119,7 +119,7 @@ public class ReserveDao {
         String sql ="SELECT movies.movie_title, movie_time, movie_category, age_grade, theater_detail_no, theater_no, theater_details.movie_no, theater_detail_standard_date, " +
                 "theater_detail_time, theater_detail_remain_seats , theater_detail_seats " +
                 "FROM theater_details, movies " +
-                "WHERE timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) >= 0 " +
+                "WHERE timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) >= 0 AND timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) < 7 " +
                 "AND movies.movie_no = theater_details.movie_no";
         Connection conn = null;
         PreparedStatement psmt = null;
