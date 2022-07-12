@@ -36,11 +36,13 @@
 |  | 등록한 리뷰를 통해 평점 변경하기 |
 
 <br/><br/>
-Cancel changes
+
 ### 🚩Structure
+![structure](https://user-images.githubusercontent.com/21255149/178442739-f243a371-f2e3-459f-8a67-56051bd6c43a.png)
+
 <br/><br/>
 
-### :open_file_folder: Database
+### :open_file_folder: Databse
 ![dbdiagram](https://user-images.githubusercontent.com/21255149/178399917-238577e1-e6ad-4e2e-9f1d-482db4a9f794.PNG)
 <br/><br/>
 
