@@ -251,7 +251,7 @@
                     <tr>
                         <th scope="row">1</th>
                         <td>${reserveDto.reserveTime}</td>
-                        <td>${movieTitleList[status].movieTitle}</td>
+                        <td>${movieTitleList[status.index].movieTitle}</td>
                         <td><%=String.format("%s", theater_name)%>
                         </td>
                         <td>${reserveDto.reserveEnterCount}</td>

@@ -193,6 +193,7 @@ public class UserController extends HttpServlet {
 
             UserDto dto = (UserDto) request.getSession().getAttribute("login");
             String id = dto.getUserId();
+            int userNo = dto.getUserNo();
             System.out.println(id);
 
             String email = request.getParameter("email");
@@ -206,7 +207,10 @@ public class UserController extends HttpServlet {
                 System.out.println("password : " + pwd);
                 if (deleteId) {
                     System.out.println("유저정보 바뀜");
+                    path = "mypage.jsp?userno="+userNo;
+                    request.getRequestDispatcher(path).forward(request, response);
                 }
+
             }
             else{
                 path = "updateUser-Fail.jsp";
