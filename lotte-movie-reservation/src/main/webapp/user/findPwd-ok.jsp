@@ -4,19 +4,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/styles.css">
     <title>비밀번호 찾기</title>
+    <link rel="stylesheet" href="css/findResultPage.css">
 </head>
 <body>
 <jsp:include page="../front/header.jsp"/>
 <% String password = (String) request.getAttribute("password"); %>
-<%-- 추후에 div태그 border 표시와 문자 굵기 표시하기. --%>
-<div class="container">
-    <div class="card-body">
-        <div class="align-center">
-            <p> 회원님의 비밀번호 &nbsp; <%=password %> &nbsp; 입니다.</p>
-            <a href="login.jsp" class="btn btn-danger">돌아가기</a>
+<div class="containerBox">
+    <div class="resultBox">
+        <div class="textBox">
+            <p> 회원님의 비밀번호 &nbsp;<strong><%=password %></strong> 입니다.</p>
         </div>
+        <a class="btn cancelBtn" href="login.jsp">돌아가기</a>
     </div>
 </div>
 <jsp:include page="../front/footer.jsp"/>

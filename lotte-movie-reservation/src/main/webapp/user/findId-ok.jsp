@@ -1,25 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/styles.css">
   <title>아이디 찾기</title>
+  <link rel="stylesheet" href="css/findResultPage.css">
 </head>
 <body>
 <jsp:include page="../front/header.jsp"/>
 <% String id = (String) request.getAttribute("user_id"); %>
-<%-- 추후에 div태그 border 표시와 문자 굵기 표시하기. --%>
-<div class="container">
-  <div class="card-body">
-    <div class="align-center">
-      <p> 회원님의 아이디는&nbsp; <%=id %> &nbsp; 입니다.</p>
-      <a class="btn btn-info" href="findpass.jsp">비밀번호찾기</a>
-      <a href="login.jsp" class="btn btn-danger">취소</a>
+<div class="containerBox">
+  <div class="resultBox">
+    <div class="textBox">
+      <p> 회원님의 아이디는 <strong><%=id %></strong> 입니다.</p>
     </div>
+    <a class="btn moveBtn" href="findPwd.jsp">비밀번호찾기</a>
+    <a class="btn cancelBtn" href="login.jsp">돌아가기</a>
   </div>
 </div>
+
 <jsp:include page="../front/footer.jsp"/>
 </body>
 </html>

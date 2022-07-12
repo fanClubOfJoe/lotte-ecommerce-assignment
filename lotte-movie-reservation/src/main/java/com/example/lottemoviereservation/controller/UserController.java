@@ -142,10 +142,9 @@ public class UserController extends HttpServlet {
             request.setCharacterEncoding("utf-8");
             String name = request.getParameter("name");
             String email = request.getParameter("email");
-            String path = null;
-            String id;
+            String path = "";
             System.out.println("servlet name = " + name);
-            id = String.valueOf(UserDao.getInstance().findId(name, email));
+            String id = UserDao.getInstance().findId(name, email);
             System.out.println(id);
             // 등록된 이메일과 이름이 존재한 경우 (회원)
             if (id != null) {
