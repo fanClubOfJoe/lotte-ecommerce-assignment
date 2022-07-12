@@ -13,7 +13,7 @@
 <html>
 <head>
     <title>MainView</title>
-
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <script
@@ -22,91 +22,6 @@
             src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style type="text/css">
-        .movieListBox{
-            width: 920px;
-            margin: 10px auto;
-            align-items:center;
-            display: flex;
-            justify-content:center;
-        }
-        .movieBox{
-            display: inline-block;
-            width: 180px;
-            height: 365px;
-            padding: 5px;
-            position: relative;
-        }
-        .moviePoster{
-            width: 170px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        #movieTitle {
-            color: black;
-            font-size: 16px;
-            font-weight: 900;
-        }
-
-
-        /* 연령 */
-        /* 전체 이용가 */
-        .age_gradeAll{
-            width: 25px;
-            height: 25px;
-            font-size: 16px;
-            border-radius: 50%;
-            background-color: #03953F;
-            color: white;
-            display: inline-block;
-        }
-
-        /* 12세 이용가 */
-        .age_grade12 {
-            width: 25px;
-            height: 25px;
-            font-size: 16px;
-            border-radius: 50%;
-            background-color: #1468B3;
-            color: white;
-            display: inline-block;
-        }
-
-        /* 15세 이용가 */
-        .age_grade15 {
-            width: 25px;
-            height: 25px;
-            font-size: 16px;
-            border-radius: 50%;
-            background-color: #FDB934;
-            color: white;
-            display: inline-block;
-        }
-
-        /* 19세 이용가 */
-        .age_grade19 {
-            width: 25px;
-            height: 25px;
-            font-size: 16px;
-            border-radius: 50%;
-            background-color: #B0063A;
-            color: white;
-            display: inline-block;
-        }
-
-        /* 미정 */
-        .age_gradeNone {
-            width: 25px;
-            height: 25px;
-            font-size: 16px;
-            border-radius: 50%;
-            background-color: #cccccc;
-            color: white;
-            display: inline-block;
-        }
-
-    </style>
 </head>
 <body>
 
@@ -164,7 +79,8 @@
                     </c:otherwise>
                 </c:choose>
 
-                <a id="movieTitle" href="<%=request.getContextPath() %>/movie?param=detail&movieno=${movieDto.movieNo}">${movieDto.movieTitle}</a>
+                <a id="movieTitle"
+                   href="<%=request.getContextPath() %>/movie?param=detail&movieno=${movieDto.movieNo}">${movieDto.movieTitle}</a>
             </div>
             <div>
                 <strong> 예매율 | </strong><c:out value="${movieDto.reserveRate}"/> %
