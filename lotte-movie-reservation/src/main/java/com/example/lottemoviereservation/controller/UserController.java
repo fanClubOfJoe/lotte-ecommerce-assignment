@@ -108,7 +108,9 @@ public class UserController extends HttpServlet {
             UserDao dao = UserDao.getInstance();
             boolean deleteId = dao.deleteId(id);
             if (deleteId) {
+                session.invalidate();
                 System.out.println("아이디가 지워짐");
+                resp.sendRedirect("movie/main.jsp");
             }
         }
         else if (param.equals("updateUser")) {
@@ -122,6 +124,10 @@ public class UserController extends HttpServlet {
             System.out.println("userNo: " + userNo);
 
             resp.sendRedirect("user/mypage.jsp?userno=" + userNo);
+        }
+        else if (param.equals("logout")) {
+            req.getSession().invalidate();
+            resp.sendRedirect("movie/main.jsp");
         }
     }
 
