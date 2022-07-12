@@ -249,7 +249,7 @@
                 <tbody>
                 <c:forEach var="reserveDto" items="${reserveList}" varStatus="status">
                     <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">${status.index+1}</th>
                         <td>${reserveDto.reserveTime}</td>
                         <td>${movieTitleList[status.index].movieTitle}</td>
                         <td><%=String.format("%s", theater_name)%>

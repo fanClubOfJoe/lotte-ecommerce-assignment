@@ -72,7 +72,7 @@ public class ReviewController extends HttpServlet {
             List<ReviewDto> reviewList = reviewDao.getReviewPageListByMovieNo(movieNo, page);
             List<UserNameDto> userNameList = userDao.getUserNameByReview(reviewList);
 
-            int reviewCount = reviewDao.getReviewCount();
+            int reviewCount = reviewDao.getReviewCountByMovieNo(movieNo);
 
             if (!reviewList.isEmpty()) {
                 obj.put("reviewList", reviewList);
@@ -113,7 +113,7 @@ public class ReviewController extends HttpServlet {
             List<ReviewDto> reviewList = reviewDao.getReviewPageListByUserNo(userNo, page);
             List<MovieTitleDto> movieTitleList = movieDao.getMovieTitleByReview(reviewList);
 
-            int reviewCount = reviewDao.getReviewCount();
+            int reviewCount = reviewDao.getReviewCountByUserNo(userNo);
 
             if (!reviewList.isEmpty()) {
                 obj.put("reviewList", reviewList);

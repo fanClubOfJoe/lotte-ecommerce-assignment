@@ -38,8 +38,9 @@
                 let a = '';
 
                 console.log(data);
+                var i = 0;
                 $.each(reviewList, function (key, value) {
-                    var i = 0;
+
 
                     a += '<div class="reviewArea" style="background-color:#f8f8f8; padding:10px; margin-bottom: 15px; line-height: 2.2;">';
                     a += '<input type="hidden" name="review_no_' + value.reviewNo + '" value="' + value.reviewNo + '"/>'
@@ -73,6 +74,7 @@
                     a += '<div class="reviewContent' + value.reviewNo + '" style="margin-top:10px; margin-left: 45px;">' + value.reviewContent + '</div>';
 
                     a += '</div>';
+                    i++;
                     // a += '</div>';
                 });
 

@@ -14,7 +14,9 @@ public class TimeDataCrawling {
     public static List<TheaterDetailDto> getTimeData() throws Exception {
 
         //url은 "영화이름 날짜 상영시간표"를 검색한 url을 복사해서 넣어야 함
-        Document doc = Jsoup.connect("https://www.google.com/search?q=%ED%83%91%EA%B1%B4+9%EC%9D%BC+%EC%83%81%EC%98%81+%EC%8B%9C%EA%B0%84%ED%91%9C&sxsrf=ALiCzsbgIA4tRBvUQiQ_fKCjx2HYk0--pA%3A1657355006993&ei=_jrJYp2SPJiKhwP_nY4Y&ved=0ahUKEwididXDsOv4AhUYxWEKHf-OAwMQ4dUDCA4&uact=5&oq=%ED%83%91%EA%B1%B4+9%EC%9D%BC+%EC%83%81%EC%98%81+%EC%8B%9C%EA%B0%84%ED%91%9C&gs_lcp=Cgdnd3Mtd2l6EANKBAhBGABKBAhGGABQAFjjH2DRIGgIcAF4AIAB4AGIAZAPkgEGMS4xMy4xmAEAoAEBuAEDwAEB&sclient=gws-wiz").get();
+        String url = "https://www.google.com/search?q=%ED%86%A0%EB%A5%B4+13%EC%9D%BC+%EC%83%81%EC%98%81+%EC%8B%9C%EA%B0%84%ED%91%9C&sxsrf=ALiCzsbyc__IxDQeyyOXrehvGNT9Lqe1hw%3A1657627127834&ei=92HNYvq6MtXM2roP8tmF4Ao&ved=0ahUKEwi6kv-gpvP4AhVVplYBHfJsAawQ4dUDCA4&uact=5&oq=%ED%86%A0%EB%A5%B4+13%EC%9D%BC+%EC%83%81%EC%98%81+%EC%8B%9C%EA%B0%84%ED%91%9C&gs_lcp=Cgdnd3Mtd2l6EAMyBAgjECdKBAhBGABKBAhGGABQAFjnA2D3BGgBcAF4AYABgAGIAe4DkgEDMC40mAEAoAEBuAECwAEB&sclient=gws-wiz";
+
+        Document doc = Jsoup.connect(url).get();
 
         //탑건 Url
         //https://www.google.com/search?q=%ED%83%91%EA%B1%B4+9%EC%9D%BC+%EC%83%81%EC%98%81+%EC%8B%9C%EA%B0%84%ED%91%9C&sxsrf=ALiCzsbgIA4tRBvUQiQ_fKCjx2HYk0--pA%3A1657355006993&ei=_jrJYp2SPJiKhwP_nY4Y&ved=0ahUKEwididXDsOv4AhUYxWEKHf-OAwMQ4dUDCA4&uact=5&oq=%ED%83%91%EA%B1%B4+9%EC%9D%BC+%EC%83%81%EC%98%81+%EC%8B%9C%EA%B0%84%ED%91%9C&gs_lcp=Cgdnd3Mtd2l6EANKBAhBGABKBAhGGABQAFjjH2DRIGgIcAF4AIAB4AGIAZAPkgEGMS4xMy4xmAEAoAEBuAEDwAEB&sclient=gws-wiz
@@ -43,7 +45,7 @@ public class TimeDataCrawling {
                 time = time.replace("오전", "");
             }
 
-            TheaterDetailDto dto = new TheaterDetailDto(21, time, 200, 200);
+            TheaterDetailDto dto = new TheaterDetailDto(1, time, 250, 250);
             list.add(dto);
         }
         return list;
