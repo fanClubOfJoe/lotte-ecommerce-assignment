@@ -162,7 +162,23 @@
             margin-left: 5px;
         }
 
+        .redbox {
+            margin-top: 20px;
+            background-color: #e60012;
+            color: white;
+            text-align: center;
+        }
+
+        .reservebox {
+            margin-top: 10px;
+            margin-left: 20px;
+            margin-right:20px;
+            padding: 10px;
+        }
+
         .reserve {
+            margin-left: 400px;
+            margin-bottom: 10px;
             padding: 5px;
             border: none;
             border-radius: 5px;
@@ -176,13 +192,11 @@
             border: #E60012 1px solid;
         }
 
-        }
     </style>
 </head>
 <%-- 일주일 일정 --%>
 <%
     Calendar cal = Calendar.getInstance();
-    cal.set(Calendar.DATE, 30);
     int year = cal.get(Calendar.YEAR);
     int month = cal.get(Calendar.MONTH) + 1;
     int day = cal.get(Calendar.DATE);
@@ -264,57 +278,13 @@
         <%--영화별 예매--%>
         <div class="timetableform">
             <br>
-            <%--&lt;%&ndash; 영화 데이터 들어올 곳 &ndash;%&gt;
-            <%
-                String movie_title = "";
-                movie_title = "토르 - 러브 앤 썬더";
-            %>
-            <div class="age_grade15"><p align="center">15</p></div>
-            <div>
-                <h3 class="movie_title"><%=String.format("%s", movie_title)%></h3>
-                <font class="isscreenfont" style="color: royalblue;"> 상영중</font>
-            </div>
-            <%
-                /* 수정할 부분 */
-                String movie_category = "";
-                String movie_time = "";
-                String movie_screen_date = "";
-
-                movie_category = "액션, 어드벤처, 환타지";
-                movie_time = "119분";
-                movie_screen_date = "2022.07.06 개봉";
-            %>
-            <p class="movieinfo">
-                <%=String.format("%s&nbsp;/&nbsp;%s&nbsp;/&nbsp;%s", movie_category, movie_time, movie_screen_date)%>
-            </p>
-
-            &lt;%&ndash; 예매 시간 데이터 들어올 곳 &ndash;%&gt;
-            &lt;%&ndash; 모달 띄우는 a href 추가 필요함 &ndash;%&gt;
-            <%
-                /* 수정할 부분 */
-                String theater_detail_time = "";
-                int theater_detail_remain_seats = 0;
-
-                theater_detail_time = "17:00";
-                theater_detail_remain_seats = 180;
-
-            %>
-            <button type="submit" class="goReserveBtn">
-                <strong><%=String.format("%s", theater_detail_time)%></strong>
-                <font class="seatsfont"  style="color: royalblue;"><%=String.format("%d석", theater_detail_remain_seats)%>
-                </font>
-            </button>--%>
-            <%--<br><br>
-            <hr class="thinhr">--%>
-            <%--    </div>--%>
-
         </div>
         <br/>
     </div>
     <jsp:include page="../front/footer.jsp"/>
     <script type="text/javascript">
         $(document).ready(function () {
-            getMovieData("2022", "07", "111");
+            getMovieData(<%=year%>, <%=month%>, <%=day%>);
         })
 
         function getMovieData(year, month, day) {
@@ -357,23 +327,24 @@
                             "<font class='seatsfont' style='color: royalblue;'>" + data.list[i].theaterDetailRemainSeats + "석</font></button>&nbsp;&nbsp;&nbsp;"
                         html += "<div id='id" + modalId + "' class='w3-modal'>" +
                             "<div class='w3-modal-content w3-animate-zoom'>" +
-                            "<div class='w3-container''>" +
+                            "<div class='w3-container reservebox''>" +
+                            "<div class='redbox'>예약 정보</div>" +
                             "<input type=\"hidden\" name=\"movieNo\" value=\"movieNo\">" +
                             "<table id='" + data.list[i].movieNo + "'>" +
                             "<tr>" +
-                            "<th>영화제목</th>" +
-                            "<td>" + data.list[i].movieTitle + "</td>" +
+                            "<th align='left'>영화제목</th>" +
+                            "<td>| " + data.list[i].movieTitle + "</td>" +
                             "</tr>" +
                             "<tr>" +
-                            "<th>날짜</th>" +
-                            "<td>" + date[0] + "년 " + month + "월 " + day + "일 " + "</td>" +
+                            "<th align='left'>날짜</th>" +
+                            "<td>| " + date[0] + "년 " + month + "월 " + day + "일 " + "</td>" +
                             "</tr>" +
                             "<tr>" +
-                            "<th>시간</th>" +
-                            "<td>" + data.list[i].theaterDetailTime + "</td>" +
+                            "<th align='left'>시간</th>" +
+                            "<td>| " + data.list[i].theaterDetailTime + "</td>" +
                             "</tr>" +
-                            "<tr><th>인원수</th><td>성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/></td></tr>" +
-                            "<tr><th>결제 방식&nbsp;&nbsp;&nbsp;</th><td><input type='radio' name='radio' id='pay" + modalId + "'>&nbsp;현장에서 결제</td><br/>" +
+                            "<tr><th align='left'>인원수</th><td>| 성인 <input style='width: 50px\' type='number' value='0'> 명 청소년 <input style='width: 50px\' type='number' value='0'> 명<br/></td></tr>" +
+                            "<tr><th align='left'>결제 방식&nbsp;&nbsp;&nbsp;</th><td>| <input type='radio' name='radio' id='pay" + modalId + "'>&nbsp;현장에서 결제</td><br/>" +
                             "<tr><td colspan='2'><button type='button' class='reserve'>예약</button></td></tr>" +
                             "</table>" +
                             "<span onclick=\"document.getElementById(\'id" + modalId + "\').style.display=\'none\'\" class='w3-button w3-display-topright'>&times;</span>" +
@@ -427,22 +398,37 @@
             %>
 
             var date = parent.children().children()[1].lastChild.innerHTML;
+            console.dir(date.split(" "));
+            let year = date.split(" ")[1].substring(0, 4);
+            let month = date.split(" ")[2].substring(0, 1);
+            let day = date.split(" ")[3].substring(0, 2);
+            if(month.length < 2)
+                month = "0"+month;
             let data = {
                 movieNo: parent.attr('id'),
-                movieTitle: parent.children().children()[0].lastChild.innerHTML,
-                year: date.split(" ")[0],
-                month: date.split(" ")[1],
-                day: date.split(" ")[2],
-                time: parent.children().children()[2].lastChild.innerHTML,
+                movieTitle: parent.children().children()[0].lastChild.innerHTML.split("| ")[1],
+                theaterTime: year+"-"+month+"-"+day+" "+parent.children().children()[2].lastChild.innerHTML.split("| ")[1],
                 adult: parent.children().children()[3].lastChild.childNodes[1].value,
                 child: parent.children().children()[3].lastChild.childNodes[3].value
             }
+            console.dir(data);
+            console.log("?");
             $.post("<%=request.getContextPath()%>/reserve?param=reservedetail", data)
-                .done(function () {
-                    alert("예매 완료되었습니다.");
-                    location.href = "/movie?param=list"
+                .done(function (res) {
+                    console.log(res);
+                    if(res.result == 0) {
+                        alert("예매할 수 없습니다.");
+                        parent.children().children()[3].lastChild.childNodes[1].value = 0;
+                        parent.children().children()[3].lastChild.childNodes[3].value = 0;
+                        return;
+                    }
+                    else {
+                        alert("예매 완료되었습니다.");
+                        location.href = "/movie?param=list"
+                    }
                 }).fail(function () {
-                alert("예매에 실패했습니다.");
+                    $('.w3-modal-content').off();
+                    alert("예매에 실패했습니다.");
             })
         })
     </script>

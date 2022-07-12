@@ -37,28 +37,38 @@ public class ReserveController extends HttpServlet {
 
         String param = request.getParameter("param");
 
-        // <th><a href="param=reservedetail&year=?&month=?&day=?">09</a></th>
         if(param.equals("reserve")) {
             response.sendRedirect("reserve/reserve.jsp");
         }
         else if(param.equals("reservedetail")) {
             String movieTitle = request.getParameter("movieTitle");
             int movieNo = Integer.parseInt(request.getParameter("movieNo"));
-            String year = request.getParameter("year");
-            year = year.substring(0, year.length()-1);
-            String month = request.getParameter("month");
-            month = month.substring(0, month.length()-1);
-            String day = request.getParameter("day");
-            day = day.substring(0, day.length()-1);
-            String time = request.getParameter("time");
+            String time = request.getParameter("theaterTime").split(" ")[1];
             int adult = Integer.parseInt(request.getParameter("adult"));
-            int child = Integer.parseInt(request.getParameter("adult"));
+            int child = Integer.parseInt(request.getParameter("child"));
 
             ReserveDao dao = ReserveDao.getInstance();
             HttpSession session = request.getSession(true);
             UserDto user = ((UserDto)session.getAttribute("login"));
 
-            dao.setReserve(new ReserveDto(user.getUserNo(), movieNo, time, adult+child));
+            System.out.println(adult+"\t"+child);
+            System.out.println(new ReserveDto(user.getUserNo(), movieNo, time, adult+child));
+            System.out.println(dao.getRemainSeats(new ReserveDto(user.getUserNo(), movieNo, time, adult+child)));
+
+            JSONObject obj = new JSONObject();
+            if(dao.getRemainSeats(new ReserveDto(user.getUserNo(), movieNo, time, adult+child))) {
+                System.out.println("TRUE");
+                ReserveDto dto = new ReserveDto(user.getUserNo(), movieNo, time, adult + child);
+                dao.setReserve(dto);
+                dao.updateTheaterDetailRemainSeats(dto);
+                obj.put("result", 1);
+            }
+            else {
+                System.out.println("FALSE");
+                obj.put("result", 0);
+            }
+            response.setContentType("application/x-json; charset=utf-8;");
+            response.getWriter().println(obj);
         }
         else if(param.equals("reservedata")) {
             String year = request.getParameter("year");
@@ -77,7 +87,7 @@ public class ReserveController extends HttpServlet {
                             SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                             Date d1 = format.parse(o1.getTheaterDetailTime());
                             Date d2 = format.parse(o2.getTheaterDetailTime());
-                            return d1.compareTo(d2);
+                            return -d1.compareTo(d2);
                         } catch(Exception e) {
                             e.printStackTrace();
                         }

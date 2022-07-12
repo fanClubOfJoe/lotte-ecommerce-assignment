@@ -20,13 +20,14 @@ public class ReserveDao {
 
     // 예매할 수 있는 인원인지 체크해주기(true, false)
     public boolean getRemainSeats(ReserveDto reserve) {
-        String sql = "SELECT IF(theater_detail_remain_seats >= ? , 1 , 0) FROM theater_details WHERE movie_no = ?";
+        String sql = "SELECT IF(theater_detail_remain_seats >= ? , 1 , 0) FROM theater_details WHERE movie_no = ? AND theater_detail_time = ?";
         Connection conn = null;
         PreparedStatement psmt = null;
         ResultSet rs = null;
 
         int canReserve = 0;
 
+        System.out.println(reserve);
         try {
             DBConnection.initConnection();
             conn = DBConnection.getConnection();
@@ -34,6 +35,7 @@ public class ReserveDao {
 
             psmt.setInt(1, reserve.getReserveEnterCount());
             psmt.setInt(2, reserve.getMovieNo());
+            psmt.setString(3, reserve.getReserveTime());
 
             rs = psmt.executeQuery();
             while(rs.next()) {
@@ -44,7 +46,7 @@ public class ReserveDao {
         } finally {
             DBClose.close(conn, psmt, rs);
         }
-        return canReserve > 0;
+        return canReserve == 1;
     }
 
     public MovieTheaterDetailDto getMovieReserveDtoByMovieNo(int movieNo) {
@@ -80,13 +82,40 @@ public class ReserveDao {
 
         return dto;
     }
-    // 예매하기
-    public boolean setReserve(ReserveDto reserve) {
-        String sql = "INSERT INTO reserves(user_no, movie_no, reserve_time, reserve_enter_count)" +
-                " VALUES(?, ?, STR_TO_DATE(?, '%H%i%s'), ?)";
+    public boolean updateTheaterDetailRemainSeats(ReserveDto reserve) {
+        String sql = "UPDATE theater_details " +
+                "SET theater_detail_remain_seats = theater_detail_remain_seats-"+reserve.getReserveEnterCount()+
+                " WHERE movie_no = ? AND theater_detail_time = ?";
         Connection conn = null;
         PreparedStatement psmt = null;
 
+        System.out.println(reserve);
+        int count = 0;
+
+        try {
+            DBConnection.initConnection();
+            conn = DBConnection.getConnection();
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, reserve.getMovieNo());
+            psmt.setString(2, reserve.getReserveTime());
+            count = psmt.executeUpdate();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, null);
+        }
+        return count > 0;
+    }
+    // 예매하기
+    public boolean setReserve(ReserveDto reserve) {
+        String sql = "INSERT INTO reserves(user_no, movie_no, reserve_time, reserve_enter_count)" +
+                " VALUES(?, ?, ?, ?)";
+        Connection conn = null;
+        PreparedStatement psmt = null;
+
+        System.out.println(reserve);
         int count = 0;
 
         try {
@@ -98,7 +127,6 @@ public class ReserveDao {
             psmt.setInt(2, reserve.getMovieNo());
             psmt.setString(3, reserve.getReserveTime());
             psmt.setInt(4, reserve.getReserveEnterCount());
-
             count = psmt.executeUpdate();
 
         } catch(Exception e) {
@@ -114,7 +142,7 @@ public class ReserveDao {
         String sql ="SELECT movies.movie_title, movie_time, movie_category, age_grade, theater_detail_no, theater_no, theater_details.movie_no, theater_detail_standard_date, " +
                 "theater_detail_time, theater_detail_remain_seats , theater_detail_seats " +
                 "FROM theater_details, movies " +
-                "WHERE timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) >= 0 " +
+                "WHERE timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) >= 0 AND timestampDIFF(DAY, theater_detail_standard_date, STR_TO_DATE('"+date+"', '%Y%m%d')) < 7 " +
                 "AND movies.movie_no = theater_details.movie_no";
         Connection conn = null;
         PreparedStatement psmt = null;
