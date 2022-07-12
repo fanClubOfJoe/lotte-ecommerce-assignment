@@ -32,6 +32,7 @@
             success: function (data) {
 
                 let reviewList = data.reviewList;
+                console.log(reviewList);
                 let userNameList = data.userNameList;
                 let reivewCount = data.reviewCount;
                 let a = '';

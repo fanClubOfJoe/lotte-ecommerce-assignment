@@ -3,6 +3,8 @@
 <%@ page import="com.example.lottemoviereservation.dao.ReserveDao" %>
 <%@ page import="com.example.lottemoviereservation.dto.ReserveDto" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.lottemoviereservation.dto.MovieTitleDto" %>
+<%@ page import="com.example.lottemoviereservation.dao.MovieDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -13,9 +15,13 @@
     pageContext.setAttribute("userDto", userDto);
 
     ReserveDao reserveDao = ReserveDao.getInstance();
+    MovieDao movieDao = MovieDao.getInstance();
+
     List<ReserveDto> reserveList = reserveDao.getReserveDtoByUserNo(userNo);
+    List<MovieTitleDto> movieTitleList = movieDao.getMovieTitleByReserve(reserveList);
 
     pageContext.setAttribute("reserveList", reserveList);
+    pageContext.setAttribute("movieTitleList", movieTitleList);
 %>
 <html>
 <head>
@@ -201,9 +207,9 @@
                     </td>
                     <td>
                         <div class="userbutton">
-                            <input type="button" class="editinfoBtn" value="정보 수정">
+                            <input type="button" class="editinfoBtn" onclick="location.href='<%=request.getContextPath()%>/user?param=updateUser'" value="정보 수정">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="button" class="leaveBtn" value="회원 탈퇴">
+                            <input type="button" class="leaveBtn" onclick="location.href='<%=request.getContextPath()%>/user?param=deleteId'" value="회원 탈퇴">
                         </div>
                     </td>
                 </tr>
@@ -241,18 +247,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="reserveDto" items="${reserveList}">
+                <c:forEach var="reserveDto" items="${reserveList}" varStatus="status">
                     <tr>
                         <th scope="row">1</th>
-                        <td>${reserveDto.reserveTime}
-                        </td>
-
-                        <td>${reserveDto.movieNo}
-                        </td>
+                        <td>${reserveDto.reserveTime}</td>
+                        <td>${movieTitleList[status].movieTitle}</td>
                         <td><%=String.format("%s", theater_name)%>
                         </td>
-                        <td>${reserveDto.reserveEnterCount}
-                        </td>
+                        <td>${reserveDto.reserveEnterCount}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
