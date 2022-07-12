@@ -27,7 +27,7 @@
 | 로그인과 회원가입 | 
 | ![](https://user-images.githubusercontent.com/72608849/178481446-fba4cdd5-da92-4b87-9e59-0141596ada96.png) | 
 | 아이디 중복확인 / 비밀번호의 보안 강도 체크 | 
-| ![](![화면 기록 2022-07-12 오후 8 54 08](https://user-images.githubusercontent.com/72608849/178484729-fc76a795-50a6-456a-beb8-87a4fd5de237.gif)) |
+| ![화면 기록 2022-07-12 오후 8 54 08](https://user-images.githubusercontent.com/72608849/178484729-fc76a795-50a6-456a-beb8-87a4fd5de237.gif) |
 | 아이디 / 비밀번호 찾기 | 
 | ![](https://user-images.githubusercontent.com/72608849/178481348-546dddef-0703-4dfd-bdc6-fa513ebd58d9.png) |
 | ![](https://user-images.githubusercontent.com/72608849/178481446-fba4cdd5-da92-4b87-9e59-0141596ada96.png) |
