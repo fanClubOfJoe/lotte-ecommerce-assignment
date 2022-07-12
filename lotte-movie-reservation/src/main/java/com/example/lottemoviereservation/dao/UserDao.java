@@ -167,7 +167,8 @@ public class UserDao {
 
         String sql = " SELECT user_email "
                 + " FROM users "
-                + " WHERE user_email=? and is_activated=true ";
+                + " WHERE user_email= (select user_email from users where user_email=?)"
+                + " and is_activated=true ";
 
         Connection conn = null;         // DB 연결
         PreparedStatement psmt = null;   // Query문을 실행
