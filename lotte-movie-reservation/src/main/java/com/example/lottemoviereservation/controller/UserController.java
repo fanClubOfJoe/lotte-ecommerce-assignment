@@ -33,7 +33,8 @@ public class UserController extends HttpServlet {
 
         if (param.equals("login")) {
             resp.sendRedirect("user/login.jsp");
-        } else if (param.equals("loginAf")) {
+        }
+        else if (param.equals("loginAf")) {
 
             String id = req.getParameter("id");
             String pwd = req.getParameter("pwd");
@@ -48,12 +49,15 @@ public class UserController extends HttpServlet {
             }
             if (msg.equals("loginSuccess")) {
                 resp.sendRedirect("movie/main.jsp");
+//                resp.sendRedirect("user/updateUser.jsp");
             } else {
                 resp.sendRedirect("user/loginError.jsp");
             }
-        } else if (param.equals("regi")) {
+        }
+        else if (param.equals("regi")) {
             resp.sendRedirect("user/regi.jsp");
-        } else if (param.equals("idcheck")) {
+        }
+        else if (param.equals("idcheck")) {
             String id = req.getParameter("id");
             System.out.println("id : " + id);
 
@@ -71,7 +75,8 @@ public class UserController extends HttpServlet {
             resp.getWriter().print(obj);
 
 
-        } else if (param.equals("regiAf")) {
+        }
+        else if (param.equals("regiAf")) {
 
             String id = req.getParameter("id");
             String name = req.getParameter("name");
@@ -88,14 +93,14 @@ public class UserController extends HttpServlet {
 
             resp.sendRedirect("user/message.jsp?msg=" + msg);
 
-        } else if (param.equals("findId")) {
+        }
+        else if (param.equals("findId")) {
             resp.sendRedirect("user/findId.jsp");
-        } else if (param.equals("findPwd")) {
-            resp.sendRedirect("user/findPwd" +
-                    "" +
-                    "" +
-                    ".jsp");
-        } else if (param.equals("deleteId")) {
+        }
+        else if (param.equals("findPwd")) {
+            resp.sendRedirect("user/findPwd.jsp");
+        }
+        else if (param.equals("deleteId")) {
             HttpSession session = req.getSession();
             UserDto dto = (UserDto) session.getAttribute("login");
             String id = dto.getUserId();
@@ -105,7 +110,10 @@ public class UserController extends HttpServlet {
             if (deleteId) {
                 System.out.println("아이디가 지워짐");
             }
-        } else if (param.equals("mypage")) {
+        }
+        else if (param.equals("updateUser")) {
+            resp.sendRedirect("user/updateUser.jsp");
+        }else if (param.equals("mypage")) {
 
             HttpSession session = req.getSession();
             UserDto dto = (UserDto) session.getAttribute("login");
@@ -114,19 +122,6 @@ public class UserController extends HttpServlet {
             System.out.println("userNo: " + userNo);
 
             resp.sendRedirect("user/mypage.jsp?userno=" + userNo);
-        } else if (param.equals("updateUser")) {
-            HttpSession session = req.getSession();
-            UserDto dto = (UserDto) session.getAttribute("login");
-            String id = dto.getUserId();
-            System.out.println("id : " + id);
-            String email = req.getParameter("email");
-            String pwd = req.getParameter("pwd");
-            System.out.println(email + pwd);
-            UserDao dao = UserDao.getInstance();
-            boolean deleteId = dao.updateUser(id, email, pwd);
-            if (deleteId) {
-                System.out.println("유저정보 바뀜");
-            }
         }
     }
 
@@ -199,13 +194,18 @@ public class UserController extends HttpServlet {
             System.out.println("id + email : " + email + pwd);
             String path = null;
             UserDao dao = UserDao.getInstance();
-            boolean deleteId = dao.updateUser(email, pwd, id);
-            System.out.println("password : " + pwd);
-            if (deleteId) {
-                System.out.println("유저정보 바뀜");
+            String flag = dao.checkEmail(email);
+            if(flag.equals("true")) {
+                boolean deleteId = dao.updateUser(email, pwd, id);
+                System.out.println("password : " + pwd);
+                if (deleteId) {
+                    System.out.println("유저정보 바뀜");
+                }
             }
-//            else path = "hi.jsp";
-//            request.getRequestDispatcher(path).forward(request, response);
+            else{
+                path = "updateUser-Fail.jsp";
+                request.getRequestDispatcher(path).forward(request, response);
+            }
         }
     }
 }
