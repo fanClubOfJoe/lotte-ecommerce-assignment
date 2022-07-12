@@ -7,7 +7,7 @@
 
 | <b>메인화면</b> | 
 | :---: | 
-| ![Uploading main_carousel.gif…]() |
+|![main_carousel](https://user-images.githubusercontent.com/21255149/178461083-2cc17e09-fdeb-4172-b8bc-40982d029ef1.gif) |
 | 캐러셀을 사용하여 3개의 영화 소개 | 
 
 <br/><br/>
