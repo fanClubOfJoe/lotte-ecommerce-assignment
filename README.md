@@ -63,8 +63,10 @@
 |영화의 리뷰 보여주기 |
 | ![image](https://user-images.githubusercontent.com/49293971/178494386-d8064d79-56cb-4d6d-a861-2ab3e9d922e6.png) | 
 | 리뷰 작성 |
-| ![image](https://user-images.githubusercontent.com/49293971/178494457-bdb11354-83ba-4b42-b178-2c7555913b75.png) | 
+| ![화면-기록-2022-07-12-오후-9 45 17](https://user-images.githubusercontent.com/51360315/178494990-52fab357-849a-43cb-8c8f-181e8ddd910c.gif)| 
 | 리뷰 수정 / 삭제하기 |
+| ![화면-기록-2022-07-12-오후-9 50 40](https://user-images.githubusercontent.com/51360315/178494903-0fe79ee9-110c-4a51-81a2-6f1b4f679c00.gif) |
+
 
 <br/><br/>
 
