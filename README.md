@@ -39,8 +39,13 @@
 <br/><br/>
 
 ### 🚩Structure
-![structure](https://user-images.githubusercontent.com/21255149/178444119-388058de-e294-49e1-9f5b-75638bd3e7b8.png)
-![image](https://user-images.githubusercontent.com/49184115/178495285-99ef2b10-859a-4ec0-83ca-0b74a6d46102.png)
+| ![structure](https://user-images.githubusercontent.com/21255149/178444119-388058de-e294-49e1-9f5b-75638bd3e7b8.png) | 
+| :--: |
+| ![image](https://user-images.githubusercontent.com/49184115/178495285-99ef2b10-859a-4ec0-83ca-0b74a6d46102.png) |
+| ![MVC2](https://user-images.githubusercontent.com/49184115/178566912-62b314d5-6d95-4d46-a886-5f6753680b04.png) |
+| <img width="250" alt="jsp" src="https://user-images.githubusercontent.com/49184115/178567153-abe1df0e-8581-430d-a564-3b640a0ef950.png"><img width="230" alt="java" src="https://user-images.githubusercontent.com/49184115/178567161-8835fe4a-deb0-4bbd-b5bb-a6f06f3dc7d5.png"> <img width="400" alt="project 구조" src="https://user-images.githubusercontent.com/49184115/178573209-dc40c835-48c5-4cd5-ac22-81e985764874.png"> |
+
+
 
 <br/><br/>
 
