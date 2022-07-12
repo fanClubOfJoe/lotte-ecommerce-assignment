@@ -313,8 +313,8 @@ public class ReviewDao {
 
         return count > 0;
     }
-    public int getReviewCount(){
-        String sql = " select count(*) from reviews ";
+    public int getReviewCountByMovieNo(int movieNo){
+        String sql = " select count(*) from reviews where movie_no=? ";
 
         Connection conn = null;
         PreparedStatement psmt = null;
@@ -326,6 +326,36 @@ public class ReviewDao {
             conn = DBConnection.getConnection();
 
             psmt = conn.prepareStatement(sql);
+            psmt.setInt(1,movieNo);
+
+            rs = psmt.executeQuery();
+            if (rs.next()) {
+                len = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return len;
+    }
+
+    public int getReviewCountByUserNo(int userNo){
+        String sql = " select count(*) from reviews where user_no=? ";
+
+        Connection conn = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+
+        int len = 0;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1,userNo);
 
             rs = psmt.executeQuery();
             if (rs.next()) {
