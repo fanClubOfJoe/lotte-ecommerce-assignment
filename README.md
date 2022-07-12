@@ -85,7 +85,12 @@
 
 
 ### :open_file_folder: Database
-![dbdiagram](https://user-images.githubusercontent.com/21255149/178399917-238577e1-e6ad-4e2e-9f1d-482db4a9f794.PNG)
+
+#### DB 설계
+<img src="https://user-images.githubusercontent.com/49184115/178485861-213a59f2-98bd-4752-9b5c-ab8f81cda213.png" width="70%">
+
+#### DB 구현
+<img src="https://user-images.githubusercontent.com/49184115/178485878-66576f95-a25d-430c-9f9e-ec0b8bb61ef6.png" width="70%">
 <br/><br/>
 
 ###  :books: Documentation
