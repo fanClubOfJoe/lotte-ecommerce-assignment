@@ -1,6 +1,5 @@
 .member_login_wrap {
     padding: 60px 0;
-    background-color: #F5F5F5;
 }
 #contents.contents_full .contents_inner {
     width: 980px;
@@ -8,7 +7,7 @@
 }
 .member_login_wrap .login_box {
     position: relative;
-    width: 470px;
+    width: 430px;
     min-height: 220px;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -137,4 +136,7 @@ a:link { color: black; text-decoration: none;}
 a:visited { color: black; text-decoration: none;}
 a:hover { color: blue; text-decoration: underline;}
 
-
+.titleBox{
+    width: 70px;
+    margin: auto;
+}

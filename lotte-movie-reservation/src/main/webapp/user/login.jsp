@@ -25,9 +25,9 @@
     <div class="member_login_wrap">
         <div class="contents_inner">
             <div class="login_box">
-                <h2 class="center">로그인</h2>
-                <br>
-
+                <div class="titleBox">
+                    <h1>로그인</h1>
+                </div>
 
                 <form action="<%=request.getContextPath() %>/user?param=loginAf" method="post">
                     <div class="login_area">
