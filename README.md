@@ -23,18 +23,22 @@
 
 | 로그인 | 
 | :--: | 
-| ![]() | 
+| ![image](https://user-images.githubusercontent.com/72608849/178494043-220aceb8-494c-487f-afa6-c67afd0b17f0.png) |
+| ![image](https://user-images.githubusercontent.com/72608849/178493306-4de94e73-e5ff-4b00-ab30-6dfec4311ffd.png) |
 | 로그인과 회원가입 | 
-| ![]() | 
+| ![화면 기록 2022-07-12 오후 8 54 08](https://user-images.githubusercontent.com/72608849/178484729-fc76a795-50a6-456a-beb8-87a4fd5de237.gif) |
 | 아이디 중복확인 / 비밀번호의 보안 강도 체크 | 
-| ![]() |
+| ![](https://user-images.githubusercontent.com/72608849/178481348-546dddef-0703-4dfd-bdc6-fa513ebd58d9.png) |
+| ![](https://user-images.githubusercontent.com/72608849/178481446-fba4cdd5-da92-4b87-9e59-0141596ada96.png) |
 | 아이디 / 비밀번호 찾기 | 
+
+
 
 <br/><br/>
 
 |예매|
 |:--:|
-![reserve](https://user-images.githubusercontent.com/21255149/178454478-d3c84b9d-8a76-45fe-b186-ec16318717dd.png) |
+![reserve](https://user-images.githubusercontent.com/72608849/178485153-b1e78b95-ce4f-471d-bd74-89a151e5a430.png) |
 |날짜 별 예매할 수 있는 영화 보여주기(개봉 후 7일 동안) |
 |![]()![reservedetail](https://user-images.githubusercontent.com/21255149/178454497-9b3792c1-18b9-496e-b365-c3cb77673f34.png) |
 |영화와 시간을 선택하여 예매하기(예매 가능 여부와 결제 방식 선택) |
@@ -43,9 +47,9 @@
  
 | 마이페이지  | 
 | :--: |
-| ![]() | 
+| ![](https://user-images.githubusercontent.com/72608849/178485377-5c4bcf45-f126-40ae-987f-5a74599a1c24.png) | 
 | 회원 정보 조회 및 수정 | 
-| ![]() | 
+| ![](https://user-images.githubusercontent.com/72608849/178485534-e787cae4-de4d-43eb-853a-9079c262a5a3.png) | 
 | 내가 쓴 예매정보와 리뷰 보기 |
 | ![]() | 
 | 회원탈퇴 |
@@ -55,19 +59,20 @@
 
 |리뷰|
 | :--: |
-| ![]() | 
+| ![image](https://user-images.githubusercontent.com/49293971/178494212-675483bd-b6f3-4cfc-9f40-4c2976dd9d63.png) | 
 |영화의 리뷰 보여주기 |
-| ![]() | 
+| ![image](https://user-images.githubusercontent.com/49293971/178494386-d8064d79-56cb-4d6d-a861-2ab3e9d922e6.png) | 
 | 리뷰 작성 |
-| ![]() | 
+| ![화면-기록-2022-07-12-오후-9 45 17](https://user-images.githubusercontent.com/51360315/178494990-52fab357-849a-43cb-8c8f-181e8ddd910c.gif)| 
 | 리뷰 수정 / 삭제하기 |
-| ![]() | 
-|등록한 리뷰를 통해 평점 변경하기 |
+| ![화면-기록-2022-07-12-오후-9 50 40](https://user-images.githubusercontent.com/51360315/178494903-0fe79ee9-110c-4a51-81a2-6f1b4f679c00.gif) |
+
 
 <br/><br/>
 
 ### 🚩Structure
 ![structure](https://user-images.githubusercontent.com/21255149/178444119-388058de-e294-49e1-9f5b-75638bd3e7b8.png)
+![image](https://user-images.githubusercontent.com/49184115/178495285-99ef2b10-859a-4ec0-83ca-0b74a6d46102.png)
 <br/><br/>
 
 ### :hammer:추가로 보완할 사항
@@ -79,7 +84,12 @@
 
 
 ### :open_file_folder: Database
-![dbdiagram](https://user-images.githubusercontent.com/21255149/178399917-238577e1-e6ad-4e2e-9f1d-482db4a9f794.PNG)
+
+#### DB 설계
+<img src="https://user-images.githubusercontent.com/49184115/178485861-213a59f2-98bd-4752-9b5c-ab8f81cda213.png" width="70%">
+
+#### DB 구현
+<img src="https://user-images.githubusercontent.com/49184115/178485878-66576f95-a25d-430c-9f9e-ec0b8bb61ef6.png" width="70%">
 <br/><br/>
 
 ###  :books: Documentation
@@ -89,6 +99,6 @@
 ### 👩‍팀원
 |  강예나  |  김은진  |  신은총  |  천예원 |  최규진  |  최진영  |
 | :----------: |  :--------:  |  :---------: |  :---------: | :---------: | :---------: |
-| [<img src="https://user-images.githubusercontent.com/21255149/178381014-e3d8db83-194c-4b70-b018-248004ddd504.jpg" width="100px" height="100px"><br/>Github](https://github.com/KangYena)| [<img src="https://user-images.githubusercontent.com/21255149/178378210-d036f6fd-311d-4891-b791-2e662c164e9c.jpg" width="100px" height="100px"><br/>Github](https://github.com/JiniEun) | [<img src="https://user-images.githubusercontent.com/21255149/178379443-7ead27aa-ec24-4e15-8935-750b1cafa08c.jpg" width="100px" height="100px"><br/>Github](https://github.com/chd830) | [<img src="https://user-images.githubusercontent.com/21255149/178380114-883584be-1c0f-44e6-90ed-c4ce3658c1c9.jpg" width="100px" height="100px"><br/>Github](https://github.com/jikimomo)| [<img src="https://user-images.githubusercontent.com/21255149/178379157-65dd719a-76db-4c2f-8881-ce9e43e9fed9.jpg" width="100px" height="100px"><br/>Github](https://github.com/kjchoi1997) | [<img src="https://user-images.githubusercontent.com/21255149/178440960-0432363d-cdef-4a8f-a917-4badaeb26571.jpg" width="100px" height="100px"><br/>Github](https://github.com/kanamycine) |
+| [<img src="https://user-images.githubusercontent.com/62419355/178489222-02bfae9d-d535-4186-ae6c-737e6bfc86ad.png" width="100px" height="100px"><br/>Github](https://github.com/KangYena)| [<img src="https://user-images.githubusercontent.com/21255149/178378210-d036f6fd-311d-4891-b791-2e662c164e9c.jpg" width="100px" height="100px"><br/>Github](https://github.com/JiniEun) | [<img src="https://user-images.githubusercontent.com/21255149/178379443-7ead27aa-ec24-4e15-8935-750b1cafa08c.jpg" width="100px" height="100px"><br/>Github](https://github.com/chd830) | [<img src="https://user-images.githubusercontent.com/21255149/178380114-883584be-1c0f-44e6-90ed-c4ce3658c1c9.jpg" width="100px" height="100px"><br/>Github](https://github.com/jikimomo)| [<img src="https://user-images.githubusercontent.com/21255149/178379157-65dd719a-76db-4c2f-8881-ce9e43e9fed9.jpg" width="100px" height="100px"><br/>Github](https://github.com/kjchoi1997) | [<img src="https://user-images.githubusercontent.com/21255149/178440960-0432363d-cdef-4a8f-a917-4badaeb26571.jpg" width="100px" height="100px"><br/>Github](https://github.com/kanamycine) |
 | UI,UX / 프론트 | 영화 / 리뷰 | 예매 | 크롤링 / 프론트 | 유저 | 유저 / 리뷰 |
 
