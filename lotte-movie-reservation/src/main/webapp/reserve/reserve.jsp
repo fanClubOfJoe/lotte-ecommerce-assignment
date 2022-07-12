@@ -278,50 +278,6 @@
         <%--영화별 예매--%>
         <div class="timetableform">
             <br>
-            <%--&lt;%&ndash; 영화 데이터 들어올 곳 &ndash;%&gt;
-            <%
-                String movie_title = "";
-                movie_title = "토르 - 러브 앤 썬더";
-            %>
-            <div class="age_grade15"><p align="center">15</p></div>
-            <div>
-                <h3 class="movie_title"><%=String.format("%s", movie_title)%></h3>
-                <font class="isscreenfont" style="color: royalblue;"> 상영중</font>
-            </div>
-            <%
-                /* 수정할 부분 */
-                String movie_category = "";
-                String movie_time = "";
-                String movie_screen_date = "";
-
-                movie_category = "액션, 어드벤처, 환타지";
-                movie_time = "119분";
-                movie_screen_date = "2022.07.06 개봉";
-            %>
-            <p class="movieinfo">
-                <%=String.format("%s&nbsp;/&nbsp;%s&nbsp;/&nbsp;%s", movie_category, movie_time, movie_screen_date)%>
-            </p>
-
-            &lt;%&ndash; 예매 시간 데이터 들어올 곳 &ndash;%&gt;
-            &lt;%&ndash; 모달 띄우는 a href 추가 필요함 &ndash;%&gt;
-            <%
-                /* 수정할 부분 */
-                String theater_detail_time = "";
-                int theater_detail_remain_seats = 0;
-
-                theater_detail_time = "17:00";
-                theater_detail_remain_seats = 180;
-
-            %>
-            <button type="submit" class="goReserveBtn">
-                <strong><%=String.format("%s", theater_detail_time)%></strong>
-                <font class="seatsfont"  style="color: royalblue;"><%=String.format("%d석", theater_detail_remain_seats)%>
-                </font>
-            </button>--%>
-            <%--<br><br>
-            <hr class="thinhr">--%>
-            <%--    </div>--%>
-
         </div>
         <br/>
     </div>
