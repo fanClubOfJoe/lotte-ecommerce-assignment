@@ -3,11 +3,11 @@
 ![moobit](https://user-images.githubusercontent.com/21255149/178376969-acef4bc6-23cc-4801-af50-983842a544cb.png)
 
 ### 🌉Features
-https://www.figma.com/file/8NEzmgLCKt5ItSjDZGlT8J/Lotte-CGV?node-id=0%3A1
 <br/><br/>
 | 메인화면 | 영화 |
 | :---: | :---: |
-| ![]() | ![]() |
+| <img width="1043" alt="main" src="https://user-images.githubusercontent.com/21255149/178453220-5d94a509-352d-43a2-8de2-5b01de70d693.png">
+![]() | ![]() |
 | 캐러셀을 사용하여 3개의 영화 소개 | 영화 검색하기(제목, 카테고리, 내용) | 
 
 <br/><br/>
@@ -41,16 +41,21 @@ https://www.figma.com/file/8NEzmgLCKt5ItSjDZGlT8J/Lotte-CGV?node-id=0%3A1
 ![structure](https://user-images.githubusercontent.com/21255149/178444119-388058de-e294-49e1-9f5b-75638bd3e7b8.png)
 <br/><br/>
 
-### 추가로 보완할 사항
-예매 기록 기반으로만 리뷰를 작성할 수 있게 추가하기
-영화관을 늘려서 다른 영화관에서도 영화를 볼 수 있게 추가하기
+### :hammer:추가로 보완할 사항
+예매 기록 기반으로만 리뷰를 작성할 수 있게 추가하기<br/>
+영화관을 늘려서 다른 영화관 정보를 추가하기<br/>
+<br/>
 
 
 
-### :open_file_folder: Databse
+
+### :open_file_folder: Database
 ![dbdiagram](https://user-images.githubusercontent.com/21255149/178399917-238577e1-e6ad-4e2e-9f1d-482db4a9f794.PNG)
 <br/><br/>
 
+### Documentation
+- [Wireframe](https://www.figma.com/file/8NEzmgLCKt5ItSjDZGlT8J/Lotte-CGV?node-id=0%3A1)
+- [DB](https://kanamycine.notion.site/DB-f3a403c446a841b4845dd7ed94debcb7)
 ### 👩‍팀원
 |  강예나  |  김은진  |  신은총  |  천예원 |  최규진  |  최진영  |
 | :----------: |  :--------:  |  :---------: |  :---------: | :---------: | :---------: |
