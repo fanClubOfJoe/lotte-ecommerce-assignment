@@ -1,13 +1,16 @@
 # 🎥MOOBIT 
+### 영화 예매사이트, MOOBIT!
 ![moobit](https://user-images.githubusercontent.com/21255149/178376969-acef4bc6-23cc-4801-af50-983842a544cb.png)
 
 ### 🌉Features
-<br/>
-<br/>
+<br/><br/>
 
 ### 🚩Structure
-<br/>
-<br/>
+<br/><br/>
+
+### :open_file_folder: Databse
+![dbdiagram](https://user-images.githubusercontent.com/21255149/178396331-52047bae-8119-4f43-b0d4-c446be46dd59.PNG)
+<br/><br/>
 
 ### 👩‍팀원
 |  강예나  |  김은진  |  신은총  |  천예원 |  최규진  |  최진영  |
