@@ -9,6 +9,7 @@
 <%
     UserDto dto = (UserDto) session.getAttribute("login");
     String id = dto.getUserId();
+    String email = dto.getUserEmail();
 %>
 <html>
 <head>
@@ -95,6 +96,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="../front/header.jsp"/>
 
 <div class="container">
     <div class="redbox">회원정보 수정</div>
@@ -109,7 +111,7 @@
             </div>
             <div class="user">
                 <div class="text">이메일</div>
-                <input name="email" type="text" class="infoinput" id="email">
+                <input name="email" type="text" class="infoinput" id="email" value="<%= email%>">
                 <span class="blank"></span>
             </div>
             <div class="user">
@@ -129,6 +131,7 @@
         </form>
     </div>
 </div>
+<jsp:include page="../front/footer.jsp"/>
 <script>
 
     function checkForm() {
