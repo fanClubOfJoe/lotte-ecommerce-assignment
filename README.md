@@ -38,7 +38,7 @@
 
 |예매|
 |:--:|
-![reserve](https://user-images.githubusercontent.com/21255149/178454478-d3c84b9d-8a76-45fe-b186-ec16318717dd.png) |
+![reserve](https://user-images.githubusercontent.com/72608849/178485153-b1e78b95-ce4f-471d-bd74-89a151e5a430.png) |
 |날짜 별 예매할 수 있는 영화 보여주기(개봉 후 7일 동안) |
 |![]()![reservedetail](https://user-images.githubusercontent.com/21255149/178454497-9b3792c1-18b9-496e-b365-c3cb77673f34.png) |
 |영화와 시간을 선택하여 예매하기(예매 가능 여부와 결제 방식 선택) |
@@ -47,9 +47,11 @@
  
 | 마이페이지  | 
 | :--: |
-| ![]() | 
+| ![](https://user-images.githubusercontent.com/72608849/178485377-5c4bcf45-f126-40ae-987f-5a74599a1c24.png) |
+) | 
 | 회원 정보 조회 및 수정 | 
-| ![]() | 
+| ![](https://user-images.githubusercontent.com/72608849/178485534-e787cae4-de4d-43eb-853a-9079c262a5a3.png) |
+) | 
 | 내가 쓴 예매정보와 리뷰 보기 |
 | ![]() | 
 | 회원탈퇴 |
