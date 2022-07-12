@@ -31,33 +31,33 @@ public class UserController extends HttpServlet {
 
         String param = req.getParameter("param");
 
-        if(param.equals("login")) {
+        if (param.equals("login")) {
             resp.sendRedirect("user/login.jsp");
         }
-        else if(param.equals("loginAf")) {
+        else if (param.equals("loginAf")) {
 
             String id = req.getParameter("id");
             String pwd = req.getParameter("pwd");
             UserDao dao = UserDao.getInstance();
             UserDto user = dao.login(new UserDto(-1, id, null, null, pwd));
             String msg = "loginFail";
-            if(user != null && !user.getUserId().equals("")) {
+            if (user != null && !user.getUserId().equals("")) {
                 resp.setContentType("application/x-json; charset=utf-8");
                 msg = "loginSuccess";
                 req.getSession().setAttribute("login", user);
                 System.out.println(req);
             }
-            if(msg.equals("loginSuccess")) {
-                resp.sendRedirect("movie/main.jsp");
-            }
-            else{
+            if (msg.equals("loginSuccess")) {
+//                resp.sendRedirect("movie/main.jsp");
+                resp.sendRedirect("user/updateUser.jsp");
+            } else {
                 resp.sendRedirect("user/loginError.jsp");
             }
         }
-        else if(param.equals("regi")) {
+        else if (param.equals("regi")) {
             resp.sendRedirect("user/regi.jsp");
         }
-        else if(param.equals("idcheck")) {
+        else if (param.equals("idcheck")) {
             String id = req.getParameter("id");
             System.out.println("id : " + id);
 
@@ -65,7 +65,7 @@ public class UserController extends HttpServlet {
             boolean b = dao.getId(id);
 
             String str = "NO";
-            if(b == false) {
+            if (b == false) {
                 str = "YES";
             }
             JSONObject obj = new JSONObject();
@@ -76,7 +76,7 @@ public class UserController extends HttpServlet {
 
 
         }
-        else if(param.equals("regiAf")) {
+        else if (param.equals("regiAf")) {
 
             String id = req.getParameter("id");
             String name = req.getParameter("name");
@@ -87,46 +87,32 @@ public class UserController extends HttpServlet {
             boolean b = dao.addUser(new UserDto(id, name, email, pwd));
             String msg = "OK";
 
-            if(b == false) {
+            if (b == false) {
                 msg = "NO";
             }
 
             resp.sendRedirect("user/message.jsp?msg=" + msg);
 
         }
-        else if(param.equals("findId")) {
+        else if (param.equals("findId")) {
             resp.sendRedirect("user/findId.jsp");
         }
-        else if(param.equals("findPwd")) {
-            resp.sendRedirect("user/findPwd" +
-                    "" +
-                    "" +
-                    ".jsp");
+        else if (param.equals("findPwd")) {
+            resp.sendRedirect("user/findPwd.jsp");
         }
-        else if(param.equals("deleteId")){
+        else if (param.equals("deleteId")) {
             HttpSession session = req.getSession();
             UserDto dto = (UserDto) session.getAttribute("login");
             String id = dto.getUserId();
             System.out.println(id);
             UserDao dao = UserDao.getInstance();
             boolean deleteId = dao.deleteId(id);
-            if(deleteId){
+            if (deleteId) {
                 System.out.println("아이디가 지워짐");
             }
         }
-        else if(param.equals("updateUser")){
-            HttpSession session = req.getSession();
-            UserDto dto = (UserDto) session.getAttribute("login");
-            String id = dto.getUserId();
-            System.out.println("id : " + id);
-            String email = req.getParameter("email");
-            String pwd = req.getParameter("pwd");
-            System.out.println(email + pwd);
-            UserDao dao = UserDao.getInstance();
-            boolean deleteId = dao.updateUser(id, email, pwd);
-            if(deleteId){
-                System.out.println("유저정보 바뀜");
-            }
+        else if (param.equals("updateUser")) {
+            resp.sendRedirect("user/updateUser.jsp");
         }
     }
 
@@ -136,6 +122,7 @@ public class UserController extends HttpServlet {
     @WebServlet("/user/FindIdController")
     public static class FindIdController extends HttpServlet {
         private static final long serialVersionUID = 1L;
+
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("utf-8");
@@ -147,13 +134,13 @@ public class UserController extends HttpServlet {
             id = String.valueOf(UserDao.getInstance().findId(name, email));
             System.out.println(id);
             // 등록된 이메일과 이름이 존재한 경우 (회원)
-            if(id != null) {
+            if (id != null) {
                 request.setAttribute("user_id", id);
                 path = "findId-ok.jsp";
             }
             // 존재하지 않는 회원인 경우
             else {
-                path="findId-fail.jsp";
+                path = "findId-fail.jsp";
             }
             request.getRequestDispatcher(path).forward(request, response);
         }
@@ -173,14 +160,14 @@ public class UserController extends HttpServlet {
             String path = null;
             String password = UserDao.getInstance().findPwd(id, email);
             System.out.println("password : " + password);
-            if(password != null) {
+            if (password != null) {
                 request.setAttribute("password", password);
                 path = "findPwd-ok.jsp";
-            }
-            else path = "findPwd-fail.jsp";
+            } else path = "findPwd-fail.jsp";
             request.getRequestDispatcher(path).forward(request, response);
         }
     }
+
     @WebServlet("/user/updateUserController")
     public static class updateUserController extends HttpServlet {
         private static final long serialVersionUID = -6972658214051531827L;
@@ -198,13 +185,18 @@ public class UserController extends HttpServlet {
             System.out.println("id + email : " + email + pwd);
             String path = null;
             UserDao dao = UserDao.getInstance();
-            boolean deleteId = dao.updateUser(email, pwd, id);
-            System.out.println("password : " + pwd);
-            if(deleteId){
-            System.out.println("유저정보 바뀜");
-}
-//            else path = "hi.jsp";
-//            request.getRequestDispatcher(path).forward(request, response);
+            String flag = dao.checkEmail(email);
+            if(flag.equals("true")) {
+                boolean deleteId = dao.updateUser(email, pwd, id);
+                System.out.println("password : " + pwd);
+                if (deleteId) {
+                    System.out.println("유저정보 바뀜");
+                }
+            }
+            else{
+                path = "updateUser-Fail.jsp";
+                request.getRequestDispatcher(path).forward(request, response);
+            }
         }
     }
 }

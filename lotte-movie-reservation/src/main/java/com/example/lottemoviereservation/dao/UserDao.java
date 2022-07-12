@@ -163,6 +163,46 @@ public class UserDao {
         return null;
     }
 
+    public String checkEmail(String user_email) {
+
+        String sql = " SELECT user_email "
+                + " FROM users "
+                + " WHERE user_email=? and is_activated=true ";
+
+        Connection conn = null;         // DB 연결
+        PreparedStatement psmt = null;   // Query문을 실행
+        ResultSet rs = null;         // 결과 취득
+
+        String pwd;
+
+        try {
+            conn = DBConnection.getConnection();
+            System.out.println("1/3 checkEmail success");
+
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, user_email);
+            System.out.println(psmt);
+            System.out.println("2/3 checkEmail success");
+
+            rs = psmt.executeQuery();
+            System.out.println("rs.nex()" + rs.next());
+            if (rs.next()){
+                return "false";
+            }
+            else{
+                System.out.println("3/3 checkEmail success");
+                return "true";
+            }
+
+        } catch (SQLException e) {
+            System.out.println("checkEmail fail");
+        } finally {
+            DBClose.close(conn, psmt, rs);
+        }
+
+        return null;
+    }
+
     public UserDto login(UserDto dto) {
         String sql = " select user_no, user_id, user_email, user_name, user_password, is_activated "
                 + " from users "

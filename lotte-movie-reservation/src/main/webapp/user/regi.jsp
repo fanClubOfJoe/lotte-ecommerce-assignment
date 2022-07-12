@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/styles.css">
     <title>Insert title here</title>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -123,7 +122,7 @@
    }
     function formSubmit() {
         let result = checkForm();
-        if(result == false) {
+        if(result === false) {
             return false;
         } else {
             alert("회원가입이 완료되었습니다. \n홈페이지로 돌아갑니다.");
@@ -134,9 +133,9 @@
         var match = document.getElementById('passMatch');
         var pswd = document.getElementById("confirmPwd");
         var pwd = document.getElementById("pwd");
-        if(pswd.value.length == 0) { //')' token error duplicate, syntax error 발생지점
+        if(pswd.value.length === 0) { //')' token error duplicate, syntax error 발생지점
             match.innerHTML = 'Type Password';
-        } else if (pwd.value ==  pswd.value) {
+        } else if (pwd.value ===  pswd.value) {
             match.innerHTML = '<span style="color:green">비밀번호 확인완료!</span>';
         } else {
             match.innerHTML = '<span style="color:red">비밀번호가 일치하지 않습니다!</span>';
@@ -148,7 +147,7 @@
         var mediumRegex = new RegExp("^(?=.{8,})(((?=.*[a-zA-Z])(?=.*[0-9]))|((?=.*[a-zA-Z])(?=.*[0-9]))).*$", "g");
         var enoughRegex = new RegExp("(?=.{6,}).*", "g");
         var pwd = document.getElementById("pwd");
-        if (pwd.value.length == 0) {
+        if (pwd.value.length === 0) {
             strength.innerHTML = 'Type Password';
         } else if (false === enoughRegex.test(pwd.value)) {
             strength.innerHTML = '<span style="color:red">길이가 짧습니다!</span>';
