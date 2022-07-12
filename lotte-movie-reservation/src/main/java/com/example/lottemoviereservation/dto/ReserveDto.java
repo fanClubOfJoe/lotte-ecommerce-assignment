@@ -2,6 +2,7 @@ package com.example.lottemoviereservation.dto;
 
 public class ReserveDto {
     private int reserveNo;
+    private int theaterNo;
     private int userNo;
     private int movieNo;
     private String reserveTime;
@@ -62,14 +63,23 @@ public class ReserveDto {
         this.reserveEnterCount = reserveEnterCount;
     }
 
+    public int getTheaterNo() {
+        return theaterNo;
+    }
+
+    public void setTheaterNo(int theaterNo) {
+        this.theaterNo = theaterNo;
+    }
+
     @Override
     public String toString() {
         return "ReserveDto{" +
                 "reserveNo=" + reserveNo +
+                ", theaterNo=" + theaterNo +
                 ", userNo=" + userNo +
                 ", movieNo=" + movieNo +
                 ", reserveTime='" + reserveTime + '\'' +
-                ", reserveEnterCount='" + reserveEnterCount + '\'' +
+                ", reserveEnterCount=" + reserveEnterCount +
                 '}';
     }
 }
