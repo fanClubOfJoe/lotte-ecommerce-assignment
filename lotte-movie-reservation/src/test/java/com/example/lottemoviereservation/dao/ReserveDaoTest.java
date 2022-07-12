@@ -25,12 +25,12 @@ class ReserveDaoTest {
         assertEquals(result, true);
     }
 
-    @Test
-    void deleteReserveDtoByReserveNo() {
-        ReserveDao dao = ReserveDao.getInstance();
-        boolean result = dao.deleteReserveDtoByReserveNo(new ReserveDto(1, 1, 1, "09:00", 1));
-        assertEquals(result, false);
-    }
+    // @Test
+    // void deleteReserveDtoByReserveNo() {
+    //     ReserveDao dao = ReserveDao.getInstance();
+    //     boolean result = dao.deleteReserveDtoByReserveNo(new ReserveDto(1, 1, 1, "09:00", 1));
+    //     assertEquals(result, false);
+    // }
 
     @Test
     void getReserveDtoByUserNo() {
