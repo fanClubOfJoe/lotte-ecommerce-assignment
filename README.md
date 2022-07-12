@@ -38,7 +38,8 @@
 <br/><br/>
 
 ### 🚩Structure
-![structure](https://user-images.githubusercontent.com/21255149/178442739-f243a371-f2e3-459f-8a67-56051bd6c43a.png)
+![structure](https://user-images.githubusercontent.com/21255149/178444119-388058de-e294-49e1-9f5b-75638bd3e7b8.png)
+
 
 <br/><br/>
 
@@ -50,3 +51,4 @@
 |  강예나  |  김은진  |  신은총  |  천예원 |  최규진  |  최진영  |
 | :----------: |  :--------:  |  :---------: |  :---------: | :---------: | :---------: |
 | [<img src="https://user-images.githubusercontent.com/21255149/178381014-e3d8db83-194c-4b70-b018-248004ddd504.jpg" width="100px" height="100px"><br/>Github](https://github.com/KangYena)| [<img src="https://user-images.githubusercontent.com/21255149/178378210-d036f6fd-311d-4891-b791-2e662c164e9c.jpg" width="100px" height="100px"><br/>Github](https://github.com/JiniEun) | [<img src="https://user-images.githubusercontent.com/21255149/178379443-7ead27aa-ec24-4e15-8935-750b1cafa08c.jpg" width="100px" height="100px"><br/>Github](https://github.com/chd830) | [<img src="https://user-images.githubusercontent.com/21255149/178380114-883584be-1c0f-44e6-90ed-c4ce3658c1c9.jpg" width="100px" height="100px"><br/>Github](https://github.com/jikimomo)| [<img src="https://user-images.githubusercontent.com/21255149/178379157-65dd719a-76db-4c2f-8881-ce9e43e9fed9.jpg" width="100px" height="100px"><br/>Github](https://github.com/kjchoi1997) | [<img src="https://user-images.githubusercontent.com/21255149/178440960-0432363d-cdef-4a8f-a917-4badaeb26571.jpg" width="100px" height="100px"><br/>Github](https://github.com/kanamycine) |
+| UI,UX 프론트 | 영화, 리뷰 | 예매 | 크롤링 프론트 | 유저 | 리뷰 |
