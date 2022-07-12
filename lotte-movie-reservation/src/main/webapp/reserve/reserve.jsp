@@ -197,7 +197,6 @@
 <%-- 일주일 일정 --%>
 <%
     Calendar cal = Calendar.getInstance();
-    cal.set(Calendar.DATE, 30);
     int year = cal.get(Calendar.YEAR);
     int month = cal.get(Calendar.MONTH) + 1;
     int day = cal.get(Calendar.DATE);
@@ -329,7 +328,7 @@
     <jsp:include page="../front/footer.jsp"/>
     <script type="text/javascript">
         $(document).ready(function () {
-            getMovieData("2022", "07", "111");
+            getMovieData(<%=year%>, <%=month%>, <%=day%>);
         })
 
         function getMovieData(year, month, day) {
