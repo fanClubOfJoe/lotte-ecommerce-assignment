@@ -59,14 +59,12 @@
 
 |리뷰|
 | :--: |
-| (![image](https://user-images.githubusercontent.com/49293971/178494212-675483bd-b6f3-4cfc-9f40-4c2976dd9d63.png) | 
+| ![image](https://user-images.githubusercontent.com/49293971/178494212-675483bd-b6f3-4cfc-9f40-4c2976dd9d63.png) | 
 |영화의 리뷰 보여주기 |
-| ![]() | 
+| ![image](https://user-images.githubusercontent.com/49293971/178494386-d8064d79-56cb-4d6d-a861-2ab3e9d922e6.png) | 
 | 리뷰 작성 |
-| ![]() | 
+| ![image](https://user-images.githubusercontent.com/49293971/178494457-bdb11354-83ba-4b42-b178-2c7555913b75.png) | 
 | 리뷰 수정 / 삭제하기 |
-| ![]() | 
-|등록한 리뷰를 통해 평점 변경하기 |
 
 <br/><br/>
 
