@@ -3,17 +3,20 @@
 ![moobit](https://user-images.githubusercontent.com/21255149/178376969-acef4bc6-23cc-4801-af50-983842a544cb.png)
 
 ### 🌉Features
-<br/><br/>
-| 메인화면 | 
+<br/>
+
+| <b>메인화면</b> | 
 | :---: | 
 | <img width="1043" alt="main" src="https://user-images.githubusercontent.com/21255149/178453220-5d94a509-352d-43a2-8de2-5b01de70d693.png"> |
 | 캐러셀을 사용하여 3개의 영화 소개 | 
 
+<br/><br/>
+
 |영화|
 |:--:|
-| ![]() |
+|![movielist](https://user-images.githubusercontent.com/21255149/178458392-0012de82-7489-4c46-a507-2406c27af9a1.png) |
 |영화 목록 보여주기 | 
-| ![]() |
+|![movielist_search](https://user-images.githubusercontent.com/21255149/178459112-2ee1225f-9e6c-4906-9f41-74d090eae3c4.png)|
 |영화 검색하기(제목, 카테고리, 내용) | 
 
 <br/><br/>
