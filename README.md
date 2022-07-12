@@ -29,8 +29,8 @@
 | 아이디 중복확인 / 비밀번호의 보안 강도 체크 | 
 | ![]() |
 | 아이디 / 비밀번호 찾기 | 
-| ![](<img width="1512" alt="image" src="https://user-images.githubusercontent.com/72608849/178481348-546dddef-0703-4dfd-bdc6-fa513ebd58d9.png">) |
-| ![](<img width="1512" alt="image" src="https://user-images.githubusercontent.com/72608849/178481446-fba4cdd5-da92-4b87-9e59-0141596ada96.png">) |
+| ![]("https://user-images.githubusercontent.com/72608849/178481348-546dddef-0703-4dfd-bdc6-fa513ebd58d9.png) |
+| ![](https://user-images.githubusercontent.com/72608849/178481446-fba4cdd5-da92-4b87-9e59-0141596ada96.png) |
 
 
 
