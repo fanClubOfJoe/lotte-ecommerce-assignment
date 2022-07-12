@@ -72,6 +72,7 @@
 
 ### 🚩Structure
 ![structure](https://user-images.githubusercontent.com/21255149/178444119-388058de-e294-49e1-9f5b-75638bd3e7b8.png)
+![image](https://user-images.githubusercontent.com/49184115/178495285-99ef2b10-859a-4ec0-83ca-0b74a6d46102.png)
 <br/><br/>
 
 ### :hammer:추가로 보완할 사항
