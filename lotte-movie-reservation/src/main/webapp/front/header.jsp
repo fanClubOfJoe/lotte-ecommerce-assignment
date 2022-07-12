@@ -120,6 +120,15 @@
 
 
 <div class="headerBox">
+    <marquee scrolldelay="80" style="color: #E60012; margin-top: 15px;">
+        <b style="size: 20px;">개발에 참여한 사람 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+        강예나 https://github.com/KangYena &nbsp;&nbsp;&nbsp;&nbsp;
+        김은진 https://github.com/JiniEun &nbsp;&nbsp;&nbsp;&nbsp;
+        신은총 https://github.com/chd830 &nbsp;&nbsp;&nbsp;&nbsp;
+        천예원 https://github.com/jikimomo &nbsp;&nbsp;&nbsp;&nbsp;
+        최규진 https://github.com/kjchoi1997 &nbsp;&nbsp;&nbsp;&nbsp;
+        최진영 https://github.com/kanamycine &nbsp;&nbsp;&nbsp;&nbsp;
+    </marquee>
     <div class="containerBox">
         <div class="searchBox">
         </div>
