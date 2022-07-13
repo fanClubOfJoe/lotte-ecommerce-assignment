@@ -195,7 +195,7 @@
                 <tr>
                     <td>
                         <div id="userimgwithinfo">
-                            <img src="/main/images/user.png" class="userimg">
+                            <img src="/image/profile.png" class="userimg">
                             <div>
                                 <input type="hidden" name="userNo" value="${userDto.userNo}"/>
                                 <div class="userName">${userDto.userName}
