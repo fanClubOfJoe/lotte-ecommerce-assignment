@@ -83,7 +83,7 @@ public class ReserveController extends HttpServlet {
                             SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                             Date d1 = format.parse(o1.getTheaterDetailTime());
                             Date d2 = format.parse(o2.getTheaterDetailTime());
-                            return -d1.compareTo(d2);
+                            return d1.compareTo(d2);
                         } catch(Exception e) {
                             e.printStackTrace();
                         }
