@@ -8,11 +8,11 @@ import java.sql.SQLException;
 public class DBClose {
     public static void close(Connection conn, PreparedStatement psmt, ResultSet rs) {
         try {
-            if(conn != null)
+            if (conn != null)
                 conn.close();
-            if(psmt != null)
+            if (psmt != null)
                 psmt.close();
-            if(rs != null)
+            if (rs != null)
                 rs.close();
         } catch (SQLException e) {
             e.printStackTrace();

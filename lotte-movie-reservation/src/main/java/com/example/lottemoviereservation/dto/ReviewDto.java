@@ -1,12 +1,20 @@
 package com.example.lottemoviereservation.dto;
 
 public class ReviewDto {
-    public int reviewNo;
-    public int movieNo;
-    public int userNo;
-    public String reviewTitle;
-    public String reviewContent;
-    public double reviewRate;
+    private int reviewNo;
+    private int movieNo;
+    private int userNo;
+    private String reviewTitle;
+    private String reviewContent;
+    private int reviewRate;
+
+    public int getReviewRate() {
+        return reviewRate;
+    }
+
+    public void setReviewRate(int reviewRate) {
+        this.reviewRate = reviewRate;
+    }
 
     public int getReviewNo() {
         return reviewNo;
@@ -48,14 +56,6 @@ public class ReviewDto {
         this.reviewContent = reviewContent;
     }
 
-    public double getReviewRate() {
-        return reviewRate;
-    }
-
-    public void setReviewRate(double reviewRate) {
-        this.reviewRate = reviewRate;
-    }
-
     @Override
     public String toString() {
         return "ReviewDto{" +
@@ -68,11 +68,26 @@ public class ReviewDto {
                 '}';
     }
 
-    public ReviewDto(int movieNo, int userNo, String reviewTitle, String reviewContent, double reviewRate) {
+    public ReviewDto(int reviewNo, int movieNo, int userNo, String reviewTitle, String reviewContent, int reviewRate) {
+        this.reviewNo = reviewNo;
         this.movieNo = movieNo;
         this.userNo = userNo;
         this.reviewTitle = reviewTitle;
         this.reviewContent = reviewContent;
         this.reviewRate = reviewRate;
+    }
+
+    public ReviewDto(int movieNo, int userNo, String reviewTitle, String reviewContent, int reviewRate) {
+        this.movieNo = movieNo;
+        this.userNo = userNo;
+        this.reviewTitle = reviewTitle;
+        this.reviewContent = reviewContent;
+        this.reviewRate = reviewRate;
+    }
+
+    public ReviewDto(int reviewNo, int userNo, String reviewContent) {
+        this.reviewNo = reviewNo;
+        this.userNo = userNo;
+        this.reviewContent = reviewContent;
     }
 }

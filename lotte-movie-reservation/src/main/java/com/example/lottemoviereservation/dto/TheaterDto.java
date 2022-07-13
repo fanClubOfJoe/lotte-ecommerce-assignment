@@ -1,9 +1,9 @@
 package com.example.lottemoviereservation.dto;
 
 public class TheaterDto {
-    public int theaterNo;
-    public String theaterName;
-    public String theaterLocation;
+    private int theaterNo;
+    private String theaterName;
+    private String theaterLocation;
 
     @Override
     public String toString() {

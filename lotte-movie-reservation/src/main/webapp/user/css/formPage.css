@@ -1,0 +1,92 @@
+/* 회원가입 */
+.regiBox {
+    width: 450px;
+    margin: 50px auto 0px auto;
+    padding-top: 30px;
+    border: solid 1px #E60012;
+    border-radius: 3px;
+}
+.regiBox .titleBox {
+    width: 138px;
+    margin: 30px auto;
+}
+.regiBox .outerInputBox{
+    width: 365px;
+    height: 250px;
+    margin: 30px auto 0px auto;
+}
+.regiBox .innerInputBox{
+    margin: 10px 0px;
+}
+.regiBox .buttonBox{
+    width: 200px;
+    margin: 0px auto 50px auto;
+}
+
+/* 아이디 & 비밀번호 찾기 */
+.findBox {
+    width: 350px;
+    min-height: 300px;
+    margin: 50px auto 0px auto;
+    padding-top: 30px;
+    border: solid 1px #E60012;
+    border-radius: 3px;
+}
+.findBox .titleBox {
+    width: 120px;
+    margin: 30px auto;
+}
+.findBox .titleBoxForPw {
+    width: 140px;
+    margin: 30px auto;
+}
+.findBox .outerInputBox {
+    width: 210px;
+    height: 100px;
+    margin: auto;
+}
+.findBox .innerInputBox {
+    margin-bottom: 10px;
+    float: right;
+}
+.findBox .inputs {
+    height: 30px;
+}
+.findBox .buttonBox {
+    width: 200px;
+    height: 40px;
+    margin: 20px auto 0px auto;
+}
+
+/* 공통 css */
+label {
+    font-size: 16px;
+}
+.btn {
+    width: 90px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.submitBtn {
+    background-color: #E60012;
+    border: none;
+    color: white;
+}
+.cancelBtn {
+    background-color: #595959;
+    border: none;
+    color: white;
+    float: right;
+}
+.submitBtn:hover {
+    border: solid 1px #E60012;
+    background-color: white;
+    color: #E60012;
+}
+.cancelBtn:hover {
+    border: solid 1px #595959;
+    background-color: white;
+    color: #595959;
+}
