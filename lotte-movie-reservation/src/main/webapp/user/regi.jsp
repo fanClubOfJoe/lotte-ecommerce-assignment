@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="../front/header.jsp"/>
 <div class="regiBox">
-    <div class="titleBox" >
+    <div class="titleBox" style="width: 165px;">
         <h1>회원가입</h1>
     </div>
     <div class="outerInputBox">
